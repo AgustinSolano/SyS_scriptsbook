@@ -10,3 +10,4 @@
   sections:
     - file: md_scripts/Resp_frec_primer_orden
     - file: md_scripts/Resp_frec_segundo_orden
+    - file: md_scripts/Filtrado_de_Senoidales
