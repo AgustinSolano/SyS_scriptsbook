@@ -9,3 +9,4 @@
 - file: md_scripts/resp_frecuencia
   sections:
     - file: md_scripts/Resp_frec_primer_orden
+    - file: md_scripts/Resp_frec_segundo_orden
