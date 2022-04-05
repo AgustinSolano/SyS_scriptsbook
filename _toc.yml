@@ -9,3 +9,4 @@
 - file: md_scripts/muestreo_cuantizacion
   sections:
     - file: md_scripts/reconstruccion_seniales_interp_sinc
+    - file: md_scripts/tipos_de_muestreo
