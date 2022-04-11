@@ -8,5 +8,6 @@
     - file: md_scripts/Filtrado_de_Senoidales
 - file: md_scripts/muestreo_cuantizacion
   sections:
-    - file: md_scripts/reconstruccion_seniales_interp_sinc
     - file: md_scripts/tipos_de_muestreo
+    - file: md_scripts/cuantizacion
+    - file: md_scripts/reconstruccion_seniales_interp_sinc
