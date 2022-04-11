@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Funciones para el Muestreo &#8212; Scripts - Señales y Sistemas</title>
+    <title>Tipos de Muestreo &#8212; Scripts - Señales y Sistemas</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -54,7 +54,8 @@
     <script async="async" type="text/javascript" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="Simulación del muestreo y reconstrucción ideal de una señal continua" href="reconstruccion_seniales_interp_sinc.html" />
+    <link rel="next" title="Cuantizacion" href="cuantizacion.html" />
+    <link rel="prev" title="Muestreo y Cuantización" href="muestreo_cuantizacion.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -117,6 +118,16 @@
    </i>
   </label>
   <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Tipos de Muestreo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="cuantizacion.html">
+     Cuantizacion
+    </a>
+   </li>
    <li class="toctree-l2">
     <a class="reference internal" href="reconstruccion_seniales_interp_sinc.html">
      Simulación del
@@ -124,11 +135,6 @@
       muestreo y reconstrucción
      </strong>
      ideal de una señal continua
-    </a>
-   </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
-     Funciones para el Muestreo
     </a>
    </li>
   </ul>
@@ -237,22 +243,22 @@
             </div>
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#funciones-para-el-muestreo">
    Funciones para el Muestreo
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#funcion-para-la-transformada-de-fourier">
    Funcion para la Transformada de Fourier
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#senales">
    Señales
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#muestreo-ideal">
    Muestreo Ideal
   </a>
@@ -268,7 +274,9 @@
         
               <div>
                 
-  <div class="cell docutils container">
+  <section id="tipos-de-muestreo">
+<h1>Tipos de Muestreo<a class="headerlink" href="#tipos-de-muestreo" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -281,7 +289,7 @@
 </div>
 </div>
 <section id="funciones-para-el-muestreo">
-<h1>Funciones para el Muestreo<a class="headerlink" href="#funciones-para-el-muestreo" title="Permalink to this headline">¶</a></h1>
+<h2>Funciones para el Muestreo<a class="headerlink" href="#funciones-para-el-muestreo" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">mIdeal</span><span class="p">(</span><span class="n">senal</span><span class="p">,</span><span class="n">t_senal</span><span class="p">,</span><span class="n">Ts</span><span class="p">,</span><span class="n">Fs_orig</span><span class="p">):</span>
@@ -297,7 +305,7 @@
 </div>
 </section>
 <section id="funcion-para-la-transformada-de-fourier">
-<h1>Funcion para la Transformada de Fourier<a class="headerlink" href="#funcion-para-la-transformada-de-fourier" title="Permalink to this headline">¶</a></h1>
+<h2>Funcion para la Transformada de Fourier<a class="headerlink" href="#funcion-para-la-transformada-de-fourier" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">TFourier</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span><span class="n">fs</span><span class="p">,</span><span class="n">unidadesx</span><span class="p">):</span><span class="c1">#unidadesx = 0 en Hz, 1 rad/s</span>
@@ -313,7 +321,7 @@
 </div>
 </section>
 <section id="senales">
-<h1>Señales<a class="headerlink" href="#senales" title="Permalink to this headline">¶</a></h1>
+<h2>Señales<a class="headerlink" href="#senales" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Se lavanta senial de un archivo separado por comas (.csv)</span>
@@ -354,12 +362,12 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/tipos_de_muestreo_8_0.png" src="../_images/tipos_de_muestreo_8_0.png" />
+<img alt="../_images/tipos_de_muestreo_9_0.png" src="../_images/tipos_de_muestreo_9_0.png" />
 </div>
 </div>
 </section>
 <section id="muestreo-ideal">
-<h1>Muestreo Ideal<a class="headerlink" href="#muestreo-ideal" title="Permalink to this headline">¶</a></h1>
+<h2>Muestreo Ideal<a class="headerlink" href="#muestreo-ideal" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Identifico la frecuencia maxima de la </span>
@@ -411,10 +419,11 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/tipos_de_muestreo_11_0.png" src="../_images/tipos_de_muestreo_11_0.png" />
-<img alt="../_images/tipos_de_muestreo_11_1.png" src="../_images/tipos_de_muestreo_11_1.png" />
+<img alt="../_images/tipos_de_muestreo_12_0.png" src="../_images/tipos_de_muestreo_12_0.png" />
+<img alt="../_images/tipos_de_muestreo_12_1.png" src="../_images/tipos_de_muestreo_12_1.png" />
 </div>
 </div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -447,14 +456,23 @@
 <div class='prev-next-bottom'>
     
     <div id="prev">
-        <a class="left-prev" href="reconstruccion_seniales_interp_sinc.html" title="previous page">
+        <a class="left-prev" href="muestreo_cuantizacion.html" title="previous page">
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">Simulación del <strong>muestreo y reconstrucción</strong> ideal de una señal continua</p>
+                <p class="prevnext-title">Muestreo y Cuantización</p>
             </div>
         </a>
     </div>
+     <div id="next">
+        <a class="right-next" href="cuantizacion.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Cuantizacion</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
 
 </div>
         
