@@ -17,3 +17,6 @@
 - file: md_scripts/filtros_FIR
   sections:
     - file: md_scripts/Filtros_PB_FIR_Ventanas
+- file: md_scripts/filtros_IIR
+  sections:
+    - file: md_scripts/Filtros_PB_IIR
