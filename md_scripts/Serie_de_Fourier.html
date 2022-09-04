@@ -123,6 +123,11 @@
      Filtrado de senoidales
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Sistema_Resorte_Masa_Amortiguador.html">
+     Respuesta en frecuencia y temporal de un sistema mecanico
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
@@ -407,6 +412,39 @@
 </div>
 <div class="cell_output docutils container">
 <img alt="../_images/Serie_de_Fourier_7_0.png" src="../_images/Serie_de_Fourier_7_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Xn_modulo</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">An</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Bn</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">Xn_fase</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Bn</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">An</span><span class="p">))</span> 
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Serie de Fourier&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">22</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">Xn_modulo</span><span class="p">)</span>
+<span class="c1">#ax[0].set_title(&quot;Senal original&quot;)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">Xn_fase</span><span class="p">)</span>
+<span class="c1">#ax[1].set_title(&quot;Suma de Fourier (Serie)&quot;)</span>
+<span class="c1">#ax[2].plot(t,y,&#39;g&#39;)</span>
+<span class="c1">#ax[2].plot(t,sum,&#39;r--&#39;)</span>
+<span class="c1">#ax[2].set_title(&quot;Senial y reconstruccion&quot;)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:2: RuntimeWarning: divide by zero encountered in true_divide
+  
+C:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:2: RuntimeWarning: invalid value encountered in true_divide
+  
+C:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:7: UserWarning: In Matplotlib 3.3 individual lines on a stem plot will be added as a LineCollection instead of individual lines. This significantly improves the performance of a stem plot. To remove this warning and switch to the new behaviour, set the &quot;use_line_collection&quot; keyword argument to True.
+  import sys
+C:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:9: UserWarning: In Matplotlib 3.3 individual lines on a stem plot will be added as a LineCollection instead of individual lines. This significantly improves the performance of a stem plot. To remove this warning and switch to the new behaviour, set the &quot;use_line_collection&quot; keyword argument to True.
+  if __name__ == &#39;__main__&#39;:
+</pre></div>
+</div>
+<img alt="../_images/Serie_de_Fourier_8_1.png" src="../_images/Serie_de_Fourier_8_1.png" />
 </div>
 </div>
 </section>
