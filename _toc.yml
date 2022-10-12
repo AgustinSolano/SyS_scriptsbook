@@ -20,6 +20,7 @@
     - file: md_scripts/Resp_frec_Sist_Digital
 - file: md_scripts/filtros_FIR
   sections:
+    - file: md_scripts/Resp_frec_Sist_FIR
     - file: md_scripts/Filtros_PB_FIR_Ventanas
 - file: md_scripts/filtros_IIR
 #  sections:
