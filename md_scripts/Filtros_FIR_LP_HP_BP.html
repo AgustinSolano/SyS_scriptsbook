@@ -1,0 +1,1293 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Filtros FIR: LP, BP, HP &#8212; Scripts - Señales y Sistemas</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/togglebutton.js"></script>
+    <script type="text/javascript" src="../_static/clipboard.min.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <script type="text/javascript">var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script type="text/javascript" src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" type="text/javascript" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script type="text/javascript">
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" type="text/javascript" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Filtros Digitales IIR" href="filtros_IIR.html" />
+    <link rel="prev" title="Filtro Digital FIR - Pasa Bajos" href="Filtros_PB_FIR_Ventanas.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Scripts - Señales y Sistemas</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro_python.html">
+   Introducción a Python
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="resp_frecuencia.html">
+   Respuesta en frecuencia
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Serie_de_Fourier.html">
+     Serie de Fourier
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Resp_frec_primer_orden.html">
+     Respuesta en frecuencia - Sistemas de primer orden
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Resp_frec_segundo_orden.html">
+     Respuesta en frecuencia - Sistemas de segundo orden
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Filtrado_de_Senoidales.html">
+     Filtrado de senoidales
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Sistema_Resorte_Masa_Amortiguador.html">
+     Respuesta en frecuencia y temporal de un sistema mecanico
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="muestreo_cuantizacion.html">
+   Muestreo y Cuantización
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="tipos_de_muestreo.html">
+     Tipos de Muestreo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="cuantizacion.html">
+     Cuantizacion
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="reconstruccion_seniales_interp_sinc.html">
+     Simulación del
+     <strong>
+      muestreo y reconstrucción
+     </strong>
+     ideal de una señal continua
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="senales_sistemas_discretos.html">
+   Señales y Sistemas Discretos
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sistema_discreto.html">
+     Señales y Sistemas Discretos
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Resp_frec_Sist_Digital.html">
+     Respuesta en Frecuencia de Funciones de Transferencia digitales
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="filtros_FIR.html">
+   Filtros Digitales FIR
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="Resp_frec_Sist_FIR.html">
+     Respuesta en Frecuencia de Sistema FIR
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Filtros_PB_FIR_Ventanas.html">
+     Filtro Digital FIR - Pasa Bajos
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Filtros FIR: LP, BP, HP
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="filtros_IIR.html">
+   Filtros Digitales IIR
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/md_scripts/Filtros_FIR_LP_HP_BP.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fmd_scripts/Filtros_FIR_LP_HP_BP.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/md_scripts/Filtros_FIR_LP_HP_BP.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Filtros FIR: LP, BP, HP
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#librerias">
+     Librerias
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fase-lineal">
+     Fase Lineal
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#respuesta-al-impulso">
+     Respuesta al impulso
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#respuesta-en-frecuencia-magnitud-y-en-fase">
+     Respuesta en frecuencia: magnitud y en fase
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ventanas">
+     Ventanas
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#respuesta-en-frecuencia-con-ventana">
+       Respuesta en frecuencia con Ventana
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#comparacion-de-ventana-rectangular-con-otra-ventana">
+       Comparacion de ventana rectangular con otra ventana
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#construccion-manual-de-la-ventana">
+     Construcción manual de la ventana
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#diseno-del-filtro-fir">
+   Diseño del filtro FIR
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pasa-bajos-lp">
+     Pasa Bajos LP
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#construimos-el-filtro">
+       Construimos el Filtro
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pasa-banda-bp">
+     Pasa Banda BP
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#construimos-el-filtro-1">
+       Construimos el filtro
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pasa-altos-hp">
+     Pasa Altos HP
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <section id="filtros-fir-lp-bp-hp">
+<h1>Filtros FIR: LP, BP, HP<a class="headerlink" href="#filtros-fir-lp-bp-hp" title="Permalink to this headline">¶</a></h1>
+<section id="librerias">
+<h2>Librerias<a class="headerlink" href="#librerias" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib.patches</span> <span class="kn">import</span> <span class="n">Circle</span>
+<span class="kn">import</span> <span class="nn">matplotlib.ticker</span> <span class="k">as</span> <span class="nn">tck</span>
+<span class="kn">import</span> <span class="nn">scipy</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="kn">import</span> <span class="nn">scipy.signal</span> <span class="k">as</span> <span class="nn">sig</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">io</span>
+<span class="kn">from</span> <span class="nn">scipy.fftpack</span> <span class="kn">import</span> <span class="n">fft</span><span class="p">,</span> <span class="n">ifft</span><span class="p">,</span> <span class="n">fftfreq</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="fase-lineal">
+<h2>Fase Lineal<a class="headerlink" href="#fase-lineal" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Importancia de la fase lineal</span>
+<span class="n">t</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">f</span><span class="o">=</span><span class="mi">2</span>
+<span class="n">y</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">f</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">f</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="mi">3</span><span class="o">*</span><span class="n">f</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="n">D</span><span class="o">=</span><span class="mf">0.8</span> <span class="c1">#fase constante</span>
+<span class="c1">#y1=np.cos(2*np.pi*f*t-D)+np.cos(2*np.pi*2*f*t-D)+np.cos(2*np.pi*3*f*t-D)</span>
+<span class="c1">#ax.plot(t,y1)</span>
+<span class="n">D</span><span class="o">=</span><span class="mf">0.8</span> <span class="c1">#fase lineal</span>
+<span class="n">y2</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">f</span><span class="o">*</span><span class="n">t</span><span class="o">+</span><span class="n">D</span><span class="p">)</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">f</span><span class="o">*</span><span class="n">t</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">D</span><span class="p">)</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="mi">3</span><span class="o">*</span><span class="n">f</span><span class="o">*</span><span class="n">t</span><span class="o">+</span><span class="mi">3</span><span class="o">*</span><span class="n">D</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">y2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x1b3ffafed88&gt;]
+</pre></div>
+</div>
+<img alt="../_images/Filtros_FIR_LP_HP_BP_4_1.png" src="../_images/Filtros_FIR_LP_HP_BP_4_1.png" />
+</div>
+</div>
+</section>
+<section id="respuesta-al-impulso">
+<h2>Respuesta al impulso<a class="headerlink" href="#respuesta-al-impulso" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Respuesta al impulso Pasa Bajos</span>
+<span class="n">Lh</span><span class="o">=</span><span class="mi">21</span>
+<span class="n">N</span><span class="o">=</span><span class="n">Lh</span><span class="o">-</span><span class="mi">1</span>
+<span class="n">n</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">Lh</span><span class="p">))</span>
+<span class="n">Oc</span><span class="o">=</span><span class="mf">0.275</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+<span class="n">k</span><span class="o">=</span><span class="p">(</span><span class="n">Lh</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">hlp</span><span class="o">=</span><span class="n">Oc</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sinc</span><span class="p">(</span><span class="n">Oc</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">k</span><span class="p">))</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">,</span> <span class="n">ax3</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">hlp</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Respuesta al impulso LP&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;n&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;h(t)&quot;</span><span class="p">)</span>
+
+<span class="c1"># Respuesta al impulso Pasa Banda</span>
+<span class="n">Lh1</span><span class="o">=</span><span class="mi">21</span>
+<span class="n">N</span><span class="o">=</span><span class="n">Lh1</span><span class="o">-</span><span class="mi">1</span>
+<span class="n">n</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">Lh1</span><span class="p">))</span>
+<span class="n">Ome0</span><span class="o">=</span><span class="mf">0.49</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+<span class="n">wo</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">k</span><span class="o">=</span><span class="p">(</span><span class="n">Lh1</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">hbp</span><span class="o">=</span><span class="n">Oc</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sinc</span><span class="p">(</span><span class="n">Oc</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">k</span><span class="p">))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">wo</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">k</span><span class="p">))</span>
+
+<span class="n">ax2</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">hbp</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Respuesta al impulso BP&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;n&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;h(t)&quot;</span><span class="p">)</span>
+
+<span class="c1"># Respuesta al impulso Pasa Altos</span>
+<span class="n">Lh2</span><span class="o">=</span><span class="mi">21</span>
+<span class="n">N</span><span class="o">=</span><span class="n">Lh2</span><span class="o">-</span><span class="mi">1</span>
+<span class="n">n</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">Lh2</span><span class="p">))</span>
+<span class="n">wo</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+<span class="n">k</span><span class="o">=</span><span class="p">(</span><span class="n">Lh2</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">hhp</span><span class="o">=</span><span class="n">Oc</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sinc</span><span class="p">(</span><span class="n">Oc</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">k</span><span class="p">))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">wo</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">k</span><span class="p">))</span>
+
+<span class="n">ax3</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">hhp</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Respuesta al impulso HP&quot;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;n&quot;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;h(t)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:10: UserWarning: In Matplotlib 3.3 individual lines on a stem plot will be added as a LineCollection instead of individual lines. This significantly improves the performance of a stem plot. To remove this warning and switch to the new behaviour, set the &quot;use_line_collection&quot; keyword argument to True.
+  # Remove the CWD from sys.path while we load stuff.
+C:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:25: UserWarning: In Matplotlib 3.3 individual lines on a stem plot will be added as a LineCollection instead of individual lines. This significantly improves the performance of a stem plot. To remove this warning and switch to the new behaviour, set the &quot;use_line_collection&quot; keyword argument to True.
+C:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:40: UserWarning: In Matplotlib 3.3 individual lines on a stem plot will be added as a LineCollection instead of individual lines. This significantly improves the performance of a stem plot. To remove this warning and switch to the new behaviour, set the &quot;use_line_collection&quot; keyword argument to True.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;h(t)&#39;)
+</pre></div>
+</div>
+<img alt="../_images/Filtros_FIR_LP_HP_BP_6_2.png" src="../_images/Filtros_FIR_LP_HP_BP_6_2.png" />
+</div>
+</div>
+</section>
+<section id="respuesta-en-frecuencia-magnitud-y-en-fase">
+<h2>Respuesta en frecuencia: magnitud y en fase<a class="headerlink" href="#respuesta-en-frecuencia-magnitud-y-en-fase" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># LP respuesta en frecuencia dB </span>
+<span class="n">s1</span><span class="o">=</span><span class="n">sig</span><span class="o">.</span><span class="n">dlti</span><span class="p">([</span><span class="n">hlp</span><span class="p">],[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">Ome</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="mf">0.01</span><span class="p">)</span>
+<span class="n">w_l1</span><span class="p">,</span> <span class="n">mag_dB1</span><span class="p">,</span> <span class="n">fase1</span> <span class="o">=</span> <span class="n">sig</span><span class="o">.</span><span class="n">dbode</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span><span class="n">w</span><span class="o">=</span><span class="n">Ome</span><span class="p">)</span>
+<span class="n">O1</span><span class="o">=</span><span class="n">Ome</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+<span class="n">fig1</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">O1</span><span class="p">,</span> <span class="n">mag_dB1</span><span class="p">)</span> 
+<span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Diagrama de Bode LP&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Frecuencia normalizada [$\pi$ rad/muestra]&quot;</span><span class="p">)</span>  
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Magnitud [dB]&quot;</span><span class="p">)</span>
+<span class="c1">#ax1.set_ylim(-2.5,2.5)</span>
+<span class="c1">#ax1.set_xlim(0.0,0.25)</span>
+
+<span class="c1"># LP respuesta en fase</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">O1</span><span class="p">,</span> <span class="n">fase1</span><span class="p">)</span> 
+<span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Diagrama de Fase LP&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Frecuencia Normalizada [$\pi$ rad/muestra]&quot;</span><span class="p">)</span>  
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Fase en grados&quot;</span><span class="p">)</span>
+<span class="n">fig1</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># BP respuesta en frecuencia dB </span>
+<span class="n">s2</span><span class="o">=</span><span class="n">sig</span><span class="o">.</span><span class="n">dlti</span><span class="p">([</span><span class="n">hbp</span><span class="p">],[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">w_l2</span><span class="p">,</span> <span class="n">mag_dB2</span><span class="p">,</span> <span class="n">fase2</span> <span class="o">=</span> <span class="n">sig</span><span class="o">.</span><span class="n">dbode</span><span class="p">(</span><span class="n">s2</span><span class="p">,</span><span class="n">w</span><span class="o">=</span><span class="n">Ome</span><span class="p">)</span>
+<span class="n">fig2</span><span class="p">,</span> <span class="p">(</span><span class="n">ax3</span><span class="p">,</span> <span class="n">ax4</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">O1</span><span class="p">,</span> <span class="n">mag_dB2</span><span class="p">)</span> 
+<span class="n">ax3</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Diagrama de Bode BP&quot;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Frecuencia normalizada [$\pi$ rad/muestra]&quot;</span><span class="p">)</span>  
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Magnitud [dB]&quot;</span><span class="p">)</span>
+
+<span class="c1"># BP respuesta en fase </span>
+<span class="n">ax4</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">O1</span><span class="p">,</span><span class="n">fase2</span><span class="p">)</span> 
+<span class="n">ax4</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">ax4</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Diagrama de Fase BP&quot;</span><span class="p">)</span>
+<span class="n">ax4</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Frecuencia Normalizada [$\pi$ rad/muestra]&quot;</span><span class="p">)</span>  
+<span class="n">ax4</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Fase en grados&quot;</span><span class="p">)</span>
+<span class="n">fig2</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># HP respuesta en frecuencia dB</span>
+<span class="n">s3</span><span class="o">=</span><span class="n">sig</span><span class="o">.</span><span class="n">dlti</span><span class="p">([</span><span class="n">hhp</span><span class="p">],[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">w_l3</span><span class="p">,</span> <span class="n">mag_dB3</span><span class="p">,</span> <span class="n">fase3</span> <span class="o">=</span> <span class="n">sig</span><span class="o">.</span><span class="n">dbode</span><span class="p">(</span><span class="n">s3</span><span class="p">,</span><span class="n">w</span><span class="o">=</span><span class="n">Ome</span><span class="p">)</span>
+<span class="n">fig3</span><span class="p">,</span> <span class="p">(</span><span class="n">ax5</span><span class="p">,</span> <span class="n">ax6</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">ax5</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">O1</span><span class="p">,</span> <span class="n">mag_dB3</span><span class="p">)</span> 
+<span class="n">ax5</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">ax5</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Diagrama de Bode HP&quot;</span><span class="p">)</span>
+<span class="n">ax5</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Frecuencia normalizada [$\pi$ rad/muestra]&quot;</span><span class="p">)</span>  
+<span class="n">ax5</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Magnitud [dB]&quot;</span><span class="p">)</span>
+
+<span class="c1"># HP respuesta en fase </span>
+<span class="n">ax6</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">O1</span><span class="p">,</span><span class="n">fase3</span><span class="p">)</span> 
+<span class="n">ax6</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">ax6</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Diagrama de Fase HP&quot;</span><span class="p">)</span>
+<span class="n">ax6</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Frecuencia Normalizada [$\pi$ rad/muestra]&quot;</span><span class="p">)</span>  
+<span class="n">ax6</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Fase en grados&quot;</span><span class="p">)</span>
+<span class="n">fig3</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:21: UserWarning: Matplotlib is currently using module://matplotlib_inline.backend_inline, which is a non-GUI backend, so cannot show the figure.
+C:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:39: UserWarning: Matplotlib is currently using module://matplotlib_inline.backend_inline, which is a non-GUI backend, so cannot show the figure.
+C:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:57: UserWarning: Matplotlib is currently using module://matplotlib_inline.backend_inline, which is a non-GUI backend, so cannot show the figure.
+</pre></div>
+</div>
+<img alt="../_images/Filtros_FIR_LP_HP_BP_8_1.png" src="../_images/Filtros_FIR_LP_HP_BP_8_1.png" />
+<img alt="../_images/Filtros_FIR_LP_HP_BP_8_2.png" src="../_images/Filtros_FIR_LP_HP_BP_8_2.png" />
+<img alt="../_images/Filtros_FIR_LP_HP_BP_8_3.png" src="../_images/Filtros_FIR_LP_HP_BP_8_3.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Respuesta en frecuencia LP</span>
+
+<span class="n">Ome1</span><span class="p">,</span> <span class="n">Hz1</span> <span class="o">=</span> <span class="n">sig</span><span class="o">.</span><span class="n">dfreqresp</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span><span class="n">w</span><span class="o">=</span><span class="n">Ome</span><span class="p">)</span>
+<span class="n">Hmag1</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">Hz1</span><span class="p">)</span> <span class="c1">#Respuesta en magnitud</span>
+<span class="n">fase1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">Hz1</span><span class="p">,</span> <span class="n">deg</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="c1"># Respuesta en fase</span>
+
+<span class="n">fig1</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span><span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="c1"># Diagrama de polos y ceros LP</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">s1</span><span class="o">.</span><span class="n">zeros</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="n">s1</span><span class="o">.</span><span class="n">zeros</span><span class="o">.</span><span class="n">imag</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">)</span><span class="c1">#ceros</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">s1</span><span class="o">.</span><span class="n">poles</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="n">s1</span><span class="o">.</span><span class="n">poles</span><span class="o">.</span><span class="n">imag</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">)</span><span class="c1">#polos</span>
+<span class="n">circulo_unitario</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">patches</span><span class="o">.</span><span class="n">Circle</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">radius</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">circulo_unitario</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mf">2.5</span><span class="p">,</span><span class="mf">2.5</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">2.5</span><span class="p">,</span><span class="mf">2.5</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Diagrama de polos y ceros LP&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Parte Real&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Parte Imaginaria&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+
+<span class="c1"># Respuesta en frecuencias magnitud</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Ome1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="n">Hmag1</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Respuesta en frecuencias LP&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Frecuencia [rad/s]&quot;</span><span class="p">)</span>  
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Magnitud&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">tck</span><span class="o">.</span><span class="n">FormatStrFormatter</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%g</span><span class="s1"> $\pi$&#39;</span><span class="p">))</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">)</span>
+<span class="n">fig1</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Respuesta en frecuencia BP</span>
+
+<span class="n">Ome2</span><span class="p">,</span> <span class="n">Hz2</span> <span class="o">=</span> <span class="n">sig</span><span class="o">.</span><span class="n">dfreqresp</span><span class="p">(</span><span class="n">s2</span><span class="p">,</span><span class="n">w</span><span class="o">=</span><span class="n">Ome</span><span class="p">)</span>
+<span class="n">Hmag2</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">Hz2</span><span class="p">)</span> <span class="c1">#Respuesta en magnitud</span>
+<span class="n">fase2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">Hz2</span><span class="p">,</span> <span class="n">deg</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="c1"># Respuesta en fase</span>
+
+<span class="n">fig2</span><span class="p">,</span> <span class="p">(</span><span class="n">ax3</span><span class="p">,</span><span class="n">ax4</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="c1"># Diagrama de polos y ceros LP</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">s2</span><span class="o">.</span><span class="n">zeros</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="n">s2</span><span class="o">.</span><span class="n">zeros</span><span class="o">.</span><span class="n">imag</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">)</span><span class="c1">#ceros</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">s2</span><span class="o">.</span><span class="n">poles</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="n">s2</span><span class="o">.</span><span class="n">poles</span><span class="o">.</span><span class="n">imag</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">)</span><span class="c1">#polos</span>
+<span class="n">circulo_unitario</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">patches</span><span class="o">.</span><span class="n">Circle</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">radius</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">circulo_unitario</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mf">2.5</span><span class="p">,</span><span class="mf">2.5</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">2.5</span><span class="p">,</span><span class="mf">2.5</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Diagrama de polos y ceros BP&quot;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Parte Real&quot;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Parte Imaginaria&quot;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+
+<span class="c1"># Respuesta en frecuencias magnitud</span>
+<span class="n">ax4</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Ome2</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="n">Hmag2</span><span class="p">)</span>
+<span class="n">ax4</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Respuesta en frecuencias BP&quot;</span><span class="p">)</span>
+<span class="n">ax4</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Frecuencia [rad/s]&quot;</span><span class="p">)</span>  
+<span class="n">ax4</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Magnitud&quot;</span><span class="p">)</span>
+<span class="n">ax4</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">tck</span><span class="o">.</span><span class="n">FormatStrFormatter</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%g</span><span class="s1"> $\pi$&#39;</span><span class="p">))</span>
+<span class="n">ax4</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">)</span>
+<span class="n">fig2</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Respuesta en frecuencia HP</span>
+
+<span class="n">Ome3</span><span class="p">,</span> <span class="n">Hz3</span> <span class="o">=</span> <span class="n">sig</span><span class="o">.</span><span class="n">dfreqresp</span><span class="p">(</span><span class="n">s3</span><span class="p">,</span><span class="n">w</span><span class="o">=</span><span class="n">Ome</span><span class="p">)</span>
+<span class="n">Hmag3</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">Hz3</span><span class="p">)</span> <span class="c1">#Respuesta en magnitud</span>
+<span class="n">fase3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">Hz3</span><span class="p">,</span> <span class="n">deg</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="c1"># Respuesta en fase</span>
+
+<span class="n">fig3</span><span class="p">,</span> <span class="p">(</span><span class="n">ax5</span><span class="p">,</span><span class="n">ax6</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="c1"># Diagrama de polos y ceros HP</span>
+<span class="n">ax5</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">s3</span><span class="o">.</span><span class="n">zeros</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="n">s3</span><span class="o">.</span><span class="n">zeros</span><span class="o">.</span><span class="n">imag</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">)</span><span class="c1">#ceros</span>
+<span class="n">ax5</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">s3</span><span class="o">.</span><span class="n">poles</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="n">s3</span><span class="o">.</span><span class="n">poles</span><span class="o">.</span><span class="n">imag</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">)</span><span class="c1">#polos</span>
+<span class="n">circulo_unitario</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">patches</span><span class="o">.</span><span class="n">Circle</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">radius</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">)</span>
+<span class="n">ax5</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">circulo_unitario</span><span class="p">)</span>
+<span class="n">ax5</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mf">2.5</span><span class="p">,</span><span class="mf">2.5</span><span class="p">)</span>
+<span class="n">ax5</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">2.5</span><span class="p">,</span><span class="mf">2.5</span><span class="p">)</span>
+<span class="n">ax5</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">ax5</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Diagrama de polos y ceros HP&quot;</span><span class="p">)</span>
+<span class="n">ax5</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Parte Real&quot;</span><span class="p">)</span>
+<span class="n">ax5</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Parte Imaginaria&quot;</span><span class="p">)</span>
+<span class="n">ax5</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+
+<span class="c1"># Respuesta en frecuencias magnitud</span>
+<span class="n">ax6</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Ome3</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="n">Hmag3</span><span class="p">)</span>
+<span class="n">ax6</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Respuesta en frecuencias HP&quot;</span><span class="p">)</span>
+<span class="n">ax6</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Frecuencia [rad/s]&quot;</span><span class="p">)</span>  
+<span class="n">ax6</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Magnitud&quot;</span><span class="p">)</span>
+<span class="n">ax6</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">tck</span><span class="o">.</span><span class="n">FormatStrFormatter</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%g</span><span class="s1"> $\pi$&#39;</span><span class="p">))</span>
+<span class="n">ax6</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">)</span>
+<span class="n">fig3</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:28: UserWarning: Matplotlib is currently using module://matplotlib_inline.backend_inline, which is a non-GUI backend, so cannot show the figure.
+C:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:57: UserWarning: Matplotlib is currently using module://matplotlib_inline.backend_inline, which is a non-GUI backend, so cannot show the figure.
+C:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:86: UserWarning: Matplotlib is currently using module://matplotlib_inline.backend_inline, which is a non-GUI backend, so cannot show the figure.
+</pre></div>
+</div>
+<img alt="../_images/Filtros_FIR_LP_HP_BP_9_1.png" src="../_images/Filtros_FIR_LP_HP_BP_9_1.png" />
+<img alt="../_images/Filtros_FIR_LP_HP_BP_9_2.png" src="../_images/Filtros_FIR_LP_HP_BP_9_2.png" />
+<img alt="../_images/Filtros_FIR_LP_HP_BP_9_3.png" src="../_images/Filtros_FIR_LP_HP_BP_9_3.png" />
+</div>
+</div>
+</section>
+<section id="ventanas">
+<h2>Ventanas<a class="headerlink" href="#ventanas" title="Permalink to this headline">¶</a></h2>
+<p>![Captura de pantalla de 2021-11-04 09-30-07.png](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAhgAAADiCAYAAAAMEr5GAAAABHNCSVQICAgIfAhkiAAAABl0RVh0U29mdHdhcmUAZ25vbWUtc2NyZWVuc2hvdO8Dvz4AACAASURBVHic7N15XFTV/z/w1zADg6zigoKCGIlmkVtuH2NRzBVTESsTLVNTo8hSIbNPKSqaVmguaSXm+lEUVBAXUIxV0ZQQNGRRkR0EZYAZmO38/vDH/TIwM8zAwMzQeT4ePuTee+6573PmnLln7soihBBQFEVRFEVpkIG2A6AoiqIoqvOhAwyKoiiKojSODjAoiqIoitI4OsCgKIqiKErj6ACDoiiKoiiNowMMiqIoiqI0jqNoQWhoKM6ePQsDAzoGoSiKoqh/g7fffhvvvPOORvJSOMC4ffs2tm/fjj59+mhkQxRFURRF6TYfHx+NDTDo4QmKoiiKojSODjAoiqIoitI4hadIqqqqIBKJOjIWSsv4fD4EAgFYLBa6desmN83z588hkUhgZGQEc3PzDo5QMxrK2ZiZmRm4XG6r86yqqkJxcTFsbW1hYWGh8noZGRnIy8vDqFGjYGFhAT6fDysrK6XrFBYWorKyEs7Ozq2Ol6IoSh4ej6exvBQewfj7779RUVGhsQ1Rui83Nxc//vgjHB0dERERIXf54MGD8eWXXyItLa3F/KZMmYLk5OT2CLVNsrOz8f3336Nnz544e/YsYmJisHPnTnh7eyMlJaVVed6/fx/e3t64fv26yuts2LABBQUFGDVqFK5du4Z3330Xd+7cAaC87qKjozFmzJhWxUlRFKVMenq6xvJSeASD+vdxdnaGiYkJeDwefv/9d7z99tsyyzMzM+Ho6AgvLy+8+eabLeY3f/58ODo6tle4rTZkyBBwOBzs2rULixcvZuYnJydj6tSpePToESwtLdXKc+zYsSrVSYPCwkLcvHkT3333HQDgnXfeQVFREbNcWd0tWrQIGzZsUCs+iqKojkavwaCamT17NlJSUlBcXMzME4vF4HDUG48uWLAAvXr10nR47eall17Cs2fP8ODBg1atz2KxVE7L5/ORk5MjcxrS29sbZmZmAFquO3W2RVEUpQ30CAbVjLGxMd577z0cOnQIX331FQAgISFB4S/0qKgomJubIyUlBb169cLChQuRkJCAwMBArFy5EtOnT8e1a9cQFBQEX19fmJubIyMjAxwOB76+vh1ZNKUSEhIwePBgDB06FABw/vx5lJSUwMTEBEVFRVi9ejUA+eVt6uOPP4ZQKMQnn3yCUaNGNVs+YMAAWFhYYMSIEVi6dCnc3d3h7OyMvn37Nqs74MVpnYiICDg5OUEikUAikTB5KYqToihKm+gAg5Jr8eLF8Pb2ZgYYfD4fpqamzdJJJBL4+PggOzsbrq6ucHJygqurK1xcXODs7IyamhoAwPjx4xEZGYmkpCRs374dHh4esLe3x/Lly8Fmszu0bA1EIhFOnDgBACgvL0dlZSXi4uJgZGSE9PR07NixA1euXAEA+Pn5ITY2Fm5ubnLL6+DgwOT7/Plz9O3bF76+vujevbvC7cfGxsLf3x9BQUHw8/PDrFmzEBoa2qzuysvLMX/+fCQkJIDL5eL58+d49uwZACiMc8KECe1RZRRFUSqjAwxKrtdffx1du3ZFfHw8BgwYABsbG7np2Gw2srOzUV5ejtjYWFhbW+PJkydwcHBodlcGl8tF//79mWlTU1Pw+Xyt3Y0ikUgwd+5cuQOcEydOwMrKCpcvXwYAdOnSBenp6ZgwYYLC8gLA48ePsX37dly4cAFGRkZKt29ubo5ffvkFv/zyC+7evYu5c+fi8OHDWLx4sUzdhYaGYtiwYcy8rl27wtjYuMU4KYqitIkOMCiFFi9ejAMHDsDb2xszZsyQm0YgEGDlypXw8vLC3LlzcerUKRBCFObZdNAhlUo1GrOmCIVCvPrqq5g8eTIAMP+3VF4ej4e33noLgYGB2LRpk8L8r1+/DltbW/Tr1w/AiwGdv78/UlNTm6Xl8XgKb6FVFCdFUZS20Ys8KRlCoRBCoRAAMG/ePFy4cEFmEEAIkdmhRkREQCqVwsvLCywWi7m1OTIystlAo+m6ygYi7a1h24piePvtt2VuExWLxUhOTm6xvCNHjsSaNWuQmJiIxMREhdsXCoU4cuSIzDyRSITXXnutWVyTJ0/G3bt3Zdatr69XGidFUZS2sdevX79e3oLff/8d06dPh62tbQeHRGnLjRs3sHnzZsTFxcHGxgaDBg1CcXExfHx8IBaLceDAAZw/fx61tbWwsLCAo6MjunTpgqNHj8Le3h737t2DjY0NEhISwGKxcPHiRRQXF2P06NFIS0tDSEgI8vPz4ezsjKioKJw5cwZSqRSjRo1q8XSCJt28eRNHjhxBeno6OBwOevbsiR49esik6devH6qrqxETEwMWi4XY2FiMHz8elpaWcssrFotx+fJllJaWYsSIEbh37x62bt2K3r17y30gVl5eHq5cuYJHjx7BxMQEmZmZiI6Oxrp163D9+nUcOHCAqbtBgwZBJBIhPj4ebDYbV69eRWRkJIAXd5vIi7MtDw2jKOrfa+fOnVi5cqVG8mIRBT/hxowZgz179mDEiBEa2RDVuVVUVDAXNEokEq1duKlpYrEYVVVVzS7WbGt5a2trYWRkBEIIMjIywGKxMGTIEKVvLxaLxaiuroaVlRWKiopgZWWFLl26KI2ToihKHf3798ejR480khe9BoPSiMY7ts4yuAAADocjd6fd1vI2viNn+PDhKsfS8BjxpkcWFcVJURSlLQp/LllaWnboYWuKoiiKorRL3acYK6NwgDF06FCFL7yiKIqiKKrzabjQXBPoXSQURVEURWkcHWBQFEVRFKVxdIBByRAIBBAIBKivr4dAIEBtba3K61ZVVSEzMxM8Hq8dI2wdXShXW2JQF4/Hw4MHD1BZWdlu21BVwy21yjx8+BDR0dFITEzUyfZDUZT66ACDkpGZmYl169bB2NgYv/zyi9wnSypy//59eHt74/r16+0YYevoQrnaEoO6srOzsXDhQsTExLTbNlRx584dzJkzB3/++afc5WVlZZg3bx5SU1Ph4eGBQYMG4auvvsLPP//csYFSFKVx9DZVSsawYcNgYGCAXbt24csvv1Rr3bFjxyp846q26UK52hKDukaMGIHx48e36zZUce3aNXzyySdYv3693EHGnDlzMHPmTMyZMwcA0KNHD+zcuRODBw9Gr1698O6773ZwxBRFaQo9gkFpFIvF0nYI7UIfy6XtmO/cuYM33ngDAQEBSElJQVxcnMzy3NxcJCYmYuLEiTLzDQ0N4erqikOHDnVkuBRFaRg9gkGpLSkpCenp6bCxsUFOTg4++ugj5gFQAHDr1i2w2WyUlZWBz+djyZIlzLLz58+jpKQEJiYmKCoqwurVq7VRBLl0oVzy8jl9+jROnjyJAQMGICgoCKmpqdi0aRMmT56Mjz/+WGfr9Nq1a1i1ahUAYNmyZVi/fj2uXbvGLG94aqmigVBnemAbRf0b0QEGpZbc3Fx8//33iIiIAADk5+fj/fffx8WLF5k0pqamzK/S7777Dvv27cPy5cuRnp6OHTt24MqVKwAAPz8/xMbG6sSrxXWhXIry8fb2RlJSEuzt7QG8ONXyn//8Bx9//LHO1mnD0YsGAQEBeOmllxAXFwc3NzcALx5J7OTkhLt372LIkCEy66enp+PDDz+Um3d5eTmCg4OVvixv8uTJcHd3b3M5KIpqPTrAoFSWnZ2NY8eOyew47OzskJmZiSdPnjA7wIb/AWDSpEn4/PPPsXz5cpw4cQJWVla4fPkyAKBLly5IT0/X+s5QF8qVnZ2tNJ8VK1Zg3rx5WL58OW7evInp06cDgM7WaWxsrMyRFBsbG3z88cfYsGEDYmNjmfnbtm3D4cOHsWDBAmZeYWEheDweli5dKjfvnj17IigoqP2CpyhKI+gAg1JZXFwcqqur0bVrV5n5BgYGqKqqkruOoaEhczumUCjEq6++ismTJwMA87+26UK54uLilObj5OSErl274q+//sKDBw+YHbIu1mnToxcNAgIC4OjoiPj4eLi6uqK6uhozZ87E//73P/D5fJiYmAAAwsPDsWfPHtTV1cHQ0LBZPjU1Nc2u52hq4MCBePnllzVTIIqiWoVe5Ek1I+/Qc8OveU9PT5nbKysrK8HhcPDKK68w82pqapi///rrL8ycORMA8PbbbyM5OZlZJhaLZabbmy6US1kMLeWzfPlybNu2TWYgpGwdQojS0wjt5cqVK3jzzTchkUhk/vXq1QuLFy/Ghg0bAACJiYkoKyvDt99+i8TERJkyeHh4MKermuJwOOjatavSfw1vmaUoSnvoEQxKRnJyMg4ePAixWIwffvgBpqamyMrKwvHjx7F+/XqMHz8eGRkZCA4OhrOzMyIiIhAaGgoO50VTsrCwACEEN27cQElJCR4+fIhNmzYBAFxcXDBr1iwEBQXB1dUVWVlZmDt37r+mXC3F0FI+DcsaH6VQtE5iYiISEhKQm5uLIUOGyAyU2lNGRgYCAgIQEBCgNN2NGzcwYsQIDBo0CN27d8cXX3yBSZMmAQBOnjyJXbt2wdXVFfPnz2+2rrGxMcaNG9cu8VMUpTksouAnTkBAAPz8/NCnT5+OjonSA2KxGM+ePUPPnj3lLhcIBJBKpTKvJW+8blVVlU6+XlwXyqUsH5FIJPe0gS7XKUVR+sPHxwdHjx7VSF70CAbVKhwOR+FOGIDSQ9QcDkdnd4S6UC5l+cgbXGhy2xRFUZpCr8GgKIqiKErj6ACDoiiKoiiNowMMiqIoiqI0jg4wKIqiKIrSOL0YYFRXV4PP56O2thbV1dXN5jV+4FFtbS34fD7q6+vbtM3CwkKkp6e3OXZd1x51q0rd8Xg8PHjwAJWVlZopiBbs3r0bfn5+uHXrlsz8puXn8/moqKiQ+ddQrw0OHTqEqVOnorCwsENi16SHDx8iOjoaiYmJ4PF4/5ptN5aamor9+/fj+vXrWstry5Ytbd62NinqT4Bsn1KlPwH616c64/eJXgwwrl+/jnHjxmHYsGHMQ4SuXr0KZ2dnuLq64vbt2wBefNl4e3vD29sbjx49AgBMmTKlVQ9zio6OxpgxYzRXCB3V2rpVVq9N604qlTKDlwZZWVlYsGABYmJi2qlk7U8ikWDdunUYOXKkzPym5c/NzcX27dthbW2NiIgIXLlyBUeOHMGsWbMQFRUFAPjggw/g6enZofG3VVlZGebNm4fU1FR4eHhg0KBB+Oqrr/Dzzz936m03lZubC6FQCCcnJ4UPB2vvvEpKSpiXxwEvnqa6a9cubNq0CRs2bEBdXV2b4uoIivoTINunVOlPgP71qU75fUIU8Pf3JwUFBYoWd7jjx48TJycnmXnbtm0jLi4uMvPCw8NJdXU1M3348GFSUlLSqm3269evVevpm9bUbUv12rju0tLSyPnz55ulCQgIICdOnGhD5Nq1Y8cOhXXQtO1kZmYSMzMzmXnJycmEy+WSoqIiQgghu3fv1qk+15I333yTbN++XWaeUCgkL7/8crt/rtrcdlMZGRlk27ZtWs3rp59+Io8fPyaEEPL06VPyww8/MMsWLFhAVqxYoZH42pOy/kSIbJ9SpT8Rol99Sle+T+bPn6/2OoroxREMAPD09EReXh4yMjKYeYaGhkhOTkZJSQkzr76+HmZmZsz0ggUL0KtXr1ZtU9FrpDub1tRtS/XauO4U/RLrzPWrStmcnJxQX18vU8f6Ijc3F4mJiczbZRsYGhrC1dUVhw4d6pTblmfw4ME4ffo07t+/r7W8njx5gn79+gF48TTVzZs3QyqVAnjRv8PDw9scm7a11Kf0uT+1RF+/T/TmQVvm5uaYNGkSTp8+jddeew0SiQR9+/bF8OHDcebMGaxYsQK1tbUyg4uEhAQEBgZi5cqVMDExQVBQEHx9fWFubo6MjAxwOBz4+voy6bOzsxEREQEnJyfm/QkNkpKSkJ6eDhsbG+Tk5OCjjz5CTEwM/ve//2HkyJGYMGECfvnlF/Tu3RtBQUHYsmULsrKysG7dOgwcOLBD60pd6tZt43pteKunoro7e/YsQkJCMHXqVBQUFMDLy0vmQVYVFRVISEjAnTt3mn0e+kRZ25FHKBTiu+++w9dff41hw4Z1UJSa03A4XtEXH5vN7pTbliciIgIjR47EBx98IPf6gfbOKz09Ha+//joz7eLigqtXrzL1lJeXB1tb2zbF1ZKzZ8+irq4OtbW1sLa2xowZM2ReYNca6vQpbfYnHo+HsLAwPHv2DKNHj0ZxcTEqKiqwbNmyVufZWb5P9GaAAQBz5szBDz/8gPXr1yMpKQnjxo3DnDlzEBYWhhUrViA2NlbmNdUuLi5wdnZGTU0Npk+fjsjISCQlJWH79u3w8PCAvb09li9fDjabjfLycsyfPx8JCQngcrl4/vw5nj17BuDFL6bvv/+e+SWen5+P999/HxcvXsTp06cxfPhwjBkzBpcvX0bfvn3BZrMxc+ZMFBUV6fzgooE6ddu4XgEorbtZs2bh3LlzmDZtGjMYaez+/fv45JNP4OLiIvN56BNl5W9MLBYjKioKhBDk5OTA3NxcN86TtkL//v3h5OSEu3fvYsiQITLL0tPT8eGHH3bKbTe1c+dO9OzZE7t27UL//v2RnZ2NAQMGdGhep0+fxqpVq5hpAwMDZicjEolw8uRJbNu2rVUxqSI4OBh1dXVYu3YtAOCtt97Cf/7zH1y6dEnuu2RUoUqf0pX+dPHiRSxYsAD9+/fH5cuXUV9fj7y8vFbn15m+T/RqgPH2229j6dKlyMzMRElJCVxdXTFnzhysW7cOT58+RW1tbbN3RHC5XJm/+/fvz0ybmpqCz+fD3NwcoaGhGDZsGJO+a9euMDY2BgAcOXJE5vXTdnZ2zBswfXx8cPz4cUyZMoXJZ/Hixbh37x7ee++99qwOjVK3bhvXq7K6a0njX16NPw99omr5ORyOzCCrqqoKNjY2iIqKwvjx4zssXk3Ztm0bDh8+zLw6HnhxxTuPx8PSpUtVymPPnj0oKCiQu4zFYmHNmjWwsrJql223VWFhIc6ePYtr164BAEaNGoUnT560aoDR2rykUin4fD4sLCzkLt+4cSP8/f2bnU7SlPz8fGzfvh0PHz5k5vXq1Qvx8fFteqOtKn1KV/rThAkTkJubiwEDBmDw4MEYPHiwzA9ddXWm7xO9GmBYWVlhwoQJOHXqFAYNGgQAePnll/Haa6/hxIkTsLe3bzGPxjtGAMx5Sh6P12xZg+rqaplXZAMvfiVUVVVh6tSp+Oyzz5CXl4fXX38dV65cQVFREZOvvmhL3Sqru6YePnyIl156iZlW9HnoE3XK35ilpSVGjhyJsLAwnflCUFV1dTVmzpyJ//3vfzKHwsPDw7Fnzx7U1dUx703h8XgwMDAAl8tt9i6V1pwSU2XbbDabOa0nEAjadKhekWvXrsHDw4OZ5vP5zBFLZWVWJy+pVKq0HFevXlW4MwsNDYWbmxs8PDxQWFjYLi+u/PPPPzF27FiZHWDXrl1x8uRJmRdmqVsfrelT2upPPXv2xJkzZ+Dm5iYzv6XPTpHO9H2iNxd5NpgzZw6Cg4MxatQomXmbNm2Cu7t7s/Sk0ctiCSHNphtMnjwZd+/eZaaFQiHzvAdPT0+kpqYyyyorK8HhcPDKK6/A0NAQU6dOxerVq+Hu7o73338f/v7+GDp0qEbK25HUqVtV6w4ATExMUF9fD4lEIpNO2eehT1oqPyC/bNXV1cjMzISLi0u7x6hpiYmJKCsrw7fffovExERmvlgshoeHB3M68cyZM0hLS8OjR48QHBzcYdu+ffs282V75coVfPLJJy2ex1YXl8tldgS1tbUwNjZG3759FZY5JSUFT58+VSuvlsoRExPDvOa+sbi4ONja2sLd3R1CobDNt88qYmhoCGtra5l5tbW1mDp1KjicF79fW9MGWupTutaf/vzzz2YDjNa2wc70fcJev379enkLrly5gtGjRys89KYt9vb2iI6OxurVq5l51tbWuH//PhYtWiSTNjExEQcOHEBxcTHq6+sRFhaG/Px8ODs7IyoqCmfOnIFUKsWoUaPQr18/iEQixMfHg81m4+rVq4iMjATw4p7isrIyJCcno7a2Fvv378eWLVuYC6esrKyQn5+PadOmwdHREb/88gv8/f07rlI0RNW6bVyvo0ePxqBBgxTWnaurK0xNTREaGopnz57Bzc0N5ubmiI+PR0hIiMLPw8jIqMPLr66UlBS89tprGDBggNLy37p1C/v378eNGzdgYWGBu3fvIi4uDj///DMWLlyIxYsXAwBu3bqFQYMG6Vyfk8fS0hKDBg3CuXPnMHDgQObe/S+++AJBQUGQSCSYNWsWsrKyEBwcjPr6esyfPx+WlpYdsm1fX1+cO3cOW7duxcCBA3Hp0iWIRCLm6JwmDBgwACdPnkSXLl1w4sQJrF27FpaWlgrLvGLFCmRlZeGtt95SOa8+ffooLEdtbS1SUlJkjnwAQE5ODlxcXPDrr78iMDAQmzZtgrGxMd555x2Nlb2Bk5MTwsPDYWFhgby8PGRmZqJfv364f/8+qqurMWjQIJXbQEN/MjMzg42NjcI+1aVLF5X6E9BxfWrLli347rvvmEEVAKWfnbLya/v7JDw8HF5eXq2siSYU3b+qa8/BaKy0tFSlea0hEolIZWUlIYSQwsJCwufzZZaVlZXJXU8oFMr9W9+0pW6V1V19fb3M80k6g6b3rSsrvyr06Z59VaWlpZHq6mpy/PhxsmzZsg7d9sSJE5m/ly1bRiIjI9tlO8XFxTLTysocFhamVl6EKC7HkSNHSGpqamvD1qjS0lIiEomY6cZ9XdU2IO85EPrSp+rr6+XOV6cN6sr3iSafg6FX12A0aHpITtG81uBwOMxFZU1v7eJwODK3WDbW+LyiKucYdVVb6lZZ3RkZGenFUYm2UFb+f6tTp07h1VdfRffu3Zv90m5v1dXVOHPmDIyMjGBmZib3LiZN6N27t8y0ojIXFRU1u5arpbwAxeW4c+cOfHx8NFCCtmv6HdH4cQFtaQP60qcUfbe1pQ3qS9mV0csBBkXpir///hsjRoxAjx492pRPTk5Om25t01WBgYEQiUQQi8XtcqGlMubm5pg1axbq6+vbbXAhj6IyP336tFV3F8grR3FxcbtctNke1GkDmupPgG70KXXbYGf7PtG7izwpSldMnz4dNTU1zPNA2qK0tBSjR49Gt27dNBCZ7mCxWDAyMurwwUVaWhq4XC5SU1NVvmVaUxSVufEt2apSVA4zMzMsX768zbF2BFXbgCb7E6D9PqVuG+yM3ycsQuRfur9lyxZ8+OGHsLGx6eiYKIqiKIrSglWrVuHHH3/USF4Kj2A8f/5cL59JQFEURVFU65SWlmosL3qKhKIoiqIojaMDDIqiKIqiNE7hXSQ8Hg8XLlzQ+kUiFEVRFEV1DD6fr7G8FA4w0tLSMHDgQI3cLkRRFEVRlO7LyMjQWF4KBxhSqRQuLi4YMWKExjZGURRFUZTu+vLLLzWWF70Gg6IoiqIojaMDDIqiKIqiNI4OMCiKoiiK0jg6wKAoiqIoSuPoAIOiKIqiKI2jAwyqTcrLy7UdAqUneDye0tcPlJeXy11O2xhF6SeFA4zi4mJUVlZ2ZCyUnikuLoanp6e2w6D0QFhYGKZMmYLi4uJmy0QiEQ4cOIDy8nLs3bsXqampzDLaxiiqYz179kxjeSkcYIhEIojFYo1tiOpcCCFISEiAhYWFtkOh9MCcOXPg6Ogod1lJSQmSkpIwaNAguLu74/79+wBoG6MobdDkfl8vTpHw+XxUVFQw/zQ5wtI2Ho+HBw8e6N3RosjISJlflgUFBfjkk0/g7u6OhQsXYuLEifD399dihJS+sLOzg4mJCYYPH47jx4/j3XffBdC8jQG0nVGUPlH4JE8TExMYGxu3mEFdXR0yMjKwd+9ehISEaDS4BtnZ2Th27Bh+/PFHHDhwAAKBAAUFBSgtLcXGjRthY2PT6rylUilqa2thbm6uwYhVl52djU8++QRffvkl88Wq69LT0+Ho6AgTExNmnkgkwp49e/Drr7/Cw8MDlZWVGDVqlBaj1A5l/eHmzZvIyclBbW0tHj58iG+++QampqbN8lA1XWdRWFgIGxsb7N69G/7+/jh27BiGDx/erI0B+tXOHj9+jJiYGHTv3h3l5eVYsmQJ2Gy2WmkfPXqE0NBQ2Nraoq6uDkuXLm1V/rrgzp07SEpKQlVVFSQSCQICAmBsbKxWOZTVh65TdV8ZGBiIJ0+ewMnJCfn5+Vi6dClef/11AICrqyuGDh0KIyMjsFgsAMB7772n0Sduq7LfV5XCIxg9evRQ6dDkhQsXUFlZiYsXL2osqKaGDBmCDz74AEZGRvjwww+xYsUKbN68GQMGDMC0adPalHdGRgbi4+M1FKn6RowYgfHjx2tt+61RXl6OzMxMhIWFIS8vD5GRkejfvz9ycnLAZrPx4MEDVFdXaztMrVDUHyQSCT799FNMnToVS5cuxdOnT/H11183W1/VdJ1BwwWdp06dwqxZs/Dmm28iPj4ecXFxctsYAL1pZ4QQLFq0CAsXLoSXlxesra2xY8cOtdLyeDx4enpi+fLlWLBgAfh8Po4cOaJ2/rqgoqIC165dw2effYZvvvkGubm5+PLLL9Uqh7L60Aeq7itramogFovx5MkTLFiwgBlcVFdXo1evXrCxsUHPnj3Ro0cPZGRkYODAgRqNU5M/ttt8isTLy0tr7yt55ZVXkJaWhtra2lbnERERocGIWqdhJKovJkyYgDlz5oDFYkEgEEAikQAADhw4gClTpsDKygp//fWXlqPUDkX9wcDAAG5ubkxdGRkZyW23qqbTN+fPn0dOTg5Onz6Nx48fAwDc3d1RX1+P6dOnIzQ0FHfu3EF0dDS8vb0VtjFAP9rZ7du3weVyweVyAQCjR4/GoUOH1EobExMDS0tLWFpaAgDGjRuHvXv3qp2/LsjIyMDmzZuZQaWnpyfCw8PVKoey+tAHqu4rHR0d8ccff2D3XcS4fQAAIABJREFU7t0yR+dKS0sRHByMtWvXIiAgAG+88QYCAwNhZmbWnmG3icJTJLpOKpXizJkzWLdunczh4/Pnz6OkpAQmJiYoKirC6tWrAQApKSm4du0anJ2dUVpainfffRcxMTEICQnB1KlTUVBQAC8vL/Ts2RNRUVEwNzdHSkoKevXqhYULF+LatWsICgqCr68vzM3NkZGRAQ6HA19fX2bbERERKCoqAp/PZzpMXV0doqOjsWzZMnh5eWHPnj3Yt28fkpOT5Y4U5W0bAC5fvoygoCB89tlnyM/PR3V1Nb799tv2rOIWeXl5wcvLi5kOCgqCgYEB+vbti9GjR2sxMt3DYrGwfft2AP93BGj//v2tTqdvPD09m11P0XDkcMCAAdiwYQMKCgowbNgwmQF30zYG6Ec7u3Xrlkz/Njc3R3p6OgQCAbp06aJS2vLycgiFQmY+i8VCVlaW2vnrAhcXF1y9ehUGBi9+0+bl5cHW1latctTU1Cisj86EEILIyEjU1tbCxsYGbm5uAICXX36ZSfPs2TPcu3cPfn5+2gpTJXo1wJBIJIiKigKfz8e+ffuwevVqTJ06lVmenp6OHTt24MqVKwAAPz8/xMbGYtCgQVi2bBn++usvcDgcuLu7w97eHrNmzcK5c+cwbdo0TJ8+ndmGj48PsrOz4erqCicnJ7i6umL8+PGIjIxEUlIStm/fDg8PD9jb22P58uVgs9l4+vQpPv/8czx69AhisRj9+vXDkydPwGazUVxczBzK9fX1xY8//ij3fn9F23ZwcMDkyZNx8uRJ3LlzBytXrtTKaR0+n8/8+lRH37596Z0A/9+NGzcQGhqKjz/+WOYLo7XpdJlYLFZ7B8Dj8Vq9PScnJ3A4uvGVxuPxZHaQDdeSNJ2vLO2wYcNQWFjIzE9NTUVlZSXq6+vVyl8XGBgYYNiwYQBeXEdz8uRJbNu2Dbdv31a5HG5ubvjqq6+Y6cb10fCDrjMwMTGBq6srLC0tsWbNGpSUlDS7Pm/79u0afetpe1HYG0eOHIkePXp0ZCwtYrPZzEBgwoQJGDZsGJKTk9G3b18AwIkTJ2BlZYXLly8DALp06YL09HSkp6dj6NChzJdPTEwMDA0NFW4jOzsb5eXliI2NhbW1NZ48eQIHBwdwuVz079+fSWtqago+nw9zc3OIRCImfxaLhbq6OkgkErDZ7GbbUtQZlG27Yb0BAwbA2toa3t7erazF1isvL8fZs2fVXm/27Nl6P8DYs2cPCgoK5C5jsVhYs2YNrKysWsxnzJgxGDNmDJYuXYqYmBj8/vvvbUqny+rr61vVXlrLz89PZw4Xc7lcCAQCZrrhb3l9X1HagQMH4qeffsLOnTsxZMgQAEDXrl2ZUwqq5q9rNm7cCH9/f0ycOBEZGRkql8PBwUFhfXQmDUetAWDs2LEIDAyUGWBUV1cjNTW13fbPw4cP11heSu8i0ZVfA/J0794ddnZ2OHr0KDOqFQqFePXVVzF58mQAYP7fsmULjIyMmHUVDS4ePnwIGxsbrFy5El5eXpg7dy5OnToFQgiTpmljbjgSYWNjg2nTpmH//v3g8/nYvXu3zDblrdOUQCBQum0AsLW1VVgn7a1fv37MBYfx8fGoqKgAi8XC9OnTFdZpZ9H4VFhrFBQU4Ny5c0w+Li4uWLx4Mfbt2yfTz1RNpw9MTU3bvb3weDyYmZkxh951hZ2dHWpqapjp6upqmJubyx1oK0s7b948SKVSCIVC1NXVMRf8qZO/LgkNDYWbmxs8PDxQWFiodjkU1Udn8c8//2DdunUIDw8HAFhbWzd7OF10dLRKP2ZaS5NHwDTSKwkhzXaEKSkpcp/ap8ltdO3aFX///TeAFw/refvtt5GcnMwsF4vFSE5OxtSpU3Hnzh1mvkQiQWJiIoAXA6n6+npIJBLcvXsXERERkEql8PLyAovFQkVFBYAX9+Q3jaFpPA4ODli2bBm++OILzJs3j5nfu3dviEQiAEBlZSUePnzYLB9CiNJtK6oDbRk4cCC+/fZbzJgxo9MPLtQl73NKSEhASEgIM7+2thZ2dnbgcDgyfUVZOn3WHu1F2dNBte2tt96SecR5YWEhJk6cyAyEGn/mitKKxWJ4e3tDJBLB2NgY0dHRWLVqlUr566K4uDjY2trC3d0dQqEQERERatWTUChUWB/6oqV9ZV1dncwRhNzcXLi4uMikv3//Prp27dr+wWoAe/369evlLbhy5QpGjx7d4oj4woULCA0NRVJSEkxNTSGVSmFnZ4dPP/0UBgYGGjnccvPmTRw5cgR37tyBkZERevfujW7duoHL5eLgwYOYNm0aEhISMGPGDFRXVyMmJgYsFguxsbEYP348+vXrBzabjTNnzoDNZiM+Ph5ubm4wNjaGqakpQkND8ezZM7i5ucHa2hpHjx6Fvb097t27BxsbGyQkJIAQgkuXLiE/Px/Ozs6IiorCmTNnIJVKMWrUKBgZGeGnn35CcHAw9u3bh9DQUJiZmeGVV16BhYUFTp06BXt7e6Snp+Pu3bsoLi7GuHHjcPPmTRw4cAAFBQUYOXIkLl261Gzbzs7OePjwIQ4dOoTy8nL07NkT9vb2ba7XtoiOjgaXy8WUKVO0GoeuUdQfHB0dUVhYCFNTU1RXV2Pbtm0IDg6Gg4ODTF9Rlk6ftUd7GTx4MP78809MnDhR5365c7lc1NTUICsrCz179kRwcDD++9//Moe1G3/mitL26tULUVFRGDlyJC5evAihUIglS5aolL+uycnJgYuLC3799VcEBgZi06ZNMDY2xoIFC1SuJzabrbA+9IEq+0obGxukpaWBx+Ph6dOnCAkJwc6dO2Xa9+HDh2FpaYlJkya1S5zh4eHNLqxuNaKAv78/KSgoULRYZ+Tn55O4uDgiEomYeSKRiDx9+rRZWrFYLHd+fX09qa6ulpnXOJ1YLG4xjsOHD5MTJ04w08+fPyeenp7k8ePHhBBCJBIJKSsrI4QQUlJSQmpqahTmpe62teGzzz4jkZGRzeZfuHCBxMfHayEi/ZCWlkbi4+ObtbfWptMX7dVefHx8dPp7qqCggCQlJRGBQNCqtGKxmKSkpJCioqI256/LVC1HS/XRWaSnp5Nbt27J7NcalJaWkufPn7fbtufPn6+xvPT7uCte3KHQcJFnAw6Hg+7duzdLy2az5c43MjJqdr1E43SqPB2vsrISr7zyCjNtaWmJ3r17M9dsGBgYoGfPngCAXr16Kc1L3W1rQ0JCAjZu3MhM5+XloV+/fqisrES3bt20GJluU/WccWc7t6xuezl48CDKyspk5rFYLKxYsUJrT91tjT59+qBPnz6tTstms5U+qVSd/HWZquVoqT46i9dee03hMmtr6w6MpG30foChKz7//HNcvnwZYWFhMDQ0hEAgwKpVq9C7d29th6ZxFRUVMDQ0ZB54U1hYiLi4OCxcuBDx8fGwsLDA999/D19fX525qp/Snta0l0WLFmkzZIqiNIAOMDSo4a6VzqyyshKbNm2CpaUlTp8+jeLiYhw/fhyXLl0C8OJOmBkzZiAuLk5nj75QHac920vjp4POnDlT769ToajOhg4wKLV069YNwcHBMvM+++wzAEBZWRmcnZ0BvNhxJCcnw8PDo8NjpHRHe7YXeU8HpShKd7AIkX/fY0BAAPz8/DrF+T2q4xBCwGKxmIeMUZQytL1QlG7x8fHB0aNHNZKX7t40TemlhvdI0J0FpQraXiiq86IDDIqiKIqiNI4OMCiKoiiK0jg6wKAoiqIoSuPoAIOiKIqiKI2jAwyq1crLyxW+GZaimqqrq2Ne4NeUWCxGQUFBi/MoitIfCgcYJiYmzBXeFNWYSCTCgQMHUF5ejr179yI1NVXbIVE67tixYzh//jzi4+MRFhYms6y0tBS//fYbsrKysGjRIty4cUPuPIqi2l/DE3c1QeGDtvh8vs68GpzSLSUlJUhKSsKiRYsglUqRlpaGYcOGaTssSkdlZ2cjOTkZe/bsQX19Pfh8vszyxMRESKVSTJgwAQKBAL/99humTZvWbN6YMWO0VAKK+veoqqrSWF568SRPgUAA4MULwyQSCTgcDgghzMN5pFIpWCwWjI2NtRzpv4OdnR1MTEwwfPhwTJs2DYGBgSgoKEBQUBDu378Pe3t7FBUVYfjw4di2bZu2w6W0LDY2FkKhEFFRUcjMzMTcuXNhZWXFLJ8zZw7zd2pqKiZMmCB3HgDazihKj7R5gHHnzh0kJSWhqqoKEokEAQEBGt/RZ2Zm4siRIwgODsauXbswY8YMiMVihIWFISAgAGvXrsW8efOYxw5T7auwsBA2NjbYvXs3/P39cezYMbi6umLPnj349ddf4eHhgcrKyn/FWw+bunnzJnJyclBbW4uHDx/im2++gampKYAX1yBkZGRg7969CAkJUZhHYGAgnjx5AicnJ+Tn52Pp0qV6/XZVPp8PCwsLTJ8+Hd27d8e6detw5MiRZulSUlLA5XIxf/58hfNEIpFOt7PHjx8jJiYG3bt3R3l5OZYsWSL3IWLK0rWUx8WLF/H8+XN069YN9vb2Mm9xBl48HfWjjz7CwYMH27ewrdQ0PmV9pqlHjx4hNDQUtra2qKurw9KlSzsy9DZRtW0o+55Q9TtEZyh6j7u/vz8pKChQ+q73p0+fkh9++IGZXrBgAVmxYkXbXyIvx99//004HI7MvJqaGgKA5OTktMs2KfmCg4NJRkYGIYQQkUhEFi1aRAghJCsri/z222/k/Pnz5MqVK9oMUSvEYjEZOXIkqaysJIQQsmTJEuLn58csDwsLI5cvXya9e/dWms+aNWvIBx98QHx9fUlKSkq7xtwRLl26RL7++mtCCCGpqalkxowZhBBCJBIJk+b27dskMjKSEEJIcnKywnmE6G47k0qlxN3dndTV1RFCCAkPD5f5flQlXUt5HD16lGzdupUQQsjJkyfJRx991Cz/M2fOkB49emi2cBrUOL6W+kxjVVVVZPDgweT58+eEEEJ27NhBDh8+3DFBt5GqbYMQ5d8Tqn6HtMX8+fM1lleb7iLJyMjA5s2bmTsJPD09ER4erolxD6XDpk+fjtDQUNy5cwfR0dHw9vYGABw4cABTpkyBlZUV/vrrLy1H2fEMDAzg5uYGiUQCADAyMkJtbS2z3MvLCyNGjGgxH0dHR/zxxx/YvXu3Tv06b61JkyZBIBDgr7/+wuHDh7F27VoAgLu7O+rr65GWlgZvb29s2LABI0aMQFxcnNx5DXS1nd2+fRtcLhdcLhcAMHr0aBw6dEitdMqW8fl8fPfdd/j8888BADNmzMCWLVtk8s7Ly9PoRXqa1jS+lvpMYzExMbC0tGTWHzduHPbu3dv+QWuAqm0DUP49oep3iK5o0ykSFxcXXL16FQYGL8YpeXl5sLW11UhgrRUVFQVzc3OkpKSgV69eWLhwIQDg2rVrCAoKgq+vL8zNzZGRkQEOhwNfX1+ly6jmBgwYgA0bNqCgoADDhg1j7jYKCgqCgYEB+vbti9GjR2s5yo7HYrGwfft2AC9u4c3MzMT+/fvVzocQgsjISNTW1sLGxgZubm6aDrVDsVgs/Pjjj3j06BE2b96MLl26AADi4+MBAEOGDMHDhw+brSdvHqC77ezWrVswNzdnps3NzZGeng6BQMCUuaV0ypbduXMHlpaWuH//PoqKiiASiTB79myZGBISEjBv3rx2LGXbNI1PnT5TU1MDoVAos25WVlb7BqwhqraNzqZNAwwDAwPm7gGRSISTJ0+268VWUqlUpvHV1dXJLJdIJPDx8UF2djZcXV3h5OQEV1dXODg4YPz48YiMjERSUhK2b98ODw8P2NvbY/ny5UqX0Zcw/R8+n4/Hjx/LzOPxeC2u17dvX1hYWLRTVLrnxo0bCA0Nxccff4yXX35Z7fVNTEzg6uoKS0tLrFmzBiUlJXj33XfbIdL2JRaLm+0AHj161G7bc3JyAoejvevWeTyezM7CxMRE7nxl6ZQte/DgAcrKytClSxd4enpi79692Lp1K7766isAL35cTZs2rf0K2EbK4lOlz7i5uTFlBV5c/FtZWYn6+nrmyICuUrVtdDYa640bN26Ev78/Jk6cqKksmzEwMMCyZcuY6draWqxcuZKZZrPZyM7ORnl5OWJjY2FtbY0nT57AwcEBAMDlctG/f38mvampKfh8PszNzZUuo14oLy/H2bNn1V5v9uzZej/A2LNnj8KHPrFYLKxZs4a5M2LMmDEYM2YMli5dipiYGPz+++9qbavhqBsAjB07FoGBgXo5wKivr29Ve2ktPz8/mJmZddj2muJyucwdb8D/3f3WdOenLJ2yZV26dIFUKmUu6hw6dChmzpyJr776CkVFReByuejWrRtzukGXtBSfKn3GwcEBP/30E3bu3IkhQ4YAALp27arzgwtA9bbR2WhkgBEaGgo3Nzd4eHigsLAQffr00US2ahMIBFi5ciW8vLwwd+5cnDp1qtmzPJp+oI2fRKlsGQX069cPX3/9NYAXh7crKirAYrEwffp0GBoaajm69qXK6bKCggKcO3eOSevi4oLFixdj3759Kv+y/ueff7Bu3TrmWiZra2sUFxe3PnAtMjU1bff2wuPxYGZmxpym1SY7OzvU1NQw09XV1TA3N282uFaWTtkye3t72NjYMMusrKzw7NkziEQinDt3DhKJBA8ePEB9fT0EAgH27NmD2bNna/20NQCF8Y0cORK3bt1Suc/MmzcPUqkUQqEQdXV1enN3lapto7Npc6+Mi4uDra0t3N3dIRQKERERAeDF7WWa/GIkhDQbLDRMN/wfEREBqVQKLy8vsFgs5rHEkZGRcvNo+reiZVRzAwcOxLfffosZM2Z0+sGFqhISEhASEsK0ndraWtjZ2cl8Ucprx437Sl1dHYYPH84sy83NhYuLSwdE377ao72EhYVhypQpOjMAe+utt1BeXs5MFxYWYuLEiczgp+FzVpZO2bI33nhD5gLI/Px8jBgxAoaGhlixYgU+/fRT+Pr64v3334exsTF8fX11YnABQGF8ubm5SvtM474hFArh7e0NkUgEY2NjREdHY9WqVVorkzqUfa7y9pXyvidUWaZr2OvXr18vb8GVK1cwevRopSOsnJwcuLi44Ndff0VgYCA2bdoEY2NjvPPOO/j0009hYGAg82XZWtevX8eRI0eQnp4OIyMjWFtbo7S0FCEhIbh58yYMDAxgZWUFR0dHHD16FPb29rh37x5sbGyQkJAAZ2dnFBQUICQkBPn5+XB2dkZUVBTOnDkDqVQKkUiEw4cPy102atQoGBkZtbkMnU10dDS4XC6mTJmi7VB0hqOjIwoLC2Fqaorq6mps27YNwcHBzCm6CxcuIDQ0FElJSTA1NYVUKoWdnZ1MX7GxsUFaWhp4PB6ePn2KkJAQ7Ny5U+9/6bRHexk8eDD+/PNPTJw4USfqh8vloqamBllZWejZsyeCg4Px3//+Fz169AAA5nMeO3aswnTK8uBwOOjZsydOnz4NW1tb7Nq1Cxs3bpQZRDRcJHn9+nWYmpripZdeUvhMCW1oGt/EiRPx/PlzhX2mcd9gs9mIiorCyJEjcfHiRQiFQixZskS7BVKRss+16b5S0fdES8s0JTw8HF5eXhrJi0UUDIUCAgLg5+entdMdbVFRUYHu3bsDAPO0T0qz/Pz8MGnSJHh6esrMv3jxIszMzDrFr+7Wunv3LqqqqjBs2LBWXxOQkZGBuro6DB06VKsXLmpKe7WXBQsWYOvWrTr1PVVYWIi8vDwMHz5c6UMHlaVradnDhw/b1L50jap9RiKR4Pbt27Czs5M5XaQvVG0b2uTj44OjR49qJC/9/+aSo2FwAYAOLtpJQkICNm7cyEzn5eWhX79+qKysRLdu3bQYmfZp4rzwa6+9poFIdIe67eXgwYMoKyuTmcdisbBixQqdv/C6T58+Kg14lKVr7TJ9pWqfYbPZev1smM742SnTKQcYVPuqqKiAoaEh88CbwsJCxMXFYeHChYiPj4eFhQW+//57+Pr6dppfWFTrtaa9LFq0SJshUxSlAXSAQamlsrISmzZtgqWlJU6fPo3i4mIcP34cly5dAvDiTp4ZM2YgLi6OHj2i2rW9nD9/Hjk5OTh9+jRmzpzJnLenKEo30AEGpZZu3bohODhYZt5nn30GACgrK2NeOCcQCJCcnAwPD48Oj5HSHe3ZXjw9PZtd00FRlO7olBd5UtpDCAGLxaIX11Iqoe2FonSLJi/y1P7TaahOpeG9JHRnQamCtheK6rzoAIOiKIqiKI2jAwyKoiiKojSODjAoiqIoitI4OsCgKIqiKErj6ACDarXy8nL6xllKZXV1dcwLCNVZ3vglURRF6Q+Fz8EwMTFhrvCmqMYaXg43duxYnDx5EuPGjcOwYcO0HRalw44dOwYulws2mw2pVIo5c+aotLy4uBizZs1CSkqKNsKmqH+dhifuaoLCAQafz9eZV8IKBAIAgIGBASQSCTgcDgghzL3zUqkULBZLZ18e09mUlJQgKSkJixYtglQqRVpaGh1gUAplZ2cjOTkZe/bsQX19Pfh8vkrLCSFISEjQiTelUtS/RVVVlcbyavOTPG/evImcnBzU1tbi4cOH+OabbzT+euDMzEwcOXIEwcHB2LVrF2bMmAGxWIywsDAEBARg7dq1mDdvHvNUwI42ZcoUfPvtt/jPf/6jle13NDs7O5iYmGD48OGYNm0aAgMDUVBQgKCgINy/fx/29vYoKirC8OHDsW3bNm2HqxWEEHz00Uc4ePAgM+/OnTtISkpCVVUVJBIJAgIC5A6KXV1dMXToUBgZGTFHEd977z2MGDGiw+LXpNjYWAiFQkRFRSEzMxNz586FlZVVi8sjIyPh6emJ3377jUmr6+3s8ePHiImJQffu3VFeXo4lS5bIfcaHsnTKltXV1SEjIwN79+5FSEiITJ6PHj1CaGgobG1tUVdXh6VLl7Z/gdUQGBiIJ0+ewMnJCfn5+Vi6dKnMS87k9Rl189AlqrYFZWmV7V87Yt/bZkQBf39/UlBQoGgxIYQQsVhMRo4cSSorKwkhhCxZsoT4+fkpXae1/v77b8LhcGTm1dTUEAAkJyenXbapqsOHD5OSkhKtxtCRCgoKyKZNm0hCQgIZO3Ys+eOPP8jDhw+JVCol+/btI9nZ2SQlJUXbYWrVmTNnSI8ePZjpp0+fkh9++IGZXrBgAVmxYkWz9Xg8HvH29iZBQUFk69atZOvWrWTKlCmkurq6Q+JuDz/99BP58ssvCSGEXL9+nfj4+LS4/O7duyQjI4MQQsjEiROZtLrczqRSKXF3dyd1dXWEEELCw8NlPnNV0rWUR1hYGLl8+TLp3bu3TJ5VVVVk8ODB5Pnz54QQQnbs2EEOHz6s+UK2wZo1a8gHH3xAfH195X5uTftMa/LQFaq2BWVple1f23PfO3/+fI3kQwghbbrI08DAAG5ubpBIJAAAIyMj1NbWamLco1cWLFiAXr16aTuMDnPq1CnMmjULb775JuLj4xEXF4f+/fsjJycHbDYbDx48QHV1tbbD1Jq8vLxm5zEzMjKwefNm5qJYT09PhIeHN1u3tLQUwcHBWLt2LQICAvDGG28gMDBQr99KO3jwYOZIjbGxMXMItqEu5C0vLy9HZmYmwsLCkJeXh8jISADQ6XZ2+/ZtcLlccLlcAMDo0aNx6NAhtdK1lIeXl5fcI1kxMTGwtLRk2t24ceOwd+9ezRawjRwdHfHHH39g9+7dzV65Lq/PqJuHLlG1LShLq2z/qi/73jadImGxWNi+fTsAMF8I+/fv10hgrRUVFQVzc3OkpKSgV69eWLhwIQDg2rVrCAoKgq+vL8zNzfHPP/8AAMaPH4/nz5/j1KlT8PHxwRtvvKFW2oSEBAQGBmLlypUwMTGRWS8jIwMcDge+vr5MfBERESgqKgKfz2ca1KBBg/TqpWDTp0/H0aNHMXPmTJSUlMDb2xsAcODAAXz66ad48uQJEhIS9KpMmpSQkIB58+bJzHNxccHVq1dhYPBiTJ+XlwdbW9tm67788svM38+ePcO9e/fg5+fXvgG3s0mTJuHy5cv466+/cPz4caxduxYA4O7ujpiYGLnLx44dCwAIDw+HQCBgvkgB3W1nt27dgrm5OTNtbm6O9PR0CAQCdOnSRaV0qubRVE1NDYRCITPNYrGQlZWlqaJpBCEEkZGRqK2thY2NDdzc3Jhl8vqMunnoEnU+R0Vp6+rqFO5fdXHfK5eiQxuqnCJpcP36dfLFF1+QEydOaOjASnN///03MTAwIPv27WP+7dixQ+YUiVgsJl27diXl5eWEEEIGDBhAHj16xOTxxRdfkNWrVzPTffv2JbGxsYQQQpKTk8ns2bNbnbah7E3Xs7OzI2KxmBBCSHl5OXFwcCCEECISiYitrS2zTB/l5+cTqVTKTEskEuZvfS5XW5w/f55UVFQQsVis8HCvUCgkI0aMIDExMUrzWrt2LdOW9Z1UKiW5ubmEz+e3anljutrOtm7dShYsWMBMi8ViAqDZ6VNl6VTJ4+nTp81OkTx69Ehm3m+//UYAMIfddcGhQ4eYUzirV69mvjNV6TMt5aFrVG0LqqRVtn9tj32vJk+RaOR17WPGjMGYMWOwdOlSxMTE4Pfff9dEts0YGBhg2bJlzHRtbS1WrlzJTLPZbGRnZ6O8vByxsbGwtrbGkydP4ODgAADgcrno378/k97MzAyvvvoqgBevlW58D766aRWtZ2pqCj6fD3Nzc4hEInA4L6qcxWKhrq5Or94iyefz8fjxY5l5PB6vxfX69u2r93cC7NmzBwUFBXKXsVgsrFmzBgKBAFwuF926dZP5xd3Uxo0b4e/vj4kTJypMU11djdTUVPTo0aPNsWuLWCxu9iv60aNHStdpabkyTk5OTP/SBi6Xy9zxBvzf3W+Nvx9aSqdqHk05ODjgp59+ws6dOzFkyBAAQNeuXVtcryM1HE0GgLFjxyLZSmh8AAAgAElEQVQwMBAuLi4q9Rllebz77rvtEm9bqPM5tpRW2f61o/a9rdWm3lhQUIBz584xpwBcXFywePFi7Nu3TysdXSAQYOXKlfDy8sLcuXNx6tSpZrfayuvsDZo+NEqdtMrWa0hrY2ODadOmYf/+/eDz+di9ezeMjIxUKJluKC8vx9mzZ9Veb/bs2Xo/wGh8mkuREydOQCKR4MGDB6ivr4dAIMCePXswe/Zs5nRIaGgo3Nzc4OHhgcLCQvTp00duXtHR0TJ3Wuij+vr6VrWX1vLz89PqtSp2dnaoqalhpqurq2Fubt6s7StLp2oe8sybNw9SqRRCoRB1dXU6dXfFP//8g3Xr1jHXHVlbW6O4uBjnzp1rsc+0lIcuUudzVJSWx+Ph2LFjcvevJSUlOrXvVaRNkSQkJCAkJASffPIJWCwWamtrYWdnBw6Hg5SUFNjb28PGxkYjgRJCmg0WGqYb/o+IiIBUKoWXlxcAMEcZIiMjMWPGjGZ5NJ6Wl7c6aZWt15iDg4PMURh90q9fP3z99dcAgPj4eFRUVIDFYmH69OkwNDTUcnTat2LFCubvkpIS5nqcBnFxcbC1tcXYsWMhFAoRERGBFStWyO0r9+/fR9euXTs0fk0zNTVt9/bC4/FgZmbGXNuiTW+99Ra2bNnCTBcWFmLixIlMbA2fs7J0LeUByP8uFAqFeP/993Hs2DEYGxsjOjoaq1ataq+iqq2urg7Dhw9npnNzc+Hi4tJin2ncNxTloYtUbQs2NjYK0yYlJSncvyrb9+oS9vr169fLW3DlyhWMHj1a6cjZ0dERhYWFMDU1RXV1NbZt24bg4GA4ODjg008/hYGBgUyDaK3r16/jyJEjSE9Ph5GREaytrVFaWoqQkBDcvHkTBgYGsLKygqOjI44ePQp7e3vcu3cPNjY2SEhIgLOzMwoKChASEoL8/Hw4OzsjKioKZ86cgVAoxMsvv4yff/4ZN2/eRN++fVFRUaFy2mfPnuHAgQPMSPrkyZPN1pNKpRg1ahSMjIzw008/ITg4GPv27UNoaCjMzMzwyiuvtLmOOpqxsTEWLVqE4OBgnWvU2tZwwdX169dhamqKl156CcXFxXBxccGvv/6KwMBAbNq0CcbGxnjnnXfk9pXDhw/D0tISkyZN0mJJNKc92ktYWBh8fX0xdepUnThCxuVyUVNTg6ysLPTs2RPBwcH473//y5zmavicx44dqzBdS3lcuHABoaGhSEpKgqmpKaRSKezs7MBmsxEVFYWRI0fi4sWLEAqFWLJkiTarQ4aNjQ3S0tLA4/Hw9OlThISEYOfOncznJq/PmJqayvSNlvLQJaq2heHDhytMO2rUKIX7V2X73rYKDw9nfqS3maKLM9S5yDMtLY3Ex8frzL36T58+Zf7WpYvADh8+LHMxzvPnz4mnpyd5/PixFqNqnbCwMLJq1Spth9FplZaWMhezdQbt1V58fHxU/p7qKAUFBSQpKYkIBIJWp1M1j8bEYjFJSUkhRUVFasfcUdLT08mtW7eISCTSah4dRZ3PUVFaZfvX9tj36txFnrp0rg8AunfvzvytSxdQVlZWyhytsLS0RO/evXXqQixV/fnnn3J/XV+8eBFmZmY6e+hSX1hbW2s7BI36N7WXPn36KLy2RtV0qubRGJvN1ulnQwDAa6+9phN5dBR1PkdFaZXtX3Vt39sUPbbdgT7//HNcvnwZYWFhMDQ0hEAgwKpVq9C7d29th6a2hIQEbNy4kZnOy8tDv379UFlZiW7dumkxMkoXqdteDh48iLKyMpl5LBYLK1askHlmAEVRuosOMDrY5MmTtR1Cm1VUVMDQ0JB58l5hYSHi4uKwcOFCxMfHw8LCAt9//z18fX31+gmUlGa0pr0sWrRImyFTFKUBdIBBqaWyshKbNm2CpaUlTp8+jeLiYhw/fhyXLl0C8OJW4RkzZiAuLk6nTk9R2tGe7eX8+fPIycnB6dOnMXPmTI1c4EZRlObQAQallm7duiE4OFhm3meffQYAKCsrY95oKxAIkJycrDOPcaa0oz3bi6enJzw9PTUXLEVRGsUipMkN1f9fQEAA/Pz81L7QiPp3I4SAxWLp1RNKKe2h7YWidIuPjw+OHj2qkby0/3QaqlNhsVgAdOvuHUp30fZCUZ0XHWBQFEVRFKVxdIBBURRFUZTG0QEGRVEURVEaRwcYFEVRFEVpHB1gUGrh8Xgyr6oXi8UoKCjQYkSULmvaXhTNU2W94uLiZm8RpShKdykcYJiYmDBXeFMU8OLtlVOmTGHeHFtaWorffvsNWVlZWLRoEW7cuKHlCCld0rS9KJrX0no8Hg/ff/89qqur8eGHH+LmzZvtHjtF/Vs1PHFXExQOMPh8vs78WuDz+aioqJD5V1tbK5OGx+PhwYMHqKysbNU2qqqqkJmZCR6Pp4mQO6U5c+bA0dGRmU5MTIRUKsWECRPg7e2N3377TYvRUbqmaXtRNK+l9QwNDTFixAg4OTnB2toaubm57RIvRVEv9oWaorEneRJC8NFHH+HgwYOaypKRm5uLY8eO/b/27jsuqmPtA/hvFxZEioCAIkiMBTVKxAKWq2JvaApXkxhLNNgiavTGlpjiVS+iWK7tqp8oscUoiA1QEbGAoFivBUQxiDQLAsrSWXbeP3g5ly1nC+yyaJ7vP3B25sw8c2Zmd/bs2T0IDAzErl270LhxY+Tn5+PMmTOYPn06vL29kZKSgtmzZ+Mf//gHPv/8c63rSEpKwvTp07F+/fp34n4h9eHvf/879//t27cxaNAgZGZmwt/fH0lJSXBxcUF2dja6deuGtWvXGjDS+rNixQqkp6fD1dUVGRkZmD59OnfHw7S0NERHR0MgECAvLw9z5sxBo0aNFMooLS3F/fv38Z///AdBQUH13YQGx8zMDP369cPevXthamqKzz77rEGNs7S0NERFRaFp06bIycnBtGnTlP6uh6p8fGmq9lE1Tvr37w93d3eYmJhwZ6K/+OILdO/eXc9Hgx9fTBEREbxzRt61a9fw+PFjFBUVITU1FT/++CPMzc3rsxkq6XMsAPzt17Teesd3H/fFixezzMxMje/7fuzYMWZnZ1e3m8erkJyczCwsLGQei4+PZ6ampiw7O5sxxtiSJUvYoUOHal3HzJkz2ZkzZ+oU57tu4sSJCuPi6tWrbO3atYwxxlJTU5lUKmU7duxgKSkpLCEhwRBhGsyiRYvYV199xfz8/BTaHhgYyP2fnZ3NfvrpJ6VlhIaGssjISNa8eXO9xloflI0XZY9psl9lZSVbsmQJO3z4cIMZZ1KplA0YMICVlpYyxhg7evQoW7dunVb5+NLUlc03TgoKCtjYsWOZv78/CwgIYAEBAWzEiBFMLBbr/gBoSFVMquZMTRKJhHl4eLC8vDzGGGPTpk1j8+bNq68mqKXPscAYf/s1rVdTEyZMqPW+8nRykefTp091+rmNplxdXVFWVobnz58DQJ2vGaFrTrR369Yt5OTkYNGiRbhy5Qref/99PH78GEZGRnj48CHEYrGhQ6xXbdq0wZ49e7B161Z4enpyj5eUlODYsWMoKysDAFhZWXH/y/Px8THoO01DUHXR54kTJxASEgKhUIjBgwdj3759DWac3bx5E6ampjA1NQUA9OzZE3v37tUqH1+aurL5xsmLFy+wceNGfP/991iyZAl69OiBFStWGPTOxqpi4psz8oRCIby8vFBZWQkAMDExUfio3JD0ORYA/vZrWq8h6GSBERsbi/79++uiKI2Vl5fjl19+wQ8//ICuXbsqzRMREYGYmBgEBgZi3759MmkJCQkICAhAREQEgoKCFAbqjBkzuAvKLly4gKFDh+L48eOIjo7G1q1bsXXrViQmJiIuLg7z58/HjRs31NYrX86mTZuwbds2HR4V/ap598q0tDTcuXMHY8eOxT//+U90794dly5dAgDs3r0bI0aMgI2Njcxx+StgjCEsLAyHDh3ijgdQdZq/WbNm6NGjB+Lj47Fjxw7MmjXLgJHqn/x44XsMAAYMGMAtuOTztGrVCgUFBUhMTERoaCh3s7SGMM6uX78OS0tLbtvS0hL37t1DSUmJxvn40mJiYjQqW17btm3h7OwMAMjPz0diYiI8PDzq1M66UhUT35yRJxAIEBgYCDs7O+Tk5CA5ORlLly6tl/g1oc+xUFJSwtt+Tes1hDpfgxEREYFRo0bpIha1JBIJIiIiwBjD48ePYWlpyXs3xcrKSkycOBEpKSno378/XF1d0b9/f7Rq1QrZ2dmYOXMmbty4AWNjYwwYMAAuLi7cvq9fv4azszP8/PzQtGlTAEBYWBji4uIQGBiIwYMHo2XLlujUqRMGDhwIoVAIf39/HD16VGW9AwcOVCjHxcUFs2bNahifl6mh7O6VqampCvn8/f0hFArh7OyMnj171ld4DULjxo3Rv39/NGnSBIsWLcLz58+5a4L279+PYcOGoV+/fpg2bRpatGhh4Gj1S9l44bsDakxMjMo8Xbp0QVpaGjZs2IDGjRsDaBjjrKCgAGZmZtx2dWzyj6vKx5eWmZmpUdmqBAYG4h//+Ie2zdIr+ZhUzRllrl69iuDgYMyYMQNt27atj5A1os+xUPNx+faHhobWeZzoS50WGNnZ2TA1NYWtrS132kafjI2N4e3tzW2/efMGjo6OiIiIwMCBA2XyGhkZISUlBTk5OTh//jwcHByQnp6OVq1aISQkBO7u7jA2rmp+VFQURCIRQkNDkZaWhsDAQJw6dQomJiZceaampnj//fe5bQsLC3Tq1AlA1S2pc3Nz1darrBxzc3MUFxfLrEAbmrKyMp1cue/q6sod87fNtm3beH/vQyAQYNGiRbCxscHkyZO5x3v37o0VK1bg888/R0VFBZYuXYrDhw8jKysLvr6+mDFjRoM5lalrSUlJeim35lkPPh988IFe6lbG1NRU5p1i9f/Vp6s1yceXZmVlhYyMDLVl8xGLxbh9+zbs7Oy0aZJeKYuJb87w6dWrF3r16oXp06cjKioKu3bt0mvMmtLnWKhZhnz7O3furFG9hlCnZ/sTJ06gsrISDx8+RFlZGUpKSrBt2zZ8+umn9fLurEmTJvDw8EBoaKjCAqOkpATz58+Hj48Pxo0bh5CQEO5rt8XFxTKLB5FIxP1fUFCAoUOHYsWKFVi1apVMmcoGSrXqz5BV1ctXjrofHTK0goICHD9+vM7lzJs3z6CfA9eFn5+f2jwPHjzAsmXLcPToUQCAg4MD91sOJ06cgKenJ5ydneHs7IyEhAR06dIFFRUVMuPvXcAY08l4qa0OHTpAKKyf3xBs2bIlCgsLuW2xWAxLS0tYWVlpnI8vrVOnTkhISFBbNp+zZ8/Cxsamtk3TC/mYVM0ZeZmZmThx4gQ3F/v16wdfX1/s2LGjQbxx0edYsLKy4m3/77//rlG9hlCnXvnmm2+4/58/fw5/f3+u8QkJCXBxcYGjo2PdIvx/8i/SQNWBTE5OxuzZs7k81flOnjwJqVQKHx8fAODOMISFhWHkyJGYNm0aV05lZSWuXLkCxhg8PDzQv39/DBo0CJcvX0bfvn0Vypbfrvm4qnrHjBmjtJyGzt7eHj/88IPMYzExMcjNzYVAIIC3t/c79yJZG6WlpejWrRu3/eeff6Jfv34Aqs5s1VxYmpubY/To0RCJRErnivw4eZsIBIJ6Gy8FBQWwsLCotwWFvKFDh2L16tXcdlZWFoYMGQKhUCjTr6ry8aUNHz4ca9asUbpPNVXjJCkpCdbW1rpsbp3Jx6RqzgCyryOxsbEICgrC7NmzIRAIUFRUhJYtWzaIxQWgeiwA/2tLbcaCUCjkbf+IESNkvp6tbJwYitHy5cuXK0s4d+4cevbsqdEqKDk5GTt37sSVK1dgbm6O1q1bY8mSJRAKhTKDp7auX7+OnTt34urVq7CyssLdu3dx6dIlbN68GZMnT4avry8uX76M3bt3IzMzE25ubmjZsiUOHDgAFxcXJCYmcgPUzc0Nffr0gZGREY4dOwYjIyPu89+DBw/ixYsX6N69OxITExEQEIDmzZsjPz8fQUFByMjIgJubGyIiInDs2DGUl5ejbdu22Lx5M65duwZnZ2d0796dt97MzEyl5UilUnh6esqcVWnoGjVqhKlTp2Ljxo0NZoIbmqOjI+7cuYOCggK8evUKQUFB2LRpE6ysrNCuXTvs3bsXjDFIJBKEhISgT58+aN26NebMmSMzV06dOoXg4GDExcXB3NwcUqkULVu2NHDr6kYf4yU0NBR+fn4YOXKkwd6tmZqaorCwEI8ePYK9vT02btyIn376CXZ2djL9qiofX5qTkxPvPoD6cbJv3z40adIEw4YNM8ixUUY+JlVzBoDMMWzTpg2ysrJgbm4OsViMtWvXYuPGjdzHz4amqo+B/7Wld+/eWo8FOzs73va3b99eZb3aOnr0KPcGuc74vr+q7e9gNFSvXr3i/pdIJDJpEolEJr2+6n0XhIaGsu+++87QYTRI9+7dY9evX2cVFRUKacnJyezixYvs9evXBojMcPQ1XjT5TY36kJmZyeLi4lhJSUmt8/GlaVq2vBcvXjS4ccYXk6o5I+/OnTssJibGoL/roYo+xwJj/O2v7TiRp8vfwXjn33pWfwsEgMI3NYyMjGTS66ved8HFixeVvjM6ffo0LCwsZE5z/tV07tyZN619+/Zo3759PUbTMLzr48XJyQlOTk51yseXpmnZ8hwcHLTeR9/4YlI1Z+Tx/cpnQ6HPsQDwt7+240Sf3vkFBtGP2NhYrFy5ktt++vQp3nvvPeTl5cHW1taAkZGGSNvx8ttvv+Hly5cyjwkEAnzzzTcN+htXhJD/oQUG0Vpubi5EIhH3661ZWVm4dOkSJk+ejJiYGFhZWWHNmjXw8/N7a781QnSnNuNl6tSphgyZEKIDtMAgWsnLy8OqVavQpEkTHDlyBM+ePcPBgwdx5swZAFVf0x0zZgwuXbr0Tn40RLSjz/FS8xc/P/744wZzsR8hpAotMIhWbG1tsXHjRpnHqn+6+eXLl3BzcwNQ9cIRHx+PwYMH13uMpOHQ53jh+1VQQkjDIGBM+ZeolyxZgnnz5jW4i0ZIw8YYg0AgQGVlJZ3BIGrReCGkYZk4cSIOHDigk7IM/0sc5J1SfUdaerEgmqDxQsi7ixYYhBBCCNE5WmAQQgghROdogUEIIYQQnaMFBiGEEEJ0jhYYhBBCCNE53gVGcXExJBJJfcZCCCGEEAMqKSnRWVm8P7TVuHHjBnMb7uoGC4VCVFZWwtjYGCYmJpBIJCguLoaxsTEEAgHMzMwMHCkh5K+koKAAz549g729Pd2Dh7wTdPk6WuePSFasWIFp06Zh7dq1mDt3Lu7evauLuGQkJydj2bJlaNSoEYKCgvDs2TMAQH5+Pvr27YspU6bg6tWrassZMWIE4uPjdR4fIUT/DDF/5euUSqUQi8Xc9qNHjzBp0iRERUXVa1yEvA3qfIqisLAQEokE6enpmDx5sl5updu1a1cIhUJs2bIFc+bM4R5PT0/H6tWr4e3trVE5EyZMQJs2bXQeHyFE/wwxf+XrvH//PjIyMrjnnB49emDQoEH1GhMhb4s6n8Fo06YN9uzZg61bt8LT01MXMWnkypUreP36tcaLCwCYNGkSmjVrpseoCDGsPXv2oLy83NBh6IUh5q98nSdPnlTIU/1rpO+anTt3GjoE8par8xkMxhjCwsJQVFQER0dHeHl56SIulc6cOYObN29i2bJlCmkRERGwtLREQkICmjVrhsmTJwMAYmNjsWLFCsyfPx/e3t7IyspCVFQUXFxckJ6eDsYYpk6divDwcDx//hyNGzdGdnY2Fi5ciMjISPj7+2Pu3LnIyMiAWCzGzz//rPd2EqKN4uJixMXFYcqUKYYOhXPkyBEcPnwY7dq1g7+/P27fvo1Vq1Zh+PDhcHJyUjpXlc23gQMHysxfAErnKt+8lhccHIw//vgDHh4eGDRoELZv347mzZvD398fq1evxqNHjzB8+HDs2bOHq/P48eMICgrCyJEjkZmZCR8fH9jb2wOouiV9bGwsbt26BWNjY/j5+ak8LsePH0dpaSmKiorg4OCAMWPGoLi4GI0bN9ZxD9ReeXk5Hjx4gI4dOxo6FPK2YjwWL17MMjMz+ZI5e/fuZa9fv2aMMbZw4UJ26NAhtfvUxn//+19mbGzMzp07xzZs2MCaNm3KsrOzZfJIJBJmbW3NcnJyGGOMtWvXjj158oRLX7BgARffzz//zG7evMkYY6y8vJwFBQWxu3fvssGDB3P5586dy6KjoxljjE2dOpV9//337MWLFywkJEQvbSSktqRSKVuyZAlLSkoydCgK5s+fz7Zv385tr1u3Tu1cVTbfas5fvrmqbF7zGTduHDt9+jRjjLHly5ezXbt2cWWfOXNGoU7GGJsyZQoLDw+XKWfp0qXMz8+P227ZsiWTSCS89W7YsIH5+/tz20OGDGGvXr1iBw4c4N3HEEpKSpivry/Lz883dCikHk2YMEFnZdX5DEb1uw4A6N27N1asWIHPP/+8rsUqJZVK0bRpUyxYsABPnjzBtGnTEBERwaUbGRkhJSUFOTk5OH/+PBwcHJCeno5WrVoBAExNTbm8Q4YMgbe3NwYMGIDRo0fjq6++wk8//QQbGxtERkYCqLqa9t69exg0aBBMTU3Rrl07ODg4YOzYsXppHyG1UVBQgMGDB8PBwQH79u1Tmz89PR0uLi5K0wQCARYtWgQbGxudxffNN99g/PjxmDVrFq5duwZvb2+N5qr8fKs5fw8dOqR0riqb13wmTpyIgwcPYsSIEbC0tERwcDB8fX2RmJiIL774QqFOVWpee2Zubo7i4mJYWloq5MvIyEBgYCBSU1O5x5o1a4aYmBidfwtu27ZtyMzMVJr28uVLmJiYwNraWmUZxsbGcHNzQ2hoaL1+BE7eDXVaYDx48ADLli3D0aNHAQAODg7cNzz0QSgUwt3dHQAQEBCALl26ICgoCF9//TWAqq+zzp8/Hz4+Phg3bhxCQkLAlN+NHt26dcPt27cRFRWF/fv3Izk5GeXl5ejUqROGDx8OANzfai1atNBb2wipLSsrK6xZswZ79uzBL7/8gkaNGhk6JBmurq6wtrbGjRs38PDhQ0yaNEmjuapqvvHN1aKiIoV5vXLlSqVljBw5EnPnzsXTp0/x4Ycf4ty5c8jOzoZUKtWoXampqWjdujUAxYUIXxkXL15E7969ZfrI2toahw8f1tktsqup+5hGE2vXrsX69etpcUFqpU4XeZaWlqJbt27c9p9//ol+/foBABISEnS62GCMyTwBNW7cGHv27MGCBQvw9OlTAFUXYEmlUvj4+EAgECA3NxcAEBYWxpVRzd/fH6amppg0aRJOnz6N5ORkfPTRRzJfSZNIJNy2fP2ENCSDBg3CDz/8AH9/f0OHotSsWbOwdu1a7h2zJnNVfr7V3Oabq8rmNR+RSISRI0di4cKFGDBgAL788kssXryYexMjXydQ9bxTVlaGyspK7iv58rGqep4QiURwcHCQeayoqAgjR45sML87VO3ixYuwtrbGZ599ZuhQyFvKaPny5cuVJZw7dw49e/aElZUV786Ojo64c+cOCgoK8OrVKwQFBWHTpk2wsrLCnDlzIBQKZRYgtXXlyhXs378f9+7dg4mJCRwcHGBra4u7d+8iNDQUZ8+ehbW1NTw8PHDgwAG4uLggMTERjo6OiI2NhZubG7Kzs7F79248e/YMPXv2REJCAtLS0iASiXDy5El4eXlhyJAhEIvFiIqKgkAgwPnz5zFw4EDExsZi7969yMnJgb29Pe/pZUIMyc7ODn/88QdGjBgBIyMjQ4cjw9XVFWvWrEFAQACMjIxgZmbGO1dTU1MV5tvly5dl5q+bm5vSuXrp0iWFee3q6sobl42NDTIyMjBq1Ci0adMG27dvx+LFiwFAoc4mTZrA3NwcwcHByM/Ph5eXF27fvo2goCBkZGTAzc0NEREROHbsGKRSKTw9PWFiYqJwHI4ePQorKys8ffoUycnJeO+995CUlASxWIwOHTrotR+0sW7dOixZsqTBjSWiX0ePHoWPj49OyhIwnuX2kiVLMG/ePDg5Oakt5P79+ygtLYW7u3uDWIXn5uaiadOmAIDKykqlE6S8vBwmJibIysqCg4MDRCIRlyaRSPDmzRuuDELeFmVlZRpfN1DfKioqZOYZoNlcVUV+rqqa15rEpSxGeeXl5SgvL4eFhYVWsdb08uVL2Nracs+XhYWFdSpPHxryWCL6M3HiRJ19XKeT1UDnzp11UYzO1FwY8D1hVb+zULaAMjY2psUFeSs15BcEZS/cmsxVVeTnqqp5rUlcmixITExMFM5MaEv+Y5KGtrgAGvZYIm8HupsqIYQQQnSOFhiEEEII0TlaYBBCCCFE52iBQQghhBCdowUGIYQQQnSOFhiEEEII0TlaYBBCCCFE52iBQQghhBCdowUGIYQQQnSOFhiEEEII0TnenwoXCAQAVN8ZkBBCCCHvjurXfl3gXWB4e3tj6dKlOquIEEIIIQ2bn5+fzsrivZsqIYQQQkht0TUYhBBCCNE5WmAQQgghROdogUEIIYQQnaMFBiGEEEJ0jhYYhBBCCNE5WmAQQgghROdogUEIIYQQnaMFBiGEEEJ0jhYYhBBCCNE5WmAQQgghROdogUEIIYQQnaMFBiGEEEJ0jhYYtfDmzRskJyejoKBAIa2goAAPHz5EXl6eASKrnZSUFGRkZBg6jLeORCLBxYsXERMTg4qKCgBvZ//X9LbH/7bIyclBZGQk3rx5Y+hQ3glZWVm4d++eocMgcv6yC4ywsDB4eHggICAAW7duRYsWLTBmzBhs2bIF3333HTp37sy7b1JSEsaOHYsrV64opKWkpGDy5MmIiorSOqa0tDTs3r0bQUFBWLduHUpLS1XmP336NP744w9ERkbiwYMHWtdXLTAwEFu3bq31/vo2YtxiS/sAAA8TSURBVMQIxMfH67xcqVQKsVhcq30zMjLg6+uLZs2awcHBAV9//TUA5f1fl3oA/bVfmUePHmHSpEm1Gr+6Uh/HS1kd9XWcnzx5gpkzZ6KsrAwLFizQe31vk9r2wdmzZ9GrVy89RETq4i+7wHj16hXCw8OxdOlSzJkzB05OThg7dizmzp2L9evXY8KECbz79u7dG3379lWa1r17dwwcOLBWMR05cgS+vr74+uuvMWHCBPj7+/Pm/f3333H37l2MHz8eb968wbp162pVZ0VFBZ48eYJDhw6BMVarMvRtwoQJaNOmjc7LvX//PmJiYmq176+//opPPvkEHTt2hIODAzw8PAAo7/+61APor/3K9OjRA4MGDaqXuvjUx/FSVkd9HecjR45g+PDhGD16NDZv3qz3+t4mte2DqVOnwt7eXg8Rkbr4yy4wGjVqhGbNmvGmu7m5obCwkDddIBDUKo1PSUkJjh07hrKyMgCAlZUV97+84uJi/PLLL/j2228BAGPGjMHq1au1rhOoWvmvW7cOeXl5Ss/INASTJk1S2Ve1dfLkyVrvm5OTA1tbWwCAra0t5s2bx6XJ939d6gH0134+tRm/ulQfx0tZHfV1nAsKCmBnZwehUAgLCwu91/c2qUsfGHrcEkVGy5cvX27oIAzBzc1NZvvXX3+Fp6cn3N3dAQCurq6IiorC8+fPERwcjD///BNdunTh8kdEREAsFqO8vBxXr15FQkICunXrBgCIjo5G8+bNuY9ZwsPDERMTg+TkZERGRqJPnz4K8YhEIkRERCAgIADu7u44fvw4Jk2aBBsbG4W8CQkJuHDhAnr37o2bN2/i0aNH6NGjBwBgzZo1kEgkaNWqlUbHISIiAp988gmSkpLw+PFjjBo1ikuLjIzE9OnTkZ+fj2fPnuHcuXO4efMmPDw81Kb5+vrC0tISkZGRiIqKgpeXFwAgLi4Op06dQlZWFiIiItCxY0ccP34cAQEBOH/+PLy9vbFq1Sr8+uuvMDc3x7NnzzBt2jQ0bdoUrq6uuHDhAmbMmAErKytkZWXh1KlTuHbtGszNzZGSkoINGzbAzs4OLVq04NqnrA+r6wSAzMxMvPfeezA3N9eor86fP4+QkBC8efMGaWlpOH78OL799lvMnj1bof+1qUfZcRMKhSrbHxYWhps3b8LT0xNA1QvnhQsXEBMTg1u3buH69esQi8Vo3bq10nF04MABvHnzBpcvX4arqytMTEwQHR0NkUiE0tJSHD9+XKZ8vuPJ1+d8+fnqP3XqlE6PV1ZWFo4ePYq8vDxcunQJt2/fxtOnTxXquHXrlsx+fPHl5OQolNe1a1eFY6tsnJuZmSE+Ph6HDx/GixcvUFhYqPA8pKpf+MrUZk5oO380rVN+HMoLDg7Gjz/+iNTUVIhEIixbtgxXr17FoEGD4O/vj127dqG4uBjfffedxmM9JSUFe/bsQW5uLh48eIBTp07JfOSkLPawsDC1cXzwwQcoKyvTqJ+JGowwxhjr0aMH27NnD7ctkUiYtbU1y8nJYYwx1q5dO/bkyRMufdasWWzDhg3c9s8//8y2b9/OGGNs6dKl7NChQ4wxxu7evcsGDx7M5Zs7dy6Ljo5WGkNhYSHr06cPEwqFbMaMGay0tFRpvl27djFnZ2eWlJTEGGNs27ZtbPXq1YwxxjZu3MguX76sUZuLi4u5mMPDw1mzZs2YRCKRyePr68vWrl0rs129j6q0qVOnsu+//569ePGChYSEMMYYe/z4MRszZgyXPz09nY0YMYIxxtjFixfZkCFDmEQiYf/+979ZRkYGl2/BggXc8azeXrhwIbft7OzMzp8/zxhjLD4+nn366aeMMfV9OGXKFBYeHs5ta9NXs2bNYmfOnOG2nZycuP9r9r+29Sg7bura37JlSyaRSFhOTg5r1aoVY4yxiooK1qJFC4X+rJaVlcW6dOnCKioqGGOMeXl5saioKC5+Pz8/hfLVHU/52FXlV1W/Lo/Xzz//zG7evMkYY6y8vJwFBQUprUN+P774+MqrSdU4Z4yxH3/8kR04cEBhP1X1qitT0zmhTV5t66weJ3zGjRvHTp8+zRhjbPny5WzXrl2Msar+rZ5Lmo71ly9fMg8PD+45Mj8/n1lYWHD5VMWuSRya9DNR7y/7EYk6RkZGSElJQU5ODoKDg+Hg4ID09HSZPC4uLtz/w4YNw65duxTKOXToEGxsbBAZGYnIyEiYmZkpvdq5oqICS5cuxeHDhxEfH4+4uDjMmDFDaWxmZmaQSqXo2LEjAMDd3R3r168HAMyfPx9/+9vfNGpjeHg4srKysHPnTqSmpiI3NxcXLlyQySMSiWTe/X722WdcO1WlmZqaol27dnBwcMDYsWMBAPv37+fOtABAy5YtkZycjPT0dHh5eWH06NEYO3Yshg0bBmdnZy6fqampTEzVZVezsLBAp06dAFR9XJGbmwtAsz6sSdO+UkYkEmmUT109yo6buvabm5ujuLgYFRUVMDY2BlB1uri0tBSVlZVKYwgJCYG7uzuXPyoqCkOGDOHSP/zwQ4Xy1R1P+dhV5VdXv66O15AhQ+Dt7Y3x48cjODgYX331lfJOkduPLz5NylM1ztXhq1ddmZrOCW3yaltn9TjhM3HiRBw8eBAAYGlpieDgYABAYmIihg8fzpVZE18dwcHB6Nq1K5ff2toajRo14vKpil2TOLQZN4SfsaEDaKhKSkowf/58+Pj4YNy4cQgJCVF5EaRIJEJRUZHC4+Xl5ejUqRM3cKv/yjtx4gQ8PT3h7OwMZ2dnJCQkoEuXLqioqFB48XJxcYGjoyO3bWNjg/z8fKV5VcnIyMDKlSu57eTkZBw6dIj3iR6ounZFWTuVpVWfZq0mFothbW0t85hQKOS+qjd06FAcPnwYjx8/5hZPfJQ9EVWTSqUAtOvD1NRUjfuqLjSpR/64KSPffqlUCkdHR4waNQo7d+5EcXExtm7dChMTE6X7FxcXy6TJjxtl5WtyPGvGriq/uvqr1fV4devWDbdv30ZUVBT279+P5ORkmTFfXYf8R0h88WlSnrpxrgpfvZqUqcmc0CZvbeqUr6emkSNHYu7cuXj69Ck+/PBDnDt3DtnZ2Sr34aujoKBA4fGaVMWuSRya9DNRj85g/D/GmMyT5cmTJyGVSuHj4wOBQMCt6sPCwrg8NS8CvXHjBj7++GOFsj766COZr11JJBKlX8MyMjKSmTDm5uYYPXo09wSTkJCAZ8+eAai60r/mC3lGRga6d+8OkUgkk0+V3NxcWFpayjw2fvx4hIaGory8XObxmu28dOkS105VafLHEwBGjx6N27dvc9t5eXkwNjZGx44dkZeXh4SEBERGRuJf//oXUlNTuXzy5ciXXXNbmz5s3LgxysrKUFlZibt372rcV3wx8KVpU4+y46ZJ+6u1atUKM2fOxIIFCzB+/HilsQNVT/a3bt3itisrK3H58mWV5as7ntrMIVX16/J4+fv7w9TUFJMmTcLp06eRnJystA75/fji4yuvJlXjnC9mdfVqWybfnNAmb23qVEUkEmHkyJFYuHAhBgwYgC+//BKLFy/mrnvTNFagapFZ3W9A1Ru5mhfFq4pdkzj4+lnT51dS5S97kWe1U6dO4ezZswgPD0dBQQGKiopga2sLR0dHHDhwAC4uLkhMTISjoyNiY2Ph5uaG1q1bIzY2FnZ2digtLcWNGzdw584drFixAlevXsXu3buRmZkJNzc3dO/eHWKxGFFRURAIBDh//jwGDhyosPpu164d9u7dC8YYJBIJQkJC0KdPH+6d1Zw5cyAUCtGtWzcYGxvD3t4eR44cQYsWLbBlyxasXLkSLVq0kMnHJzo6Gn5+fkhMTETfvn1ha2sLsViM3377DXFxccjIyEDz5s3h5OSEiIgIZGdnw97eHpcvX0ZiYiJWr14NY2Nj3rSLFy9i7969yMnJgb29PfdR0vvvv4+XL18iPj4eRUVF2LlzJ1avXo0zZ85gypQp6Nu3L3r16oXY2Fhs2rQJFhYWEIvF2L17N549e4aePXvizp07CAoKQkZGBtzc3BAREYFjx46hvLwcbdu2xebNm3Ht2jU4Ozuje/fuKvvQ3NwcwcHByM/Ph5eXFzp37qxRX0VHR2Pv3r14/vw53N3dceDAAYSHh8PY2BiMMZn+t7e317ie2NhYheN2+fJljdovlUrh6emJLVu2YOPGjdixYweCg4NhYWGh9GxQ8+bNYWRkhGPHjsHIyAgxMTHw8vLCtWvXeMvv378/Dh8+rPR4pqamKsRuZmbGe/z79OmjtP5GjRrp9HglJCQgLS0NIpEIJ0+ehJeXF1xdXRXquHPnjsx+7du3VxpfTEyM0vJq4hvnLVq0QFxcHDc+mjZtqnDmhK9fOnTowFtmTEyMxnMiNzdX47ze3t5a11k9DvnOnNnY2CAjIwOjRo1CmzZtsH37dixevBgAtBrrH3/8MQQCAWJiYmBkZITo6Ghuodu/f3+VfaAuDqDqoyll/azJ8yupQWdXc7yjXr16xf2v7AKm4uJiVlhYqLaciooKmbL4JCcns4sXL7LXr1+rzZuZmcliYmKYWCxWm7e2Zs2axY4cOaK0narSVKmoqGAvX77Udai8VPVhWVmZwvHTtK+0UR/17Nu3T+YCudevX7PRo0eztLQ03n0kEonWMaibE9rk56tfV8errKyMMVY1V8rLy9XWIU8+PlXlyavLOOc7LvU9d/RRZ83jpu4YqlNRUcHy8vIYY1UXyBYXFyuk88WuKg5t+pnwo2sw1GjatCn3v5GRkUK6mZmZRuUYGxvLlMWnffv2aN++vUZlOjk5wcnJSaO8tVVSUoKSkhKl7VSVpkr1GZj6oqoPTUxMFN5tadpX2qiPevLy8mTOVjRp0gTNmzdX+Vm1kZGR1jGomxPa5OerX1fHq7oMZfNEWR3y5ONTVZ68uoxzvuNS33NHH3XWvN5Gm2vGlDE2Nua+yq/sWhxVsauKQ5t+JvwEjDXQn28kBhcdHY0LFy7AxMQEX3zxhcypYFVpxHAiIyNRWFgIkUiEkpISdOnSBR06dDB0WISQvyBaYBBCCCFE5+hbJIQQQgjROVpgEEIIIUTnaIFBCCGEEJ2jBQYhhBBCdI4WGIQQQgjROVpgEEIIIUTnaIFBCCGEEJ2jBQYhhBBCdO7/ANvfpMy5vJnWAAAAAElFTkSuQmCC)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">omega_c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">21</span><span class="c1"># longitud de la ventana</span>
+<span class="n">L</span> <span class="o">=</span> <span class="n">N</span><span class="o">-</span><span class="mi">1</span> <span class="c1">#orden del sistema</span>
+<span class="n">k</span> <span class="o">=</span> <span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">))</span>
+
+<span class="c1"># Determino la ventana a utilizar</span>
+<span class="n">window</span> <span class="o">=</span> <span class="n">sig</span><span class="o">.</span><span class="n">windows</span><span class="o">.</span><span class="n">hamming</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+
+
+<span class="c1"># Respuesta al impulso</span>
+<span class="n">h_wind</span> <span class="o">=</span> <span class="p">(</span><span class="n">omega_c</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sinc</span><span class="p">(</span><span class="n">omega_c</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">k</span><span class="p">))</span><span class="o">*</span><span class="n">window</span>
+
+<span class="c1">#Grafico  Ventana y Resp. Impulso</span>
+
+<span class="n">fig3</span><span class="p">,</span> <span class="p">(</span><span class="n">ax4</span><span class="p">,</span> <span class="n">ax5</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="n">ax4</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">window</span><span class="p">)</span>
+<span class="n">ax4</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Ventana elegida&quot;</span><span class="p">)</span>
+<span class="n">ax4</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Muestras&quot;</span><span class="p">)</span>
+<span class="n">ax4</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Amplitud&quot;</span><span class="p">)</span>
+<span class="n">ax4</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">)</span><span class="c1">#grilla punteada</span>
+
+<span class="p">(</span><span class="n">markersa</span><span class="p">,</span> <span class="n">stemlinesa</span><span class="p">,</span> <span class="n">baselinea</span><span class="p">)</span> <span class="o">=</span> <span class="n">ax5</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">h_wind</span><span class="p">)</span>
+<span class="n">ax5</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">)</span>
+<span class="n">ax5</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Respuesta el impulso&quot;</span><span class="p">)</span>
+<span class="n">ax5</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Muestras&quot;</span><span class="p">)</span>
+<span class="n">ax5</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Amplitud&quot;</span><span class="p">)</span>
+<span class="n">ax5</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">)</span><span class="c1">#grilla punteada</span>
+<span class="n">fig3</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">fig4</span><span class="p">,</span> <span class="n">ax6</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">ax6</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">h_wind</span><span class="p">,</span><span class="s1">&#39;ob&#39;</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">hlp</span><span class="p">,</span><span class="s1">&#39;or&#39;</span><span class="p">)</span>
+<span class="n">ax6</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Ventana elegida&quot;</span><span class="p">)</span>
+<span class="n">ax6</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Muestras&quot;</span><span class="p">)</span>
+<span class="n">ax6</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Amplitud&quot;</span><span class="p">)</span>
+<span class="n">ax6</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="s1">&#39;Resp. impulso VHann&#39;</span><span class="p">,</span> <span class="s1">&#39;Respuesta al impulso VRect&#39;</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">,</span> <span class="n">shadow</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ax6</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">)</span><span class="c1">#grilla punteada</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:18: UserWarning: In Matplotlib 3.3 individual lines on a stem plot will be added as a LineCollection instead of individual lines. This significantly improves the performance of a stem plot. To remove this warning and switch to the new behaviour, set the &quot;use_line_collection&quot; keyword argument to True.
+C:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:24: UserWarning: In Matplotlib 3.3 individual lines on a stem plot will be added as a LineCollection instead of individual lines. This significantly improves the performance of a stem plot. To remove this warning and switch to the new behaviour, set the &quot;use_line_collection&quot; keyword argument to True.
+C:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:30: UserWarning: Matplotlib is currently using module://matplotlib_inline.backend_inline, which is a non-GUI backend, so cannot show the figure.
+</pre></div>
+</div>
+<img alt="../_images/Filtros_FIR_LP_HP_BP_11_1.png" src="../_images/Filtros_FIR_LP_HP_BP_11_1.png" />
+<img alt="../_images/Filtros_FIR_LP_HP_BP_11_2.png" src="../_images/Filtros_FIR_LP_HP_BP_11_2.png" />
+</div>
+</div>
+<section id="respuesta-en-frecuencia-con-ventana">
+<h3>Respuesta en frecuencia con Ventana<a class="headerlink" href="#respuesta-en-frecuencia-con-ventana" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Respuesta en frecuencia</span>
+<span class="c1">#sistema</span>
+<span class="n">sys_wind</span> <span class="o">=</span> <span class="n">sig</span><span class="o">.</span><span class="n">dlti</span><span class="p">([</span><span class="n">h_wind</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">])</span> 
+
+<span class="c1">#frecuencia</span>
+<span class="n">Omega</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="mf">0.01</span><span class="p">)</span>
+<span class="c1">#f_Hz = Omega</span>
+
+<span class="c1">#respuesta en frecuencia</span>
+<span class="n">Omega_wind_log</span><span class="p">,</span> <span class="n">mag_wind_dB</span><span class="p">,</span> <span class="n">fase_wind</span> <span class="o">=</span> <span class="n">sig</span><span class="o">.</span><span class="n">dbode</span><span class="p">(</span><span class="n">sys_wind</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="n">Omega</span><span class="p">)</span>
+
+<span class="c1">#graficos</span>
+
+<span class="n">fig5</span><span class="p">,</span> <span class="p">(</span><span class="n">ax7</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="c1">#1 diagrama de polos y ceros</span>
+<span class="n">ax7</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sys_wind</span><span class="o">.</span><span class="n">zeros</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="n">sys_wind</span><span class="o">.</span><span class="n">zeros</span><span class="o">.</span><span class="n">imag</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">)</span><span class="c1">#ceros</span>
+<span class="n">ax7</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sys_wind</span><span class="o">.</span><span class="n">poles</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="n">sys_wind</span><span class="o">.</span><span class="n">poles</span><span class="o">.</span><span class="n">imag</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">)</span><span class="c1">#polos</span>
+<span class="n">circulo_unitario</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">patches</span><span class="o">.</span><span class="n">Circle</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">radius</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">)</span>
+<span class="n">ax7</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">circulo_unitario</span><span class="p">)</span>
+<span class="n">ax7</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span><span class="c1">#limite en parte real</span>
+<span class="n">ax7</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span><span class="c1">#limite en parte imaginaria</span>
+<span class="n">ax7</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span><span class="c1">#grilla punteada</span>
+<span class="n">ax7</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Diagrama de polos y ceros&quot;</span><span class="p">)</span>
+<span class="n">ax7</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Parte Real&quot;</span><span class="p">)</span>
+<span class="n">ax7</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Parte Imaginaria&quot;</span><span class="p">)</span>
+<span class="n">ax7</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+<span class="n">fig5</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">fig6</span><span class="p">,</span> <span class="p">(</span><span class="n">ax8</span><span class="p">,</span> <span class="n">ax9</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="c1">#2 magnitud</span>
+<span class="n">ax8</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Omega</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="n">mag_wind_dB</span><span class="p">)</span>
+<span class="n">ax8</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Diagrama de Bode: Magnitud&quot;</span><span class="p">)</span>
+<span class="n">ax8</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Frecuencia [rad/s]&quot;</span><span class="p">)</span>  
+<span class="n">ax8</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Magnitud [dB]&quot;</span><span class="p">)</span>
+<span class="n">ax8</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">tck</span><span class="o">.</span><span class="n">FormatStrFormatter</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%g</span><span class="s1"> $\pi$&#39;</span><span class="p">))</span>
+<span class="n">ax8</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">)</span><span class="c1">#grilla punteada para escala logaritmica</span>
+
+<span class="c1">#3 fase</span>
+<span class="n">ax9</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Omega</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="o">-</span><span class="n">fase_wind</span><span class="p">)</span>
+<span class="n">ax9</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Fase de la respuesta en frecuencia&quot;</span><span class="p">)</span>
+<span class="c1">#a3.plot(0.5/np.pi,np.angle(signal.dfreqresp(sys,w=0.5)[1][0],deg=True),&#39;x&#39;)</span>
+<span class="n">ax9</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Frecuencia[rad/s]&quot;</span><span class="p">)</span>
+<span class="n">ax9</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Angulo[deg]&quot;</span><span class="p">)</span>
+<span class="n">ax9</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">)</span><span class="c1">#grilla punteada</span>
+<span class="n">ax9</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">tck</span><span class="o">.</span><span class="n">FormatStrFormatter</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%g</span><span class="s1"> $\pi$&#39;</span><span class="p">))</span>
+<span class="c1">#ax3.xaxis.set_major_locator(tck.MultipleLocator(base=0.5))</span>
+<span class="n">fig6</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:27: UserWarning: Matplotlib is currently using module://matplotlib_inline.backend_inline, which is a non-GUI backend, so cannot show the figure.
+C:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:47: UserWarning: Matplotlib is currently using module://matplotlib_inline.backend_inline, which is a non-GUI backend, so cannot show the figure.
+</pre></div>
+</div>
+<img alt="../_images/Filtros_FIR_LP_HP_BP_13_1.png" src="../_images/Filtros_FIR_LP_HP_BP_13_1.png" />
+<img alt="../_images/Filtros_FIR_LP_HP_BP_13_2.png" src="../_images/Filtros_FIR_LP_HP_BP_13_2.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#vuelvo a armar el LP con ventana rectangular para comparar</span>
+<span class="n">Lh</span><span class="o">=</span><span class="mi">21</span>
+<span class="n">N</span><span class="o">=</span><span class="n">Lh</span><span class="o">-</span><span class="mi">1</span>
+<span class="n">n</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">Lh</span><span class="p">))</span>
+<span class="n">k</span><span class="o">=</span><span class="p">(</span><span class="n">Lh</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">hlp</span><span class="o">=</span><span class="n">omega_c</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sinc</span><span class="p">(</span><span class="n">omega_c</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">k</span><span class="p">))</span>
+<span class="n">sys_rect</span><span class="o">=</span><span class="n">sig</span><span class="o">.</span><span class="n">dlti</span><span class="p">([</span><span class="n">hlp</span><span class="p">],[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">Ome</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="mf">0.01</span><span class="p">)</span>
+<span class="n">w_rect</span><span class="p">,</span> <span class="n">mag_rect</span><span class="p">,</span> <span class="n">fase_rect</span> <span class="o">=</span> <span class="n">sig</span><span class="o">.</span><span class="n">dbode</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span><span class="n">w</span><span class="o">=</span><span class="n">Omega</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="comparacion-de-ventana-rectangular-con-otra-ventana">
+<h3>Comparacion de ventana rectangular con otra ventana<a class="headerlink" href="#comparacion-de-ventana-rectangular-con-otra-ventana" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig7</span><span class="p">,</span> <span class="n">ax10</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="n">ax10</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Omega</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="n">mag_rect</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">Omega</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="n">mag_wind_dB</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="c1">#ax10.plot(Omega/np.pi,mag_wind_dB,&#39;b&#39;)</span>
+<span class="n">ax10</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="s1">&#39;Rect&#39;</span><span class="p">,</span><span class="s1">&#39;Otra ventana&#39;</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">,</span> <span class="n">shadow</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ax10</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Diagrama de Bode: Magnitud&quot;</span><span class="p">)</span>
+<span class="n">ax10</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Frecuencia [rad/s]&quot;</span><span class="p">)</span>  
+<span class="n">ax10</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Magnitud [dB]&quot;</span><span class="p">)</span>
+<span class="n">ax10</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">tck</span><span class="o">.</span><span class="n">FormatStrFormatter</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%g</span><span class="s1"> $\pi$&#39;</span><span class="p">))</span>
+<span class="n">ax10</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">)</span><span class="c1">#grilla punteada para escala logaritmica</span>
+
+<span class="n">fig7</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:12: UserWarning: Matplotlib is currently using module://matplotlib_inline.backend_inline, which is a non-GUI backend, so cannot show the figure.
+  if sys.path[0] == &#39;&#39;:
+</pre></div>
+</div>
+<img alt="../_images/Filtros_FIR_LP_HP_BP_16_1.png" src="../_images/Filtros_FIR_LP_HP_BP_16_1.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="construccion-manual-de-la-ventana">
+<h2>Construcción manual de la ventana<a class="headerlink" href="#construccion-manual-de-la-ventana" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Ventana de Hanning</span>
+<span class="n">hanning</span><span class="o">=</span><span class="mf">0.5</span><span class="o">-</span><span class="mf">0.5</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">n</span><span class="o">/</span><span class="p">(</span><span class="n">Lh</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">fig</span><span class="p">,</span><span class="n">ax11</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">ax11</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">hanning</span><span class="p">)</span>
+<span class="n">ax11</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="n">N</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ax11</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">1.05</span><span class="p">)</span>
+<span class="n">ax11</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">ax11</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Ventana de Hanning&quot;</span><span class="p">)</span>
+<span class="n">ax11</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;n&quot;</span><span class="p">)</span>
+<span class="n">ax11</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;w(t)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:4: UserWarning: In Matplotlib 3.3 individual lines on a stem plot will be added as a LineCollection instead of individual lines. This significantly improves the performance of a stem plot. To remove this warning and switch to the new behaviour, set the &quot;use_line_collection&quot; keyword argument to True.
+  after removing the cwd from sys.path.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;w(t)&#39;)
+</pre></div>
+</div>
+<img alt="../_images/Filtros_FIR_LP_HP_BP_18_2.png" src="../_images/Filtros_FIR_LP_HP_BP_18_2.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="diseno-del-filtro-fir">
+<h1>Diseño del filtro FIR<a class="headerlink" href="#diseno-del-filtro-fir" title="Permalink to this headline">¶</a></h1>
+<section id="pasa-bajos-lp">
+<h2>Pasa Bajos LP<a class="headerlink" href="#pasa-bajos-lp" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Parametros del filtro</span>
+<span class="n">fs</span><span class="o">=</span><span class="mi">4200</span>
+<span class="n">fa</span><span class="o">=</span><span class="mi">1200</span>
+<span class="n">fp</span><span class="o">=</span><span class="mi">1000</span>
+<span class="n">rp</span><span class="o">=</span><span class="mi">20</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="mf">1.1</span><span class="p">)</span>
+<span class="n">Aa</span><span class="o">=</span><span class="mi">20</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">400</span><span class="p">)</span>
+<span class="n">Op</span><span class="o">=</span><span class="n">fp</span><span class="o">/</span><span class="n">fs</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+<span class="n">Oa</span><span class="o">=</span><span class="n">fa</span><span class="o">/</span><span class="n">fs</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+<span class="n">Oc</span><span class="o">=</span><span class="p">(</span><span class="n">Op</span><span class="o">+</span><span class="n">Oa</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;PARAMETROS DEL FILTRO&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Atenuación=&#39;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">Aa</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Omega de paso=&#39;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">Op</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Omega de paso=&#39;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">Op</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Omega de rechazo=&#39;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">Oa</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Omega de rechazo=&#39;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">Oa</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Ripple=&#39;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">rp</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Banda de transición=&#39;</span><span class="p">,</span><span class="nb">round</span><span class="p">((</span><span class="n">Oa</span><span class="o">-</span><span class="n">Op</span><span class="p">),</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Banda de transición=&#39;</span><span class="p">,</span><span class="nb">round</span><span class="p">((</span><span class="n">Oa</span><span class="o">-</span><span class="n">Op</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Omega de corte=&#39;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">Oc</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Omega de corte=&#39;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">Oc</span><span class="o">/</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">),</span><span class="mi">2</span><span class="p">))</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PARAMETROS DEL FILTRO
+Atenuación= -52.04
+Omega de paso= 1.5
+Omega de paso= 0.48
+Omega de rechazo= 1.8
+Omega de rechazo= 0.57
+Ripple= 0.828
+Banda de transición= 0.3
+Banda de transición= 0.1
+Omega de corte= 1.65
+Omega de corte= 0.52
+</pre></div>
+</div>
+</div>
+</div>
+<section id="construimos-el-filtro">
+<h3>Construimos el Filtro<a class="headerlink" href="#construimos-el-filtro" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># con ventana rectangular</span>
+<span class="n">Lh</span><span class="o">=</span><span class="mi">69</span>
+<span class="n">N</span><span class="o">=</span><span class="n">Lh</span><span class="o">-</span><span class="mi">1</span>
+<span class="n">n</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">Lh</span><span class="p">))</span>
+<span class="n">k</span><span class="o">=</span><span class="p">(</span><span class="n">Lh</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">hr</span><span class="o">=</span><span class="n">Oc</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sinc</span><span class="p">(</span><span class="n">Oc</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">k</span><span class="p">))</span>
+
+<span class="c1"># con ventana de Hamming</span>
+<span class="n">win</span> <span class="o">=</span> <span class="n">sig</span><span class="o">.</span><span class="n">windows</span><span class="o">.</span><span class="n">hamming</span><span class="p">(</span><span class="n">Lh</span><span class="p">)</span>
+<span class="n">hwin</span><span class="o">=</span><span class="p">(</span><span class="n">Oc</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sinc</span><span class="p">(</span><span class="n">Oc</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">k</span><span class="p">)))</span><span class="o">*</span><span class="n">win</span>
+
+<span class="c1">#Respuestas en frecuencias</span>
+<span class="n">S1</span><span class="o">=</span><span class="n">sig</span><span class="o">.</span><span class="n">dlti</span><span class="p">([</span><span class="n">hr</span><span class="p">],[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">Ome</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="mf">0.01</span><span class="p">)</span>
+<span class="n">_</span><span class="p">,</span> <span class="n">Mag_dB1</span><span class="p">,</span> <span class="n">Fase1</span> <span class="o">=</span> <span class="n">sig</span><span class="o">.</span><span class="n">dbode</span><span class="p">(</span><span class="n">S1</span><span class="p">,</span><span class="n">w</span><span class="o">=</span><span class="n">Ome</span><span class="p">)</span>
+<span class="n">O1</span><span class="o">=</span><span class="n">Ome</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+<span class="n">S2</span><span class="o">=</span><span class="n">sig</span><span class="o">.</span><span class="n">dlti</span><span class="p">([</span><span class="n">hwin</span><span class="p">],[</span><span class="mi">1</span><span class="p">],</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">_</span><span class="p">,</span> <span class="n">Mag_dB2</span><span class="p">,</span> <span class="n">Fase2</span> <span class="o">=</span> <span class="n">sig</span><span class="o">.</span><span class="n">dbode</span><span class="p">(</span><span class="n">S2</span><span class="p">,</span><span class="n">w</span><span class="o">=</span><span class="n">Ome</span><span class="p">)</span>
+<span class="n">fig1</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">O1</span><span class="p">,</span> <span class="n">Mag_dB1</span><span class="p">)</span> 
+<span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Diagrama de Bode&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Frecuencia normalizada [$\pi$ rad/muestra]&quot;</span><span class="p">)</span>  
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Magnitud [dB]&quot;</span><span class="p">)</span>
+<span class="c1">#ax1.set_ylim(-1,1)</span>
+<span class="c1">#ax1.set_xlim(0.0,0.47)</span>
+
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">O1</span><span class="p">,</span> <span class="n">Mag_dB2</span><span class="p">)</span> 
+<span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Diagrama de Bode&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Frecuencia normalizada [$\pi$ rad/muestra]&quot;</span><span class="p">)</span>  
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Magnitud [dB]&quot;</span><span class="p">)</span>
+<span class="c1">#ax2.set_ylim(-2.5,2.5)</span>
+<span class="c1">#ax2.set_xlim(0.0,0.25)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Magnitud [dB]&#39;)
+</pre></div>
+</div>
+<img alt="../_images/Filtros_FIR_LP_HP_BP_23_1.png" src="../_images/Filtros_FIR_LP_HP_BP_23_1.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="pasa-banda-bp">
+<h2>Pasa Banda BP<a class="headerlink" href="#pasa-banda-bp" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Parametros del filtro</span>
+<span class="n">fs</span><span class="o">=</span><span class="mi">4200</span>
+<span class="n">fa1</span><span class="o">=</span><span class="mi">400</span>
+<span class="n">fa2</span><span class="o">=</span><span class="mi">1700</span>
+<span class="n">fp1</span><span class="o">=</span><span class="mi">500</span>
+<span class="n">fp2</span><span class="o">=</span><span class="mi">1500</span>
+<span class="n">rp</span><span class="o">=</span><span class="mi">20</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="mf">1.1</span><span class="p">)</span>
+<span class="n">Aa</span><span class="o">=</span><span class="mi">20</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">400</span><span class="p">)</span>
+<span class="n">Op1</span><span class="o">=</span><span class="n">fp1</span><span class="o">/</span><span class="n">fs</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+<span class="n">Op2</span><span class="o">=</span><span class="n">fp2</span><span class="o">/</span><span class="n">fs</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+<span class="n">Oa1</span><span class="o">=</span><span class="n">fa1</span><span class="o">/</span><span class="n">fs</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+<span class="n">Oa2</span><span class="o">=</span><span class="n">fa2</span><span class="o">/</span><span class="n">fs</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+<span class="n">Oc1</span><span class="o">=</span><span class="p">(</span><span class="n">Op1</span><span class="o">+</span><span class="n">Oa1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">Oc2</span><span class="o">=</span><span class="p">(</span><span class="n">Op2</span><span class="o">+</span><span class="n">Oa2</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+
+<span class="n">Ome0</span><span class="o">=</span><span class="p">(</span><span class="n">Oc1</span><span class="o">+</span><span class="n">Oc2</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;PARAMETROS DEL FILTRO&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Atenuación=&#39;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">Aa</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Omega de paso 1=&#39;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">Op1</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Omega de paso 1=&#39;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">Op1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Omega de paso 2=&#39;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">Op2</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Omega de paso 2=&#39;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">Op2</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Omega de rechazo 1=&#39;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">Oa1</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Omega de rechazo 1=&#39;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">Oa1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Omega de rechazo 2=&#39;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">Oa2</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Omega de rechazo 2=&#39;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">Oa2</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Ripple=&#39;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">rp</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Banda de transición 1=&#39;</span><span class="p">,</span><span class="nb">round</span><span class="p">((</span><span class="n">Op1</span><span class="o">-</span><span class="n">Oa1</span><span class="p">),</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Banda de transición 1=&#39;</span><span class="p">,</span><span class="nb">round</span><span class="p">((</span><span class="n">Op1</span><span class="o">-</span><span class="n">Oa1</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Banda de transiciónv 2=&#39;</span><span class="p">,</span><span class="nb">round</span><span class="p">((</span><span class="n">Oa2</span><span class="o">-</span><span class="n">Op2</span><span class="p">),</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Banda de transición 2=&#39;</span><span class="p">,</span><span class="nb">round</span><span class="p">((</span><span class="n">Oa2</span><span class="o">-</span><span class="n">Op2</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Omega de corte 1=&#39;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">Oc1</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Omega de corte 1=&#39;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">Oc1</span><span class="o">/</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">),</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Omega de corte 2=&#39;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">Oc2</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Omega de corte 2=&#39;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">Oc2</span><span class="o">/</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">),</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Omega cero=&#39;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">Ome0</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Omega cero=&#39;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">Ome0</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PARAMETROS DEL FILTRO
+Atenuación= -52.04
+Omega de paso 1= 0.75
+Omega de paso 1= 0.24
+Omega de paso 2= 2.24
+Omega de paso 2= 0.71
+Omega de rechazo 1= 0.6
+Omega de rechazo 1= 0.19
+Omega de rechazo 2= 2.54
+Omega de rechazo 2= 0.81
+Ripple= 0.828
+Banda de transición 1= 0.15
+Banda de transición 1= 0.05
+Banda de transiciónv 2= 0.3
+Banda de transición 2= 0.1
+Omega de corte 1= 0.67
+Omega de corte 1= 0.21
+Omega de corte 2= 2.39
+Omega de corte 2= 0.76
+Omega cero= 1.53
+Omega cero= 0.49
+</pre></div>
+</div>
+</div>
+</div>
+<section id="construimos-el-filtro-1">
+<h3>Construimos el filtro<a class="headerlink" href="#construimos-el-filtro-1" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># con ventana rectangular</span>
+<span class="n">Lh</span><span class="o">=</span><span class="mi">135</span>
+<span class="n">N</span><span class="o">=</span><span class="n">Lh</span><span class="o">-</span><span class="mi">1</span>
+<span class="n">n</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">Lh</span><span class="p">))</span>
+<span class="n">Oc</span><span class="o">=</span><span class="p">(</span><span class="n">Oc2</span><span class="o">-</span><span class="n">Oc1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">k</span><span class="o">=</span><span class="p">(</span><span class="n">Lh</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">hbpr</span><span class="o">=</span><span class="n">Oc</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sinc</span><span class="p">(</span><span class="n">Oc</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">k</span><span class="p">))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">Ome0</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">k</span><span class="p">))</span>
+
+<span class="c1"># con ventana de Hamming</span>
+<span class="n">win1</span> <span class="o">=</span> <span class="n">sig</span><span class="o">.</span><span class="n">windows</span><span class="o">.</span><span class="n">hamming</span><span class="p">(</span><span class="n">Lh</span><span class="p">)</span>
+<span class="n">hwin1</span><span class="o">=</span><span class="p">(</span><span class="n">Oc</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sinc</span><span class="p">(</span><span class="n">Oc</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">k</span><span class="p">))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">Ome0</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">k</span><span class="p">)))</span><span class="o">*</span><span class="n">win1</span>
+
+<span class="c1"># Respuestas en frecuencias</span>
+<span class="n">S3</span><span class="o">=</span><span class="n">sig</span><span class="o">.</span><span class="n">dlti</span><span class="p">([</span><span class="n">hbpr</span><span class="p">],[</span><span class="mi">1</span><span class="p">],</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">Ome</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="mf">0.01</span><span class="p">)</span>
+<span class="n">_</span><span class="p">,</span> <span class="n">Mag_dB3</span><span class="p">,</span> <span class="n">Fase3</span> <span class="o">=</span> <span class="n">sig</span><span class="o">.</span><span class="n">dbode</span><span class="p">(</span><span class="n">S3</span><span class="p">,</span><span class="n">w</span><span class="o">=</span><span class="n">Ome</span><span class="p">)</span>
+<span class="n">O1</span><span class="o">=</span><span class="n">Ome</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+<span class="n">S4</span><span class="o">=</span><span class="n">sig</span><span class="o">.</span><span class="n">dlti</span><span class="p">([</span><span class="n">hwin1</span><span class="p">],[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">_</span><span class="p">,</span> <span class="n">Mag_dB4</span><span class="p">,</span> <span class="n">Fase4</span> <span class="o">=</span> <span class="n">sig</span><span class="o">.</span><span class="n">dbode</span><span class="p">(</span><span class="n">S4</span><span class="p">,</span><span class="n">w</span><span class="o">=</span><span class="n">Ome</span><span class="p">)</span>
+<span class="n">fig2</span><span class="p">,</span> <span class="p">(</span><span class="n">ax3</span><span class="p">,</span> <span class="n">ax4</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">O1</span><span class="p">,</span> <span class="n">Mag_dB3</span><span class="p">)</span> 
+<span class="n">ax3</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Diagrama de Bode BP&quot;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Frecuencia normalizada [$\pi$ rad/muestra]&quot;</span><span class="p">)</span>  
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Magnitud [dB]&quot;</span><span class="p">)</span>
+<span class="c1">#ax3.set_ylim(-1,1)</span>
+<span class="c1">#ax3.set_xlim(0.0,0.47)</span>
+
+<span class="n">ax4</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">O1</span><span class="p">,</span> <span class="n">Mag_dB4</span><span class="p">)</span> 
+<span class="n">ax4</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">ax4</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Diagrama de Bode BP ventaneado&quot;</span><span class="p">)</span>
+<span class="n">ax4</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Frecuencia normalizada [$\pi$ rad/muestra]&quot;</span><span class="p">)</span>  
+<span class="n">ax4</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Magnitud [dB]&quot;</span><span class="p">)</span>
+<span class="c1">#ax2.set_ylim(-2.5,2.5)</span>
+<span class="c1">#ax2.set_xlim(0.0,0.25)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Magnitud [dB]&#39;)
+</pre></div>
+</div>
+<img alt="../_images/Filtros_FIR_LP_HP_BP_27_1.png" src="../_images/Filtros_FIR_LP_HP_BP_27_1.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="pasa-altos-hp">
+<h2>Pasa Altos HP<a class="headerlink" href="#pasa-altos-hp" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Parametros del filtro</span>
+<span class="n">fs</span><span class="o">=</span><span class="mi">4200</span>
+<span class="n">fa</span><span class="o">=</span><span class="mi">1400</span>
+<span class="n">fp</span><span class="o">=</span><span class="mi">1500</span>
+<span class="n">rp</span><span class="o">=</span><span class="mi">20</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="mf">1.1</span><span class="p">)</span>
+<span class="n">Aa</span><span class="o">=</span><span class="mi">20</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">400</span><span class="p">)</span>
+<span class="n">Op</span><span class="o">=</span><span class="n">fp</span><span class="o">/</span><span class="n">fs</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+<span class="n">Oa</span><span class="o">=</span><span class="n">fa</span><span class="o">/</span><span class="n">fs</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+<span class="n">Oc1</span><span class="o">=</span><span class="p">(</span><span class="n">Op</span><span class="o">+</span><span class="n">Oa</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">Ome0</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;PARAMETROS DEL FILTRO&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Atenuación=&#39;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">Aa</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Omega de paso =&#39;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">Op</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Omega de paso =&#39;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">Op</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Omega de rechazo =&#39;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">Oa</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Omega de rechazo =&#39;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">Oa</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Ripple=&#39;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">rp</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Banda de transición =&#39;</span><span class="p">,</span><span class="nb">round</span><span class="p">((</span><span class="n">Op</span><span class="o">-</span><span class="n">Oa</span><span class="p">),</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Banda de transición =&#39;</span><span class="p">,</span><span class="nb">round</span><span class="p">((</span><span class="n">Op</span><span class="o">-</span><span class="n">Oa</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Omega de corte =&#39;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">Oc1</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Omega de corte =&#39;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">Oc1</span><span class="o">/</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">),</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Omega cero=&#39;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">Ome0</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Omega cero=&#39;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">Ome0</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PARAMETROS DEL FILTRO
+Atenuación= -52.04
+Omega de paso = 2.24
+Omega de paso = 0.71
+Omega de rechazo = 2.09
+Omega de rechazo = 0.67
+Ripple= 0.828
+Banda de transición = 0.15
+Banda de transición = 0.05
+Omega de corte = 2.17
+Omega de corte = 0.69
+Omega cero= 3.14
+Omega cero= 1.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># con ventana rectangular</span>
+<span class="n">Lh</span><span class="o">=</span><span class="mi">135</span>
+<span class="n">N</span><span class="o">=</span><span class="n">Lh</span><span class="o">-</span><span class="mi">1</span>
+<span class="n">n</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">Lh</span><span class="p">))</span>
+<span class="n">Oc</span><span class="o">=</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">-</span><span class="n">Oc1</span><span class="p">)</span>
+<span class="n">k</span><span class="o">=</span><span class="p">(</span><span class="n">Lh</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">hhpr</span><span class="o">=</span><span class="n">Oc</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sinc</span><span class="p">(</span><span class="n">Oc</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">k</span><span class="p">))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">Ome0</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="n">k</span><span class="p">))</span>
+
+<span class="c1"># con ventana de Hamming</span>
+<span class="n">win2</span> <span class="o">=</span> <span class="n">sig</span><span class="o">.</span><span class="n">windows</span><span class="o">.</span><span class="n">hamming</span><span class="p">(</span><span class="n">Lh</span><span class="p">)</span>
+<span class="n">hwin2</span><span class="o">=</span><span class="p">(</span><span class="n">Oc</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sinc</span><span class="p">(</span><span class="n">Oc</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">k</span><span class="p">))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">Ome0</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">k</span><span class="p">)))</span><span class="o">*</span><span class="n">win2</span>
+
+<span class="c1"># Respuestas en frecuencias</span>
+<span class="n">S3</span><span class="o">=</span><span class="n">sig</span><span class="o">.</span><span class="n">dlti</span><span class="p">([</span><span class="n">hhpr</span><span class="p">],[</span><span class="mi">1</span><span class="p">],</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">Ome</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="mf">0.01</span><span class="p">)</span>
+<span class="n">_</span><span class="p">,</span> <span class="n">Mag_dB5</span><span class="p">,</span> <span class="n">Fase5</span> <span class="o">=</span> <span class="n">sig</span><span class="o">.</span><span class="n">dbode</span><span class="p">(</span><span class="n">S3</span><span class="p">,</span><span class="n">w</span><span class="o">=</span><span class="n">Ome</span><span class="p">)</span>
+<span class="n">O1</span><span class="o">=</span><span class="n">Ome</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+<span class="n">S4</span><span class="o">=</span><span class="n">sig</span><span class="o">.</span><span class="n">dlti</span><span class="p">([</span><span class="n">hwin2</span><span class="p">],[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">_</span><span class="p">,</span> <span class="n">Mag_dB6</span><span class="p">,</span> <span class="n">Fase6</span> <span class="o">=</span> <span class="n">sig</span><span class="o">.</span><span class="n">dbode</span><span class="p">(</span><span class="n">S4</span><span class="p">,</span><span class="n">w</span><span class="o">=</span><span class="n">Ome</span><span class="p">)</span>
+<span class="n">fig2</span><span class="p">,</span> <span class="p">(</span><span class="n">ax5</span><span class="p">,</span> <span class="n">ax6</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">ax5</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">O1</span><span class="p">,</span> <span class="n">Mag_dB5</span><span class="p">)</span> 
+<span class="n">ax5</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">ax5</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Diagrama de Bode&quot;</span><span class="p">)</span>
+<span class="n">ax5</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Frecuencia normalizada [$\pi$ rad/muestra]&quot;</span><span class="p">)</span>  
+<span class="n">ax5</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Magnitud [dB]&quot;</span><span class="p">)</span>
+<span class="c1">#ax5.set_ylim(-1,1)</span>
+<span class="c1">#ax5.set_xlim(0.0,0.47)</span>
+
+<span class="n">ax6</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">O1</span><span class="p">,</span> <span class="n">Mag_dB6</span><span class="p">)</span> 
+<span class="n">ax6</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">ax6</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Diagrama de Bode&quot;</span><span class="p">)</span>
+<span class="n">ax6</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Frecuencia normalizada [$\pi$ rad/muestra]&quot;</span><span class="p">)</span>  
+<span class="n">ax6</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Magnitud [dB]&quot;</span><span class="p">)</span>
+<span class="c1">#ax6.set_ylim(-2.5,2.5)</span>
+<span class="c1">#ax6.set_xlim(0.0,0.25)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Magnitud [dB]&#39;)
+</pre></div>
+</div>
+<img alt="../_images/Filtros_FIR_LP_HP_BP_30_1.png" src="../_images/Filtros_FIR_LP_HP_BP_30_1.png" />
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./md_scripts"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="Filtros_PB_FIR_Ventanas.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Filtro Digital FIR - Pasa Bajos</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="filtros_IIR.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Filtros Digitales IIR</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Agustín Solano & Sebastian Tomas<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+    
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+
+    
+  </body>
+</html>

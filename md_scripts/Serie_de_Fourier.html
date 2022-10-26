@@ -203,6 +203,11 @@
      Filtro Digital FIR - Pasa Bajos
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Filtros_FIR_LP_HP_BP.html">
+     Filtros FIR: LP, BP, HP
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1">
@@ -412,53 +417,12 @@
   on the subranges.  Perhaps a special-purpose integrator should be used.
 </pre></div>
 </div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span>\<span class="n">ipykernel_18048</span>\<span class="mf">3920190134.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">     </span><span class="mi">28</span> <span class="c1">#Se obtiene el termino Bn</span>
-<span class="g g-Whitespace">     </span><span class="mi">29</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-<span class="ne">---&gt; </span><span class="mi">30</span>  <span class="n">bn</span><span class="o">=</span><span class="n">quad</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">31</span>  <span class="n">Bn</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bn</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">32</span> 
-
-<span class="nn">~\Anaconda3\lib\site-packages\scipy\integrate\quadpack.py</span> in <span class="ni">quad</span><span class="nt">(func, a, b, args, full_output, epsabs, epsrel, limit, points, weight, wvar, wopts, maxp1, limlst)</span>
-<span class="g g-Whitespace">    </span><span class="mi">350</span>     <span class="k">if</span> <span class="n">weight</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">351</span>         <span class="n">retval</span> <span class="o">=</span> <span class="n">_quad</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">full_output</span><span class="p">,</span> <span class="n">epsabs</span><span class="p">,</span> <span class="n">epsrel</span><span class="p">,</span> <span class="n">limit</span><span class="p">,</span>
-<span class="ne">--&gt; </span><span class="mi">352</span>                        <span class="n">points</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">353</span>     <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">354</span>         <span class="k">if</span> <span class="n">points</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-
-<span class="nn">~\Anaconda3\lib\site-packages\scipy\integrate\quadpack.py</span> in <span class="ni">_quad</span><span class="nt">(func, a, b, args, full_output, epsabs, epsrel, limit, points)</span>
-<span class="g g-Whitespace">    </span><span class="mi">461</span>     <span class="k">if</span> <span class="n">points</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">462</span>         <span class="k">if</span> <span class="n">infbounds</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">463</span>             <span class="k">return</span> <span class="n">_quadpack</span><span class="o">.</span><span class="n">_qagse</span><span class="p">(</span><span class="n">func</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">args</span><span class="p">,</span><span class="n">full_output</span><span class="p">,</span><span class="n">epsabs</span><span class="p">,</span><span class="n">epsrel</span><span class="p">,</span><span class="n">limit</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">464</span>         <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">465</span>             <span class="k">return</span> <span class="n">_quadpack</span><span class="o">.</span><span class="n">_qagie</span><span class="p">(</span><span class="n">func</span><span class="p">,</span><span class="n">bound</span><span class="p">,</span><span class="n">infbounds</span><span class="p">,</span><span class="n">args</span><span class="p">,</span><span class="n">full_output</span><span class="p">,</span><span class="n">epsabs</span><span class="p">,</span><span class="n">epsrel</span><span class="p">,</span><span class="n">limit</span><span class="p">)</span>
-
-<span class="nn">~\AppData\Local\Temp\ipykernel_18048\3920190134.py</span> in <span class="ni">&lt;lambda&gt;</span><span class="nt">(t)</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="c1">#Funciones utilziadas para el calculo de An y Bn</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="n">fc</span><span class="o">=</span><span class="k">lambda</span> <span class="n">t</span><span class="p">:</span><span class="n">sawtooth</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>  <span class="c1">#i :dummy index</span>
-<span class="ne">---&gt; </span><span class="mi">13</span> <span class="n">fs</span><span class="o">=</span><span class="k">lambda</span> <span class="n">t</span><span class="p">:</span><span class="n">sawtooth</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">14</span> 
-<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="c1">#Cantidad de terminos incluidos en la sumatoria</span>
-
-<span class="nn">~\Anaconda3\lib\site-packages\scipy\signal\waveforms.py</span> in <span class="ni">sawtooth</span><span class="nt">(t, width)</span>
-<span class="g g-Whitespace">     </span><span class="mi">63</span>     <span class="c1"># width must be between 0 and 1 inclusive</span>
-<span class="g g-Whitespace">     </span><span class="mi">64</span>     <span class="n">mask1</span> <span class="o">=</span> <span class="p">(</span><span class="n">w</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">w</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">65</span>     <span class="n">place</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">mask1</span><span class="p">,</span> <span class="n">nan</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">66</span> 
-<span class="g g-Whitespace">     </span><span class="mi">67</span>     <span class="c1"># take t modulo 2*pi</span>
-
-<span class="nn">&lt;__array_function__ internals&gt;</span> in <span class="ni">place</span><span class="nt">(*args, **kwargs)</span>
-
-<span class="nn">~\Anaconda3\lib\site-packages\numpy\lib\function_base.py</span> in <span class="ni">place</span><span class="nt">(arr, mask, vals)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1723</span>                         <span class="s2">&quot;not </span><span class="si">{name}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="nb">type</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">))</span>
-<span class="g g-Whitespace">   </span><span class="mi">1724</span> 
-<span class="ne">-&gt; </span><span class="mi">1725</span>     <span class="k">return</span> <span class="n">_insert</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">mask</span><span class="p">,</span> <span class="n">vals</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1726</span> 
-<span class="g g-Whitespace">   </span><span class="mi">1727</span> 
-
-<span class="ne">KeyboardInterrupt</span>: 
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:30: IntegrationWarning: The maximum number of subdivisions (50) has been achieved.
+  If increasing the limit yields no improvement it is advised to analyze 
+  the integrand in order to determine the difficulties.  If the position of a 
+  local difficulty can be determined (singularity, discontinuity) one will 
+  probably gain from splitting up the interval and calling the integrator 
+  on the subranges.  Perhaps a special-purpose integrator should be used.
 </pre></div>
 </div>
 </div>
@@ -503,13 +467,11 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:2: RuntimeWarning: divide by zero encountered in true_divide
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:2: RuntimeWarning: divide by zero encountered in true_divide
   
-c:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:2: RuntimeWarning: invalid value encountered in true_divide
-  
-c:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:7: UserWarning: In Matplotlib 3.3 individual lines on a stem plot will be added as a LineCollection instead of individual lines. This significantly improves the performance of a stem plot. To remove this warning and switch to the new behaviour, set the &quot;use_line_collection&quot; keyword argument to True.
+C:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:7: UserWarning: In Matplotlib 3.3 individual lines on a stem plot will be added as a LineCollection instead of individual lines. This significantly improves the performance of a stem plot. To remove this warning and switch to the new behaviour, set the &quot;use_line_collection&quot; keyword argument to True.
   import sys
-c:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:9: UserWarning: In Matplotlib 3.3 individual lines on a stem plot will be added as a LineCollection instead of individual lines. This significantly improves the performance of a stem plot. To remove this warning and switch to the new behaviour, set the &quot;use_line_collection&quot; keyword argument to True.
+C:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:9: UserWarning: In Matplotlib 3.3 individual lines on a stem plot will be added as a LineCollection instead of individual lines. This significantly improves the performance of a stem plot. To remove this warning and switch to the new behaviour, set the &quot;use_line_collection&quot; keyword argument to True.
   if __name__ == &#39;__main__&#39;:
 </pre></div>
 </div>
