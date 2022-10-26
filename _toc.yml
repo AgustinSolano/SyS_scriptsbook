@@ -23,6 +23,7 @@
     - file: md_scripts/Resp_frec_Sist_FIR
     - file: md_scripts/Filtros_PB_FIR_Ventanas
     - file: md_scripts/Filtros_FIR_LP_HP_BP
+    - file: md_scripts/Actividad9_Guia5_FiltrosFIR_Ventanas
 - file: md_scripts/filtros_IIR
 #  sections:
 #    - file: md_scripts/Filtros_PB_IIR
