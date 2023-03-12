@@ -1,29 +1,28 @@
-# Table of content
-# Learn more at https://jupyterbook.org/customize/toc.html
-#
+format: jb-article
+root: md_scripts/instalaciones_iniciales
+sections:
+- file: md_scripts/instalacion_vscode
 - file: md_scripts/intro_python
 - file: md_scripts/resp_frecuencia
   sections:
-    - file: md_scripts/Serie_de_Fourier
-    - file: md_scripts/Resp_frec_primer_orden
-    - file: md_scripts/Resp_frec_segundo_orden
-    - file: md_scripts/Filtrado_de_Senoidales
-    - file: md_scripts/Sistema_Resorte_Masa_Amortiguador
+  - file: md_scripts/Serie_de_Fourier
+  - file: md_scripts/Resp_frec_primer_orden
+  - file: md_scripts/Resp_frec_segundo_orden
+  - file: md_scripts/Filtrado_de_Senoidales
+  - file: md_scripts/Sistema_Resorte_Masa_Amortiguador
 - file: md_scripts/muestreo_cuantizacion
   sections:
-    - file: md_scripts/tipos_de_muestreo
-    - file: md_scripts/cuantizacion
-    - file: md_scripts/reconstruccion_seniales_interp_sinc
+  - file: md_scripts/tipos_de_muestreo
+  - file: md_scripts/cuantizacion
+  - file: md_scripts/reconstruccion_seniales_interp_sinc
 - file: md_scripts/senales_sistemas_discretos
-  sections:  
-    - file: md_scripts/sistema_discreto
-    - file: md_scripts/Resp_frec_Sist_Digital
+  sections:
+  - file: md_scripts/sistema_discreto
+  - file: md_scripts/Resp_frec_Sist_Digital
 - file: md_scripts/filtros_FIR
   sections:
-    - file: md_scripts/Resp_frec_Sist_FIR
-    - file: md_scripts/Filtros_PB_FIR_Ventanas
-    - file: md_scripts/Filtros_FIR_LP_HP_BP
-    - file: md_scripts/Actividad9_Guia5_FiltrosFIR_Ventanas
+  - file: md_scripts/Resp_frec_Sist_FIR
+  - file: md_scripts/Filtros_PB_FIR_Ventanas
+  - file: md_scripts/Filtros_FIR_LP_HP_BP
+  - file: md_scripts/Actividad9_Guia5_FiltrosFIR_Ventanas
 - file: md_scripts/filtros_IIR
-#  sections:
-#    - file: md_scripts/Filtros_PB_IIR
