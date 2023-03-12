@@ -1,6 +1,7 @@
 format: jb-article
-root: md_scripts/instalaciones_iniciales
+root: md_scripts/intro
 sections:
+- file: md_scripts/instalaciones_iniciales
 - file: md_scripts/instalacion_vscode
 - file: md_scripts/intro_python
 - file: md_scripts/resp_frecuencia
