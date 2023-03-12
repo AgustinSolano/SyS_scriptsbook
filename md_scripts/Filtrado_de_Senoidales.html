@@ -582,11 +582,10 @@ title="Print to PDF"
 <section id="filtro-pasa-bajos">
 <h2>Filtro Pasa-Bajos<a class="headerlink" href="#filtro-pasa-bajos" title="Permalink to this headline">#</a></h2>
 <font size=6>
-Suponga un filtro con la siguiente función de transferencia:  $H(s) = \frac{{\omega}_c}{(s+{\omega}_c)} = \frac{(2*\pi*10)}{(s+2*\pi*10)}$
+<p>Suponga un filtro con la siguiente función de transferencia:  <span class="math notranslate nohighlight">\(H(s) = \frac{{\omega}_c}{(s+{\omega}_c)} = \frac{(2*\pi*10)}{(s+2*\pi*10)}\)</span></p>
 <p>La respuesta en frecuencia del filtro es: <span class="math notranslate nohighlight">\(H(j\omega) = \frac{(2*\pi*10)}{(j\omega+2*\pi*10)}\)</span></p>
-<p>Cual es la frecuencia de corte <span class="math notranslate nohighlight">\({\omega}_c\)</span>?
-<font></p>
-<div class="cell docutils container">
+<p>Cual es la frecuencia de corte <span class="math notranslate nohighlight">\({\omega}_c\)</span>?</p>
+<font><div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">7000</span><span class="p">,</span><span class="mi">7000</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
 <span class="n">H_LP</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="mi">10</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">w</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="mi">10</span><span class="p">)</span>
@@ -611,7 +610,9 @@ Suponga un filtro con la siguiente función de transferencia:  $H(s) = \frac{{\o
 <section id="salida-del-filtro">
 <h2>Salida del filtro<a class="headerlink" href="#salida-del-filtro" title="Permalink to this headline">#</a></h2>
 <font size=4> 
-* Supongamos una señal de $f = 5 Hz \to x(t) = A*sin(2\pi*f*t + \phi)$
+<ul class="simple">
+<li><p>Supongamos una señal de <span class="math notranslate nohighlight">\(f = 5 Hz \to x(t) = A*sin(2\pi*f*t + \phi)\)</span></p></li>
+</ul>
 <font><div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">DURATION</span> <span class="o">=</span> <span class="mf">5.0</span>  <span class="c1"># Segs</span>
@@ -642,7 +643,7 @@ Suponga un filtro con la siguiente función de transferencia:  $H(s) = \frac{{\o
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/kc/w9qf361n0lv2428kf159qtqm0000gn/T/ipykernel_7608/1549478349.py:11: MatplotlibDeprecationWarning: The &#39;use_line_collection&#39; parameter of stem() was deprecated in Matplotlib 3.6 and will be removed two minor releases later. If any parameter follows &#39;use_line_collection&#39;, they should be passed as keyword, not positionally.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/kc/w9qf361n0lv2428kf159qtqm0000gn/T/ipykernel_8422/1549478349.py:11: MatplotlibDeprecationWarning: The &#39;use_line_collection&#39; parameter of stem() was deprecated in Matplotlib 3.6 and will be removed two minor releases later. If any parameter follows &#39;use_line_collection&#39;, they should be passed as keyword, not positionally.
   ax1.stem(t, x1,use_line_collection = True)
 </pre></div>
 </div>
@@ -653,13 +654,12 @@ Suponga un filtro con la siguiente función de transferencia:  $H(s) = \frac{{\o
 </div>
 </div>
 <font size=4>
-Evaluamos la salida del filtro cuando la entrada es ${x}_1$.
+<p>Evaluamos la salida del filtro cuando la entrada es <span class="math notranslate nohighlight">\({x}_1\)</span>.</p>
 <p>Como vimos la respuesta en frecuencia del filtro es: <span class="math notranslate nohighlight">\(H(j\omega) = \frac{(2*\pi*10)}{(j\omega+2*\pi*10)}\)</span></p>
 <p>Y recordemos que:</p>
 <p><span class="math notranslate nohighlight">\(A*sin({\omega}_1*t+\theta) \Longrightarrow |H(j{\omega}_1)|*A* sin({\omega}_1*t+\theta+\angle H(j{\omega}_1)) \)</span></p>
-<p>Busquemos la magnitud y la fase del filtro para la frecuencia de la senoidal <span class="math notranslate nohighlight">\({\omega}_1\)</span>
-<font></p>
-<div class="cell docutils container">
+<p>Busquemos la magnitud y la fase del filtro para la frecuencia de la senoidal <span class="math notranslate nohighlight">\({\omega}_1\)</span></p>
+<font><div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">w1</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">FRECUENCY</span>
 <span class="c1"># Magnitud del filtro a la frecuencia w1</span>
@@ -711,14 +711,16 @@ Fase en radianes:    -0.46. Fase en grados:   -26.57 [grad]
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x111eff910&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x113519090&gt;
 </pre></div>
 </div>
 <img alt="../_images/Filtrado_de_Senoidales_14_1.png" src="../_images/Filtrado_de_Senoidales_14_1.png" />
 </div>
 </div>
 <font size=4>
-* Supongamos una señal de $f = 10 Hz \to x(t) = A*sin(2\pi*f*t + \phi)$
+<ul class="simple">
+<li><p>Supongamos una señal de <span class="math notranslate nohighlight">\(f = 10 Hz \to x(t) = A*sin(2\pi*f*t + \phi)\)</span></p></li>
+</ul>
 <font><div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">FRECUENCY</span> <span class="o">=</span> <span class="mf">10.0</span> <span class="c1"># Hertz</span>
@@ -758,14 +760,16 @@ Fase en radianes:    -0.79. Fase en grados:   -45.00 [grad]
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1170239a0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x113519480&gt;
 </pre></div>
 </div>
 <img alt="../_images/Filtrado_de_Senoidales_17_1.png" src="../_images/Filtrado_de_Senoidales_17_1.png" />
 </div>
 </div>
 <font size=4>
-* Supongamos una señal de $f = 100 Hz \to x(t) = A*sin(2\pi*f*t + \phi)$
+<ul class="simple">
+<li><p>Supongamos una señal de <span class="math notranslate nohighlight">\(f = 100 Hz \to x(t) = A*sin(2\pi*f*t + \phi)\)</span></p></li>
+</ul>
 <font><div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">DURATION</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># Segs</span>
@@ -810,7 +814,7 @@ Fase en radianes:    -1.56. Fase en grados:   -89.43 [grad]
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x110414ac0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1135fe920&gt;
 </pre></div>
 </div>
 <img alt="../_images/Filtrado_de_Senoidales_20_1.png" src="../_images/Filtrado_de_Senoidales_20_1.png" />
@@ -829,7 +833,7 @@ Fase en radianes:    -1.56. Fase en grados:   -89.43 [grad]
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1171ccac0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x116d007c0&gt;
 </pre></div>
 </div>
 <img alt="../_images/Filtrado_de_Senoidales_21_1.png" src="../_images/Filtrado_de_Senoidales_21_1.png" />

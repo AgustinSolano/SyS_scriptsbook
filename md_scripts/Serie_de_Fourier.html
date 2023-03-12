@@ -524,20 +524,6 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">from</span> <span class="nn">scipy.signal</span> <span class="kn">import</span> <span class="n">square</span><span class="p">,</span> <span class="n">sawtooth</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">quad</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span><span class="o">*</span> <span class="c1"># import all function from math</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;scipy&#39;
-</pre></div>
-</div>
-</div>
 </div>
 <section id="serie-de-fourier">
 <h1>Serie de Fourier<a class="headerlink" href="#serie-de-fourier" title="Permalink to this headline">#</a></h1>
@@ -596,18 +582,22 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:25: IntegrationWarning: The maximum number of subdivisions (50) has been achieved.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/kc/w9qf361n0lv2428kf159qtqm0000gn/T/ipykernel_8476/3920190134.py:25: IntegrationWarning: The maximum number of subdivisions (50) has been achieved.
   If increasing the limit yields no improvement it is advised to analyze 
   the integrand in order to determine the difficulties.  If the position of a 
   local difficulty can be determined (singularity, discontinuity) one will 
   probably gain from splitting up the interval and calling the integrator 
   on the subranges.  Perhaps a special-purpose integrator should be used.
-c:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:30: IntegrationWarning: The maximum number of subdivisions (50) has been achieved.
+  an=quad(fc,-np.pi,np.pi)[0]*(1.0/np.pi)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/kc/w9qf361n0lv2428kf159qtqm0000gn/T/ipykernel_8476/3920190134.py:30: IntegrationWarning: The maximum number of subdivisions (50) has been achieved.
   If increasing the limit yields no improvement it is advised to analyze 
   the integrand in order to determine the difficulties.  If the position of a 
   local difficulty can be determined (singularity, discontinuity) one will 
   probably gain from splitting up the interval and calling the integrator 
   on the subranges.  Perhaps a special-purpose integrator should be used.
+  bn=quad(fs,-np.pi,np.pi)[0]*(1.0/np.pi)
 </pre></div>
 </div>
 </div>
@@ -652,14 +642,10 @@ c:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:30: Integrati
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:2: RuntimeWarning: divide by zero encountered in true_divide
-  
-c:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:2: RuntimeWarning: invalid value encountered in true_divide
-  
-c:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:7: UserWarning: In Matplotlib 3.3 individual lines on a stem plot will be added as a LineCollection instead of individual lines. This significantly improves the performance of a stem plot. To remove this warning and switch to the new behaviour, set the &quot;use_line_collection&quot; keyword argument to True.
-  import sys
-c:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:9: UserWarning: In Matplotlib 3.3 individual lines on a stem plot will be added as a LineCollection instead of individual lines. This significantly improves the performance of a stem plot. To remove this warning and switch to the new behaviour, set the &quot;use_line_collection&quot; keyword argument to True.
-  if __name__ == &#39;__main__&#39;:
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/kc/w9qf361n0lv2428kf159qtqm0000gn/T/ipykernel_8476/2356088145.py:2: RuntimeWarning: divide by zero encountered in divide
+  Xn_fase = np.arctan(np.array(Bn)/np.array(An))
+/var/folders/kc/w9qf361n0lv2428kf159qtqm0000gn/T/ipykernel_8476/2356088145.py:2: RuntimeWarning: invalid value encountered in divide
+  Xn_fase = np.arctan(np.array(Bn)/np.array(An))
 </pre></div>
 </div>
 <img alt="../_images/Serie_de_Fourier_8_1.png" src="../_images/Serie_de_Fourier_8_1.png" />

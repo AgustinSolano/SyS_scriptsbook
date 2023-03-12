@@ -679,20 +679,6 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">6</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span> <span class="nn">matplotlib.patches</span> <span class="kn">import</span> <span class="n">Circle</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">import</span> <span class="nn">matplotlib.ticker</span> <span class="k">as</span> <span class="nn">tck</span>
-<span class="ne">----&gt; </span><span class="mi">6</span> <span class="kn">import</span> <span class="nn">scipy</span> <span class="k">as</span> <span class="nn">sp</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="kn">import</span> <span class="nn">scipy.signal</span> <span class="k">as</span> <span class="nn">sig</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">io</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;scipy&#39;
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 <section id="fase-lineal">
@@ -715,7 +701,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x184758b5cc8&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x1619a1630&gt;]
 </pre></div>
 </div>
 <img alt="../_images/Filtros_FIR_LP_HP_BP_4_1.png" src="../_images/Filtros_FIR_LP_HP_BP_4_1.png" />
@@ -775,16 +761,10 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:10: UserWarning: In Matplotlib 3.3 individual lines on a stem plot will be added as a LineCollection instead of individual lines. This significantly improves the performance of a stem plot. To remove this warning and switch to the new behaviour, set the &quot;use_line_collection&quot; keyword argument to True.
-  # Remove the CWD from sys.path while we load stuff.
-c:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:25: UserWarning: In Matplotlib 3.3 individual lines on a stem plot will be added as a LineCollection instead of individual lines. This significantly improves the performance of a stem plot. To remove this warning and switch to the new behaviour, set the &quot;use_line_collection&quot; keyword argument to True.
-c:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:40: UserWarning: In Matplotlib 3.3 individual lines on a stem plot will be added as a LineCollection instead of individual lines. This significantly improves the performance of a stem plot. To remove this warning and switch to the new behaviour, set the &quot;use_line_collection&quot; keyword argument to True.
-</pre></div>
-</div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;h(t)&#39;)
 </pre></div>
 </div>
-<img alt="../_images/Filtros_FIR_LP_HP_BP_6_2.png" src="../_images/Filtros_FIR_LP_HP_BP_6_2.png" />
+<img alt="../_images/Filtros_FIR_LP_HP_BP_6_1.png" src="../_images/Filtros_FIR_LP_HP_BP_6_1.png" />
 </div>
 </div>
 </section>
@@ -853,9 +833,12 @@ c:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:40: UserWarni
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:21: UserWarning: Matplotlib is currently using module://matplotlib_inline.backend_inline, which is a non-GUI backend, so cannot show the figure.
-c:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:39: UserWarning: Matplotlib is currently using module://matplotlib_inline.backend_inline, which is a non-GUI backend, so cannot show the figure.
-c:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:57: UserWarning: Matplotlib is currently using module://matplotlib_inline.backend_inline, which is a non-GUI backend, so cannot show the figure.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/kc/w9qf361n0lv2428kf159qtqm0000gn/T/ipykernel_8439/3491047433.py:21: UserWarning: Matplotlib is currently using module://matplotlib_inline.backend_inline, which is a non-GUI backend, so cannot show the figure.
+  fig1.show()
+/var/folders/kc/w9qf361n0lv2428kf159qtqm0000gn/T/ipykernel_8439/3491047433.py:39: UserWarning: Matplotlib is currently using module://matplotlib_inline.backend_inline, which is a non-GUI backend, so cannot show the figure.
+  fig2.show()
+/var/folders/kc/w9qf361n0lv2428kf159qtqm0000gn/T/ipykernel_8439/3491047433.py:57: UserWarning: Matplotlib is currently using module://matplotlib_inline.backend_inline, which is a non-GUI backend, so cannot show the figure.
+  fig3.show()
 </pre></div>
 </div>
 <img alt="../_images/Filtros_FIR_LP_HP_BP_8_1.png" src="../_images/Filtros_FIR_LP_HP_BP_8_1.png" />
@@ -955,9 +938,12 @@ c:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:57: UserWarni
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:28: UserWarning: Matplotlib is currently using module://matplotlib_inline.backend_inline, which is a non-GUI backend, so cannot show the figure.
-c:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:57: UserWarning: Matplotlib is currently using module://matplotlib_inline.backend_inline, which is a non-GUI backend, so cannot show the figure.
-c:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:86: UserWarning: Matplotlib is currently using module://matplotlib_inline.backend_inline, which is a non-GUI backend, so cannot show the figure.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/kc/w9qf361n0lv2428kf159qtqm0000gn/T/ipykernel_8439/4271718025.py:28: UserWarning: Matplotlib is currently using module://matplotlib_inline.backend_inline, which is a non-GUI backend, so cannot show the figure.
+  fig1.show()
+/var/folders/kc/w9qf361n0lv2428kf159qtqm0000gn/T/ipykernel_8439/4271718025.py:57: UserWarning: Matplotlib is currently using module://matplotlib_inline.backend_inline, which is a non-GUI backend, so cannot show the figure.
+  fig2.show()
+/var/folders/kc/w9qf361n0lv2428kf159qtqm0000gn/T/ipykernel_8439/4271718025.py:86: UserWarning: Matplotlib is currently using module://matplotlib_inline.backend_inline, which is a non-GUI backend, so cannot show the figure.
+  fig3.show()
 </pre></div>
 </div>
 <img alt="../_images/Filtros_FIR_LP_HP_BP_9_1.png" src="../_images/Filtros_FIR_LP_HP_BP_9_1.png" />
@@ -1013,9 +999,8 @@ c:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:86: UserWarni
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:18: UserWarning: In Matplotlib 3.3 individual lines on a stem plot will be added as a LineCollection instead of individual lines. This significantly improves the performance of a stem plot. To remove this warning and switch to the new behaviour, set the &quot;use_line_collection&quot; keyword argument to True.
-c:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:24: UserWarning: In Matplotlib 3.3 individual lines on a stem plot will be added as a LineCollection instead of individual lines. This significantly improves the performance of a stem plot. To remove this warning and switch to the new behaviour, set the &quot;use_line_collection&quot; keyword argument to True.
-c:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:30: UserWarning: Matplotlib is currently using module://matplotlib_inline.backend_inline, which is a non-GUI backend, so cannot show the figure.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/kc/w9qf361n0lv2428kf159qtqm0000gn/T/ipykernel_8439/2049024632.py:30: UserWarning: Matplotlib is currently using module://matplotlib_inline.backend_inline, which is a non-GUI backend, so cannot show the figure.
+  fig3.show()
 </pre></div>
 </div>
 <img alt="../_images/Filtros_FIR_LP_HP_BP_11_1.png" src="../_images/Filtros_FIR_LP_HP_BP_11_1.png" />
@@ -1077,8 +1062,10 @@ c:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:30: UserWarni
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:27: UserWarning: Matplotlib is currently using module://matplotlib_inline.backend_inline, which is a non-GUI backend, so cannot show the figure.
-c:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:47: UserWarning: Matplotlib is currently using module://matplotlib_inline.backend_inline, which is a non-GUI backend, so cannot show the figure.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/kc/w9qf361n0lv2428kf159qtqm0000gn/T/ipykernel_8439/3846617414.py:27: UserWarning: Matplotlib is currently using module://matplotlib_inline.backend_inline, which is a non-GUI backend, so cannot show the figure.
+  fig5.show()
+/var/folders/kc/w9qf361n0lv2428kf159qtqm0000gn/T/ipykernel_8439/3846617414.py:47: UserWarning: Matplotlib is currently using module://matplotlib_inline.backend_inline, which is a non-GUI backend, so cannot show the figure.
+  fig6.show()
 </pre></div>
 </div>
 <img alt="../_images/Filtros_FIR_LP_HP_BP_13_1.png" src="../_images/Filtros_FIR_LP_HP_BP_13_1.png" />
@@ -1121,8 +1108,8 @@ c:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:47: UserWarni
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:12: UserWarning: Matplotlib is currently using module://matplotlib_inline.backend_inline, which is a non-GUI backend, so cannot show the figure.
-  if sys.path[0] == &#39;&#39;:
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/kc/w9qf361n0lv2428kf159qtqm0000gn/T/ipykernel_8439/1473630891.py:12: UserWarning: Matplotlib is currently using module://matplotlib_inline.backend_inline, which is a non-GUI backend, so cannot show the figure.
+  fig7.show()
 </pre></div>
 </div>
 <img alt="../_images/Filtros_FIR_LP_HP_BP_16_1.png" src="../_images/Filtros_FIR_LP_HP_BP_16_1.png" />
@@ -1148,14 +1135,10 @@ c:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:47: UserWarni
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\Agustin\Anaconda3\lib\site-packages\ipykernel_launcher.py:4: UserWarning: In Matplotlib 3.3 individual lines on a stem plot will be added as a LineCollection instead of individual lines. This significantly improves the performance of a stem plot. To remove this warning and switch to the new behaviour, set the &quot;use_line_collection&quot; keyword argument to True.
-  after removing the cwd from sys.path.
-</pre></div>
-</div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;w(t)&#39;)
 </pre></div>
 </div>
-<img alt="../_images/Filtros_FIR_LP_HP_BP_18_2.png" src="../_images/Filtros_FIR_LP_HP_BP_18_2.png" />
+<img alt="../_images/Filtros_FIR_LP_HP_BP_18_1.png" src="../_images/Filtros_FIR_LP_HP_BP_18_1.png" />
 </div>
 </div>
 </section>
