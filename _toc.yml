@@ -30,4 +30,5 @@ sections:
 - file: md_scripts/filtros_IIR
   sections:
   - file: md_scripts/Filtros_IIR_TransBilineal
+  - file: md_scripts/Filtros_IIR_Notch
 
