@@ -4,6 +4,9 @@ sections:
 - file: md_scripts/instalaciones_iniciales
 - file: md_scripts/instalacion_vscode
 - file: md_scripts/intro_python
+- file: md_scripts/convolucion_cont
+  sections:
+  - file: md_scripts/convolucion_continua
 - file: md_scripts/resp_frecuencia
   sections:
   - file: md_scripts/Serie_de_Fourier
