@@ -13,6 +13,7 @@ sections:
   - file: md_scripts/Resp_frec_primer_orden
   - file: md_scripts/Resp_frec_segundo_orden
   - file: md_scripts/Filtrado_de_Senoidales
+  - file: md_scripts/Filtro_butterworth_especif
   - file: md_scripts/Sistema_Resorte_Masa_Amortiguador
 - file: md_scripts/muestreo_cuantizacion
   sections:
