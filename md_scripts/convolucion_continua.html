@@ -177,6 +177,11 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="Filtro_butterworth_especif.html">
+     Filtro Butterworth a partir de especificaciones
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="Sistema_Resorte_Masa_Amortiguador.html">
      Respuesta en frecuencia y temporal de un sistema mecanico
     </a>
@@ -578,7 +583,102 @@ title="Print to PDF"
 <h1>Convolucion continua<a class="headerlink" href="#convolucion-continua" title="Permalink to this headline">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#%matplotlib qt5</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> qt5
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ImportError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">run_line_magic</span><span class="p">(</span><span class="s1">&#39;matplotlib&#39;</span><span class="p">,</span> <span class="s1">&#39;qt5&#39;</span><span class="p">)</span>
+
+<span class="nn">File /opt/homebrew/Caskroom/miniconda/base/envs/jupyter-book-env/lib/python3.10/site-packages/IPython/core/interactiveshell.py:2369,</span> in <span class="ni">InteractiveShell.run_line_magic</span><span class="nt">(self, magic_name, line, _stack_depth)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2367</span>     <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;local_ns&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_local_scope</span><span class="p">(</span><span class="n">stack_depth</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2368</span> <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">builtin_trap</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">2369</span>     <span class="n">result</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2371</span> <span class="c1"># The code below prevents the output from being displayed</span>
+<span class="g g-Whitespace">   </span><span class="mi">2372</span> <span class="c1"># when using magics with decodator @output_can_be_silenced</span>
+<span class="g g-Whitespace">   </span><span class="mi">2373</span> <span class="c1"># when the last Python token in the expression is a &#39;;&#39;.</span>
+<span class="g g-Whitespace">   </span><span class="mi">2374</span> <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="n">magic</span><span class="o">.</span><span class="n">MAGIC_OUTPUT_CAN_BE_SILENCED</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+
+<span class="nn">File /opt/homebrew/Caskroom/miniconda/base/envs/jupyter-book-env/lib/python3.10/site-packages/IPython/core/magics/pylab.py:99,</span> in <span class="ni">PylabMagics.matplotlib</span><span class="nt">(self, line)</span>
+<span class="g g-Whitespace">     </span><span class="mi">97</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Available matplotlib backends: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">backends_list</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">98</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">99</span>     <span class="n">gui</span><span class="p">,</span> <span class="n">backend</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">shell</span><span class="o">.</span><span class="n">enable_matplotlib</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">gui</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="n">args</span><span class="o">.</span><span class="n">gui</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">100</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_show_matplotlib_backend</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">gui</span><span class="p">,</span> <span class="n">backend</span><span class="p">)</span>
+
+<span class="nn">File /opt/homebrew/Caskroom/miniconda/base/envs/jupyter-book-env/lib/python3.10/site-packages/IPython/core/interactiveshell.py:3555,</span> in <span class="ni">InteractiveShell.enable_matplotlib</span><span class="nt">(self, gui)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3551</span>         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Warning: Cannot change to a different GUI toolkit: </span><span class="si">%s</span><span class="s1">.&#39;</span>
+<span class="g g-Whitespace">   </span><span class="mi">3552</span>                 <span class="s1">&#39; Using </span><span class="si">%s</span><span class="s1"> instead.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">gui</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pylab_gui_select</span><span class="p">))</span>
+<span class="g g-Whitespace">   </span><span class="mi">3553</span>         <span class="n">gui</span><span class="p">,</span> <span class="n">backend</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">find_gui_and_backend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pylab_gui_select</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">3555</span> <span class="n">pt</span><span class="o">.</span><span class="n">activate_matplotlib</span><span class="p">(</span><span class="n">backend</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3556</span> <span class="n">configure_inline_support</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">backend</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3558</span> <span class="c1"># Now we must activate the gui pylab wants to use, and fix %run to take</span>
+<span class="g g-Whitespace">   </span><span class="mi">3559</span> <span class="c1"># plot updates into account</span>
+
+<span class="nn">File /opt/homebrew/Caskroom/miniconda/base/envs/jupyter-book-env/lib/python3.10/site-packages/IPython/core/pylabtools.py:360,</span> in <span class="ni">activate_matplotlib</span><span class="nt">(backend)</span>
+<span class="g g-Whitespace">    </span><span class="mi">355</span> <span class="c1"># Due to circular imports, pyplot may be only partially initialised</span>
+<span class="g g-Whitespace">    </span><span class="mi">356</span> <span class="c1"># when this function runs.</span>
+<span class="g g-Whitespace">    </span><span class="mi">357</span> <span class="c1"># So avoid needing matplotlib attribute-lookup to access pyplot.</span>
+<span class="g g-Whitespace">    </span><span class="mi">358</span> <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="ne">--&gt; </span><span class="mi">360</span> <span class="n">plt</span><span class="o">.</span><span class="n">switch_backend</span><span class="p">(</span><span class="n">backend</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">362</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="o">.</span><span class="n">_needmain</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="g g-Whitespace">    </span><span class="mi">363</span> <span class="c1"># We need to detect at runtime whether show() is called by the user.</span>
+<span class="g g-Whitespace">    </span><span class="mi">364</span> <span class="c1"># For this, we wrap it into a decorator which adds a &#39;called&#39; flag.</span>
+
+<span class="nn">File /opt/homebrew/Caskroom/miniconda/base/envs/jupyter-book-env/lib/python3.10/site-packages/matplotlib/pyplot.py:271,</span> in <span class="ni">switch_backend</span><span class="nt">(newbackend)</span>
+<span class="g g-Whitespace">    </span><span class="mi">268</span> <span class="c1"># have to escape the switch on access logic</span>
+<span class="g g-Whitespace">    </span><span class="mi">269</span> <span class="n">old_backend</span> <span class="o">=</span> <span class="nb">dict</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">(</span><span class="n">rcParams</span><span class="p">,</span> <span class="s1">&#39;backend&#39;</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">271</span> <span class="n">backend_mod</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">272</span>     <span class="n">cbook</span><span class="o">.</span><span class="n">_backend_module_name</span><span class="p">(</span><span class="n">newbackend</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">274</span> <span class="n">required_framework</span> <span class="o">=</span> <span class="n">_get_required_interactive_framework</span><span class="p">(</span><span class="n">backend_mod</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">275</span> <span class="k">if</span> <span class="n">required_framework</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+<span class="nn">File /opt/homebrew/Caskroom/miniconda/base/envs/jupyter-book-env/lib/python3.10/importlib/__init__.py:126,</span> in <span class="ni">import_module</span><span class="nt">(name, package)</span>
+<span class="g g-Whitespace">    </span><span class="mi">124</span>             <span class="k">break</span>
+<span class="g g-Whitespace">    </span><span class="mi">125</span>         <span class="n">level</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="ne">--&gt; </span><span class="mi">126</span> <span class="k">return</span> <span class="n">_bootstrap</span><span class="o">.</span><span class="n">_gcd_import</span><span class="p">(</span><span class="n">name</span><span class="p">[</span><span class="n">level</span><span class="p">:],</span> <span class="n">package</span><span class="p">,</span> <span class="n">level</span><span class="p">)</span>
+
+<span class="nn">File &lt;frozen importlib._bootstrap&gt;:1050,</span> in <span class="ni">_gcd_import</span><span class="nt">(name, package, level)</span>
+
+<span class="nn">File &lt;frozen importlib._bootstrap&gt;:1027,</span> in <span class="ni">_find_and_load</span><span class="nt">(name, import_)</span>
+
+<span class="nn">File &lt;frozen importlib._bootstrap&gt;:1006,</span> in <span class="ni">_find_and_load_unlocked</span><span class="nt">(name, import_)</span>
+
+<span class="nn">File &lt;frozen importlib._bootstrap&gt;:688,</span> in <span class="ni">_load_unlocked</span><span class="nt">(spec)</span>
+
+<span class="nn">File &lt;frozen importlib._bootstrap_external&gt;:883,</span> in <span class="ni">exec_module</span><span class="nt">(self, module)</span>
+
+<span class="nn">File &lt;frozen importlib._bootstrap&gt;:241,</span> in <span class="ni">_call_with_frames_removed</span><span class="nt">(f, *args, **kwds)</span>
+
+<span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">homebrew</span><span class="o">/</span><span class="n">Caskroom</span><span class="o">/</span><span class="n">miniconda</span><span class="o">/</span><span class="n">base</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">jupyter</span><span class="o">-</span><span class="n">book</span><span class="o">-</span><span class="n">env</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.10</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">matplotlib</span><span class="o">/</span><span class="n">backends</span><span class="o">/</span><span class="n">backend_qt5agg</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">7</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">backends</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">backends</span><span class="o">.</span><span class="n">_QT_FORCE_QT5_BINDING</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="ne">----&gt; </span><span class="mi">7</span> <span class="kn">from</span> <span class="nn">.backend_qtagg</span> <span class="kn">import</span> <span class="p">(</span>    <span class="c1"># noqa: F401, E402 # pylint: disable=W0611</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="n">_BackendQTAgg</span><span class="p">,</span> <span class="n">FigureCanvasQTAgg</span><span class="p">,</span> <span class="n">FigureManagerQT</span><span class="p">,</span> <span class="n">NavigationToolbar2QT</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="n">FigureCanvasAgg</span><span class="p">,</span> <span class="n">FigureCanvasQT</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="nd">@_BackendQTAgg</span><span class="o">.</span><span class="n">export</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="k">class</span> <span class="nc">_BackendQT5Agg</span><span class="p">(</span><span class="n">_BackendQTAgg</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span>     <span class="k">pass</span>
+
+<span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">homebrew</span><span class="o">/</span><span class="n">Caskroom</span><span class="o">/</span><span class="n">miniconda</span><span class="o">/</span><span class="n">base</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">jupyter</span><span class="o">-</span><span class="n">book</span><span class="o">-</span><span class="n">env</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.10</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">matplotlib</span><span class="o">/</span><span class="n">backends</span><span class="o">/</span><span class="n">backend_qtagg</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">9</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">import</span> <span class="nn">ctypes</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="kn">from</span> <span class="nn">matplotlib.transforms</span> <span class="kn">import</span> <span class="n">Bbox</span>
+<span class="ne">----&gt; </span><span class="mi">9</span> <span class="kn">from</span> <span class="nn">.qt_compat</span> <span class="kn">import</span> <span class="n">QT_API</span><span class="p">,</span> <span class="n">_enum</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="kn">from</span> <span class="nn">.backend_agg</span> <span class="kn">import</span> <span class="n">FigureCanvasAgg</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="kn">from</span> <span class="nn">.backend_qt</span> <span class="kn">import</span> <span class="n">QtCore</span><span class="p">,</span> <span class="n">QtGui</span><span class="p">,</span> <span class="n">_BackendQT</span><span class="p">,</span> <span class="n">FigureCanvasQT</span>
+
+<span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">homebrew</span><span class="o">/</span><span class="n">Caskroom</span><span class="o">/</span><span class="n">miniconda</span><span class="o">/</span><span class="n">base</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">jupyter</span><span class="o">-</span><span class="n">book</span><span class="o">-</span><span class="n">env</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.10</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">matplotlib</span><span class="o">/</span><span class="n">backends</span><span class="o">/</span><span class="n">qt_compat</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">135</span>
+<span class="g g-Whitespace">    </span><span class="mi">133</span>         <span class="k">break</span>
+<span class="g g-Whitespace">    </span><span class="mi">134</span>     <span class="k">else</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">135</span>         <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">136</span>             <span class="s2">&quot;Failed to import any of the following Qt binding modules: </span><span class="si">{}</span><span class="s2">&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">137</span>             <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_ETS</span><span class="o">.</span><span class="n">values</span><span class="p">())))</span>
+<span class="g g-Whitespace">    </span><span class="mi">138</span> <span class="k">else</span><span class="p">:</span>  <span class="c1"># We should not get there.</span>
+<span class="g g-Whitespace">    </span><span class="mi">139</span>     <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unexpected QT_API: </span><span class="si">{</span><span class="n">QT_API</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="ne">ImportError</span>: Failed to import any of the following Qt binding modules: PyQt6, PySide6, PyQt5, PySide2
 </pre></div>
 </div>
 </div>
@@ -684,10 +784,9 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1080a8310&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1764c3a90&gt;
 </pre></div>
 </div>
-<img alt="../_images/convolucion_continua_6_1.png" src="../_images/convolucion_continua_6_1.png" />
 </div>
 </div>
 <section id="animacion-de-la-convolucion">
@@ -698,11 +797,6 @@ title="Print to PDF"
 <span class="n">anim</span> <span class="o">=</span> <span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">showConvolution</span><span class="p">,</span> <span class="n">frames</span><span class="o">=</span><span class="n">t0</span><span class="p">,</span> <span class="n">fargs</span><span class="o">=</span><span class="p">(</span><span class="n">f1</span><span class="p">,</span><span class="n">f2</span><span class="p">),</span><span class="n">interval</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 800x300 with 0 Axes&gt;
 </pre></div>
 </div>
 </div>
@@ -746,10 +840,9 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x11df4ca00&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1485e0af0&gt;
 </pre></div>
 </div>
-<img alt="../_images/convolucion_continua_10_1.png" src="../_images/convolucion_continua_10_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -758,11 +851,6 @@ title="Print to PDF"
 <span class="n">anim</span> <span class="o">=</span> <span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">showConvolution</span><span class="p">,</span> <span class="n">frames</span><span class="o">=</span><span class="n">t0</span><span class="p">,</span> <span class="n">fargs</span><span class="o">=</span><span class="p">(</span><span class="n">f1</span><span class="p">,</span><span class="n">f2</span><span class="p">),</span><span class="n">interval</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 800x300 with 0 Axes&gt;
 </pre></div>
 </div>
 </div>
