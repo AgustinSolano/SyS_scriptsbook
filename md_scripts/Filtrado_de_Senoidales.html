@@ -54,7 +54,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Respuesta en frecuencia y temporal de un sistema mecanico" href="Sistema_Resorte_Masa_Amortiguador.html" />
+    <link rel="next" title="Sistema analogico de la familia Butterworth" href="Sistema_familia_butterworth.html" />
     <link rel="prev" title="Respuesta en frecuencia - Sistemas de segundo orden" href="Resp_frec_segundo_orden.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -131,12 +131,29 @@ const thebe_selector_output = ".output, .cell_output"
    Introducción a Python
   </a>
  </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="convolucion_cont.html">
+   Convolucion continua
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="convolucion_continua.html">
+     Convolucion continua
+    </a>
+   </li>
+  </ul>
+ </li>
  <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="resp_frecuencia.html">
    Respuesta en frecuencia
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
    <i class="fas fa-chevron-down">
    </i>
   </label>
@@ -162,6 +179,16 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="Sistema_familia_butterworth.html">
+     Sistema analogico de la familia Butterworth
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Filtro_butterworth_especif.html">
+     Filtro Butterworth a partir de especificaciones
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="Sistema_Resorte_Masa_Amortiguador.html">
      Respuesta en frecuencia y temporal de un sistema mecanico
     </a>
@@ -172,8 +199,8 @@ const thebe_selector_output = ".output, .cell_output"
   <a class="reference internal" href="muestreo_cuantizacion.html">
    Muestreo y Cuantización
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
-  <label for="toctree-checkbox-2">
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
    <i class="fas fa-chevron-down">
    </i>
   </label>
@@ -203,8 +230,8 @@ const thebe_selector_output = ".output, .cell_output"
   <a class="reference internal" href="senales_sistemas_discretos.html">
    Señales y Sistemas Discretos
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
-  <label for="toctree-checkbox-3">
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
    <i class="fas fa-chevron-down">
    </i>
   </label>
@@ -212,6 +239,11 @@ const thebe_selector_output = ".output, .cell_output"
    <li class="toctree-l2">
     <a class="reference internal" href="sistema_discreto.html">
      Señales y Sistemas Discretos
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ejemplos_DTFT.html">
+     Ejemplos DTFT
     </a>
    </li>
    <li class="toctree-l2">
@@ -225,8 +257,8 @@ const thebe_selector_output = ".output, .cell_output"
   <a class="reference internal" href="filtros_FIR.html">
    Filtros Digitales FIR
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
-  <label for="toctree-checkbox-4">
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
    <i class="fas fa-chevron-down">
    </i>
   </label>
@@ -253,10 +285,27 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
   </ul>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="filtros_IIR.html">
    Filtros Digitales IIR
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Filtros_IIR_TransBilineal.html">
+     Filtro Digital IIR - Transformada Bilineal
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Filtros_IIR_Notch.html">
+     Filtro Digital IIR - Notch
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -643,14 +692,26 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/kc/w9qf361n0lv2428kf159qtqm0000gn/T/ipykernel_8422/1549478349.py:11: MatplotlibDeprecationWarning: The &#39;use_line_collection&#39; parameter of stem() was deprecated in Matplotlib 3.6 and will be removed two minor releases later. If any parameter follows &#39;use_line_collection&#39;, they should be passed as keyword, not positionally.
-  ax1.stem(t, x1,use_line_collection = True)
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">line</span> <span class="mi">11</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Amplitud&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">11</span> <span class="n">ax1</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span><span class="n">use_line_collection</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="nn">File /opt/homebrew/Caskroom/miniconda/base/envs/jupyter-book-env/lib/python3.10/site-packages/matplotlib/__init__.py:1465,</span> in <span class="ni">_preprocess_data.&lt;locals&gt;.inner</span><span class="nt">(ax, data, *args, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1462</span> <span class="nd">@functools</span><span class="o">.</span><span class="n">wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1463</span> <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1464</span>     <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1465</span>         <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="o">*</span><span class="nb">map</span><span class="p">(</span><span class="n">sanitize_sequence</span><span class="p">,</span> <span class="n">args</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1467</span>     <span class="n">bound</span> <span class="o">=</span> <span class="n">new_sig</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1468</span>     <span class="n">auto_label</span> <span class="o">=</span> <span class="p">(</span><span class="n">bound</span><span class="o">.</span><span class="n">arguments</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">label_namer</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1469</span>                   <span class="ow">or</span> <span class="n">bound</span><span class="o">.</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">label_namer</span><span class="p">))</span>
+
+<span class="ne">TypeError</span>: Axes.stem() got an unexpected keyword argument &#39;use_line_collection&#39;
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;StemContainer object of 3 artists&gt;
-</pre></div>
-</div>
-<img alt="../_images/Filtrado_de_Senoidales_9_2.png" src="../_images/Filtrado_de_Senoidales_9_2.png" />
+<img alt="../_images/Filtrado_de_Senoidales_9_1.png" src="../_images/Filtrado_de_Senoidales_9_1.png" />
 </div>
 </div>
 <font size=4>
@@ -711,7 +772,7 @@ Fase en radianes:    -0.46. Fase en grados:   -26.57 [grad]
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x113519090&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1dafbec6f08&gt;
 </pre></div>
 </div>
 <img alt="../_images/Filtrado_de_Senoidales_14_1.png" src="../_images/Filtrado_de_Senoidales_14_1.png" />
@@ -760,7 +821,7 @@ Fase en radianes:    -0.79. Fase en grados:   -45.00 [grad]
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x113519480&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1dafbec6fc8&gt;
 </pre></div>
 </div>
 <img alt="../_images/Filtrado_de_Senoidales_17_1.png" src="../_images/Filtrado_de_Senoidales_17_1.png" />
@@ -814,7 +875,7 @@ Fase en radianes:    -1.56. Fase en grados:   -89.43 [grad]
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1135fe920&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1dafa38bc88&gt;
 </pre></div>
 </div>
 <img alt="../_images/Filtrado_de_Senoidales_20_1.png" src="../_images/Filtrado_de_Senoidales_20_1.png" />
@@ -833,7 +894,7 @@ Fase en radianes:    -1.56. Fase en grados:   -89.43 [grad]
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x116d007c0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1dafb1bc888&gt;
 </pre></div>
 </div>
 <img alt="../_images/Filtrado_de_Senoidales_21_1.png" src="../_images/Filtrado_de_Senoidales_21_1.png" />
@@ -876,10 +937,10 @@ Fase en radianes:    -1.56. Fase en grados:   -89.43 [grad]
             <p class="prev-next-title">Respuesta en frecuencia - Sistemas de segundo orden</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="Sistema_Resorte_Masa_Amortiguador.html" title="next page">
+    <a class='right-next' id="next-link" href="Sistema_familia_butterworth.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Respuesta en frecuencia y temporal de un sistema mecanico</p>
+        <p class="prev-next-title">Sistema analogico de la familia Butterworth</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

@@ -25,14 +25,14 @@ nbclient.exceptions.CellExecutionError: An error occurred while executing the fo
 Cell [0;32mIn[1], line 1[0m
 [0;32m----> 1[0m [43mget_ipython[49m[43m([49m[43m)[49m[38;5;241;43m.[39;49m[43mrun_line_magic[49m[43m([49m[38;5;124;43m'[39;49m[38;5;124;43mmatplotlib[39;49m[38;5;124;43m'[39;49m[43m,[49m[43m [49m[38;5;124;43m'[39;49m[38;5;124;43mqt5[39;49m[38;5;124;43m'[39;49m[43m)[49m
 
-File [0;32m/opt/homebrew/Caskroom/miniconda/base/envs/jupyter-book-env/lib/python3.10/site-packages/IPython/core/interactiveshell.py:2369[0m, in [0;36mInteractiveShell.run_line_magic[0;34m(self, magic_name, line, _stack_depth)[0m
-[1;32m   2367[0m     kwargs[[38;5;124m'[39m[38;5;124mlocal_ns[39m[38;5;124m'[39m] [38;5;241m=[39m [38;5;28mself[39m[38;5;241m.[39mget_local_scope(stack_depth)
-[1;32m   2368[0m [38;5;28;01mwith[39;00m [38;5;28mself[39m[38;5;241m.[39mbuiltin_trap:
-[0;32m-> 2369[0m     result [38;5;241m=[39m [43mfn[49m[43m([49m[38;5;241;43m*[39;49m[43margs[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m[43m)[49m
-[1;32m   2371[0m [38;5;66;03m# The code below prevents the output from being displayed[39;00m
-[1;32m   2372[0m [38;5;66;03m# when using magics with decodator @output_can_be_silenced[39;00m
-[1;32m   2373[0m [38;5;66;03m# when the last Python token in the expression is a ';'.[39;00m
-[1;32m   2374[0m [38;5;28;01mif[39;00m [38;5;28mgetattr[39m(fn, magic[38;5;241m.[39mMAGIC_OUTPUT_CAN_BE_SILENCED, [38;5;28;01mFalse[39;00m):
+File [0;32m/opt/homebrew/Caskroom/miniconda/base/envs/jupyter-book-env/lib/python3.10/site-packages/IPython/core/interactiveshell.py:2432[0m, in [0;36mInteractiveShell.run_line_magic[0;34m(self, magic_name, line, _stack_depth)[0m
+[1;32m   2430[0m     kwargs[[38;5;124m'[39m[38;5;124mlocal_ns[39m[38;5;124m'[39m] [38;5;241m=[39m [38;5;28mself[39m[38;5;241m.[39mget_local_scope(stack_depth)
+[1;32m   2431[0m [38;5;28;01mwith[39;00m [38;5;28mself[39m[38;5;241m.[39mbuiltin_trap:
+[0;32m-> 2432[0m     result [38;5;241m=[39m [43mfn[49m[43m([49m[38;5;241;43m*[39;49m[43margs[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m[43m)[49m
+[1;32m   2434[0m [38;5;66;03m# The code below prevents the output from being displayed[39;00m
+[1;32m   2435[0m [38;5;66;03m# when using magics with decorator @output_can_be_silenced[39;00m
+[1;32m   2436[0m [38;5;66;03m# when the last Python token in the expression is a ';'.[39;00m
+[1;32m   2437[0m [38;5;28;01mif[39;00m [38;5;28mgetattr[39m(fn, magic[38;5;241m.[39mMAGIC_OUTPUT_CAN_BE_SILENCED, [38;5;28;01mFalse[39;00m):
 
 File [0;32m/opt/homebrew/Caskroom/miniconda/base/envs/jupyter-book-env/lib/python3.10/site-packages/IPython/core/magics/pylab.py:99[0m, in [0;36mPylabMagics.matplotlib[0;34m(self, line)[0m
 [1;32m     97[0m     [38;5;28mprint[39m([38;5;124m"[39m[38;5;124mAvailable matplotlib backends: [39m[38;5;132;01m%s[39;00m[38;5;124m"[39m [38;5;241m%[39m backends_list)
@@ -40,32 +40,31 @@ File [0;32m/opt/homebrew/Caskroom/miniconda/base/envs/jupyter-book-env/lib/pyth
 [0;32m---> 99[0m     gui, backend [38;5;241m=[39m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mshell[49m[38;5;241;43m.[39;49m[43menable_matplotlib[49m[43m([49m[43margs[49m[38;5;241;43m.[39;49m[43mgui[49m[38;5;241;43m.[39;49m[43mlower[49m[43m([49m[43m)[49m[43m [49m[38;5;28;43;01mif[39;49;00m[43m [49m[38;5;28;43misinstance[39;49m[43m([49m[43margs[49m[38;5;241;43m.[39;49m[43mgui[49m[43m,[49m[43m [49m[38;5;28;43mstr[39;49m[43m)[49m[43m [49m[38;5;28;43;01melse[39;49;00m[43m [49m[43margs[49m[38;5;241;43m.[39;49m[43mgui[49m[43m)[49m
 [1;32m    100[0m     [38;5;28mself[39m[38;5;241m.[39m_show_matplotlib_backend(args[38;5;241m.[39mgui, backend)
 
-File [0;32m/opt/homebrew/Caskroom/miniconda/base/envs/jupyter-book-env/lib/python3.10/site-packages/IPython/core/interactiveshell.py:3555[0m, in [0;36mInteractiveShell.enable_matplotlib[0;34m(self, gui)[0m
-[1;32m   3551[0m         [38;5;28mprint[39m([38;5;124m'[39m[38;5;124mWarning: Cannot change to a different GUI toolkit: [39m[38;5;132;01m%s[39;00m[38;5;124m.[39m[38;5;124m'[39m
-[1;32m   3552[0m                 [38;5;124m'[39m[38;5;124m Using [39m[38;5;132;01m%s[39;00m[38;5;124m instead.[39m[38;5;124m'[39m [38;5;241m%[39m (gui, [38;5;28mself[39m[38;5;241m.[39mpylab_gui_select))
-[1;32m   3553[0m         gui, backend [38;5;241m=[39m pt[38;5;241m.[39mfind_gui_and_backend([38;5;28mself[39m[38;5;241m.[39mpylab_gui_select)
-[0;32m-> 3555[0m [43mpt[49m[38;5;241;43m.[39;49m[43mactivate_matplotlib[49m[43m([49m[43mbackend[49m[43m)[49m
-[1;32m   3556[0m configure_inline_support([38;5;28mself[39m, backend)
-[1;32m   3558[0m [38;5;66;03m# Now we must activate the gui pylab wants to use, and fix %run to take[39;00m
-[1;32m   3559[0m [38;5;66;03m# plot updates into account[39;00m
+File [0;32m/opt/homebrew/Caskroom/miniconda/base/envs/jupyter-book-env/lib/python3.10/site-packages/IPython/core/interactiveshell.py:3621[0m, in [0;36mInteractiveShell.enable_matplotlib[0;34m(self, gui)[0m
+[1;32m   3617[0m         [38;5;28mprint[39m([38;5;124m'[39m[38;5;124mWarning: Cannot change to a different GUI toolkit: [39m[38;5;132;01m%s[39;00m[38;5;124m.[39m[38;5;124m'[39m
+[1;32m   3618[0m                 [38;5;124m'[39m[38;5;124m Using [39m[38;5;132;01m%s[39;00m[38;5;124m instead.[39m[38;5;124m'[39m [38;5;241m%[39m (gui, [38;5;28mself[39m[38;5;241m.[39mpylab_gui_select))
+[1;32m   3619[0m         gui, backend [38;5;241m=[39m pt[38;5;241m.[39mfind_gui_and_backend([38;5;28mself[39m[38;5;241m.[39mpylab_gui_select)
+[0;32m-> 3621[0m [43mpt[49m[38;5;241;43m.[39;49m[43mactivate_matplotlib[49m[43m([49m[43mbackend[49m[43m)[49m
+[1;32m   3622[0m configure_inline_support([38;5;28mself[39m, backend)
+[1;32m   3624[0m [38;5;66;03m# Now we must activate the gui pylab wants to use, and fix %run to take[39;00m
+[1;32m   3625[0m [38;5;66;03m# plot updates into account[39;00m
 
-File [0;32m/opt/homebrew/Caskroom/miniconda/base/envs/jupyter-book-env/lib/python3.10/site-packages/IPython/core/pylabtools.py:360[0m, in [0;36mactivate_matplotlib[0;34m(backend)[0m
-[1;32m    355[0m [38;5;66;03m# Due to circular imports, pyplot may be only partially initialised[39;00m
-[1;32m    356[0m [38;5;66;03m# when this function runs.[39;00m
-[1;32m    357[0m [38;5;66;03m# So avoid needing matplotlib attribute-lookup to access pyplot.[39;00m
-[1;32m    358[0m [38;5;28;01mfrom[39;00m [38;5;21;01mmatplotlib[39;00m [38;5;28;01mimport[39;00m pyplot [38;5;28;01mas[39;00m plt
-[0;32m--> 360[0m [43mplt[49m[38;5;241;43m.[39;49m[43mswitch_backend[49m[43m([49m[43mbackend[49m[43m)[49m
-[1;32m    362[0m plt[38;5;241m.[39mshow[38;5;241m.[39m_needmain [38;5;241m=[39m [38;5;28;01mFalse[39;00m
-[1;32m    363[0m [38;5;66;03m# We need to detect at runtime whether show() is called by the user.[39;00m
-[1;32m    364[0m [38;5;66;03m# For this, we wrap it into a decorator which adds a 'called' flag.[39;00m
+File [0;32m/opt/homebrew/Caskroom/miniconda/base/envs/jupyter-book-env/lib/python3.10/site-packages/IPython/core/pylabtools.py:368[0m, in [0;36mactivate_matplotlib[0;34m(backend)[0m
+[1;32m    363[0m [38;5;66;03m# Due to circular imports, pyplot may be only partially initialised[39;00m
+[1;32m    364[0m [38;5;66;03m# when this function runs.[39;00m
+[1;32m    365[0m [38;5;66;03m# So avoid needing matplotlib attribute-lookup to access pyplot.[39;00m
+[1;32m    366[0m [38;5;28;01mfrom[39;00m [38;5;21;01mmatplotlib[39;00m [38;5;28;01mimport[39;00m pyplot [38;5;28;01mas[39;00m plt
+[0;32m--> 368[0m [43mplt[49m[38;5;241;43m.[39;49m[43mswitch_backend[49m[43m([49m[43mbackend[49m[43m)[49m
+[1;32m    370[0m plt[38;5;241m.[39mshow[38;5;241m.[39m_needmain [38;5;241m=[39m [38;5;28;01mFalse[39;00m
+[1;32m    371[0m [38;5;66;03m# We need to detect at runtime whether show() is called by the user.[39;00m
+[1;32m    372[0m [38;5;66;03m# For this, we wrap it into a decorator which adds a 'called' flag.[39;00m
 
-File [0;32m/opt/homebrew/Caskroom/miniconda/base/envs/jupyter-book-env/lib/python3.10/site-packages/matplotlib/pyplot.py:271[0m, in [0;36mswitch_backend[0;34m(newbackend)[0m
-[1;32m    268[0m [38;5;66;03m# have to escape the switch on access logic[39;00m
-[1;32m    269[0m old_backend [38;5;241m=[39m [38;5;28mdict[39m[38;5;241m.[39m[38;5;21m__getitem__[39m(rcParams, [38;5;124m'[39m[38;5;124mbackend[39m[38;5;124m'[39m)
-[0;32m--> 271[0m backend_mod [38;5;241m=[39m [43mimportlib[49m[38;5;241;43m.[39;49m[43mimport_module[49m[43m([49m
-[1;32m    272[0m [43m    [49m[43mcbook[49m[38;5;241;43m.[39;49m[43m_backend_module_name[49m[43m([49m[43mnewbackend[49m[43m)[49m[43m)[49m
-[1;32m    274[0m required_framework [38;5;241m=[39m _get_required_interactive_framework(backend_mod)
-[1;32m    275[0m [38;5;28;01mif[39;00m required_framework [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m:
+File [0;32m/opt/homebrew/Caskroom/miniconda/base/envs/jupyter-book-env/lib/python3.10/site-packages/matplotlib/pyplot.py:342[0m, in [0;36mswitch_backend[0;34m(newbackend)[0m
+[1;32m    339[0m [38;5;66;03m# have to escape the switch on access logic[39;00m
+[1;32m    340[0m old_backend [38;5;241m=[39m [38;5;28mdict[39m[38;5;241m.[39m[38;5;21m__getitem__[39m(rcParams, [38;5;124m'[39m[38;5;124mbackend[39m[38;5;124m'[39m)
+[0;32m--> 342[0m module [38;5;241m=[39m [43mimportlib[49m[38;5;241;43m.[39;49m[43mimport_module[49m[43m([49m[43mcbook[49m[38;5;241;43m.[39;49m[43m_backend_module_name[49m[43m([49m[43mnewbackend[49m[43m)[49m[43m)[49m
+[1;32m    343[0m canvas_class [38;5;241m=[39m module[38;5;241m.[39mFigureCanvas
+[1;32m    345[0m required_framework [38;5;241m=[39m canvas_class[38;5;241m.[39mrequired_interactive_framework
 
 File [0;32m/opt/homebrew/Caskroom/miniconda/base/envs/jupyter-book-env/lib/python3.10/importlib/__init__.py:126[0m, in [0;36mimport_module[0;34m(name, package)[0m
 [1;32m    124[0m             [38;5;28;01mbreak[39;00m
@@ -97,19 +96,20 @@ File [0;32m/opt/homebrew/Caskroom/miniconda/base/envs/jupyter-book-env/lib/pyth
 File [0;32m/opt/homebrew/Caskroom/miniconda/base/envs/jupyter-book-env/lib/python3.10/site-packages/matplotlib/backends/backend_qtagg.py:9[0m
 [1;32m      5[0m [38;5;28;01mimport[39;00m [38;5;21;01mctypes[39;00m
 [1;32m      7[0m [38;5;28;01mfrom[39;00m [38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01mtransforms[39;00m [38;5;28;01mimport[39;00m Bbox
-[0;32m----> 9[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01mqt_compat[39;00m [38;5;28;01mimport[39;00m QT_API, _enum
+[0;32m----> 9[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01mqt_compat[39;00m [38;5;28;01mimport[39;00m QT_API, QtCore, QtGui
 [1;32m     10[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01mbackend_agg[39;00m [38;5;28;01mimport[39;00m FigureCanvasAgg
-[1;32m     11[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01mbackend_qt[39;00m [38;5;28;01mimport[39;00m QtCore, QtGui, _BackendQT, FigureCanvasQT
+[1;32m     11[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01mbackend_qt[39;00m [38;5;28;01mimport[39;00m _BackendQT, FigureCanvasQT
 
-File [0;32m/opt/homebrew/Caskroom/miniconda/base/envs/jupyter-book-env/lib/python3.10/site-packages/matplotlib/backends/qt_compat.py:135[0m
-[1;32m    133[0m         [38;5;28;01mbreak[39;00m
-[1;32m    134[0m     [38;5;28;01melse[39;00m:
-[0;32m--> 135[0m         [38;5;28;01mraise[39;00m [38;5;167;01mImportError[39;00m(
-[1;32m    136[0m             [38;5;124m"[39m[38;5;124mFailed to import any of the following Qt binding modules: [39m[38;5;132;01m{}[39;00m[38;5;124m"[39m
-[1;32m    137[0m             [38;5;241m.[39mformat([38;5;124m"[39m[38;5;124m, [39m[38;5;124m"[39m[38;5;241m.[39mjoin(_ETS[38;5;241m.[39mvalues())))
-[1;32m    138[0m [38;5;28;01melse[39;00m:  [38;5;66;03m# We should not get there.[39;00m
-[1;32m    139[0m     [38;5;28;01mraise[39;00m [38;5;167;01mAssertionError[39;00m([38;5;124mf[39m[38;5;124m"[39m[38;5;124mUnexpected QT_API: [39m[38;5;132;01m{[39;00mQT_API[38;5;132;01m}[39;00m[38;5;124m"[39m)
+File [0;32m/opt/homebrew/Caskroom/miniconda/base/envs/jupyter-book-env/lib/python3.10/site-packages/matplotlib/backends/qt_compat.py:133[0m
+[1;32m    131[0m         [38;5;28;01mbreak[39;00m
+[1;32m    132[0m     [38;5;28;01melse[39;00m:
+[0;32m--> 133[0m         [38;5;28;01mraise[39;00m [38;5;167;01mImportError[39;00m(
+[1;32m    134[0m             [38;5;124m"[39m[38;5;124mFailed to import any of the following Qt binding modules: [39m[38;5;132;01m{}[39;00m[38;5;124m"[39m
+[1;32m    135[0m             [38;5;241m.[39mformat([38;5;124m"[39m[38;5;124m, [39m[38;5;124m"[39m[38;5;241m.[39mjoin([QT_API [38;5;28;01mfor[39;00m _, QT_API [38;5;129;01min[39;00m _candidates]))
+[1;32m    136[0m         )
+[1;32m    137[0m [38;5;28;01melse[39;00m:  [38;5;66;03m# We should not get there.[39;00m
+[1;32m    138[0m     [38;5;28;01mraise[39;00m [38;5;167;01mAssertionError[39;00m([38;5;124mf[39m[38;5;124m"[39m[38;5;124mUnexpected QT_API: [39m[38;5;132;01m{[39;00mQT_API[38;5;132;01m}[39;00m[38;5;124m"[39m)
 
-[0;31mImportError[0m: Failed to import any of the following Qt binding modules: PyQt6, PySide6, PyQt5, PySide2
-ImportError: Failed to import any of the following Qt binding modules: PyQt6, PySide6, PyQt5, PySide2
+[0;31mImportError[0m: Failed to import any of the following Qt binding modules: PyQt5, PySide2
+ImportError: Failed to import any of the following Qt binding modules: PyQt5, PySide2
 
