@@ -13,7 +13,6 @@ Para comenzar recomendamos explorar el siguiente sitio: https://colab.research.g
 
 Ver tambien este video: 
 
+
 %%HTML
-<iframe width=”560" height=”315"
- src=”https://youtu.be/inN8seMm7UI"
-</iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/inN8seMm7UI?si=_CWJ2wbLDMp8o17Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
