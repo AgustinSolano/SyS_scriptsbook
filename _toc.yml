@@ -1,6 +1,7 @@
 format: jb-article
 root: md_scripts/intro
 sections:
+- file: md_scripts/uso_colab
 - file: md_scripts/instalaciones_iniciales
 - file: md_scripts/instalacion_vscode
 - file: md_scripts/intro_python
