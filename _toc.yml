@@ -17,6 +17,7 @@ sections:
   - file: md_scripts/Sistema_familia_butterworth
   - file: md_scripts/Filtro_butterworth_especif
   - file: md_scripts/Sistema_Resorte_Masa_Amortiguador
+  - file: md_scripts/Computo_TFourier_FFT_senial_real
 - file: md_scripts/muestreo_cuantizacion
   sections:
   - file: md_scripts/tipos_de_muestreo
