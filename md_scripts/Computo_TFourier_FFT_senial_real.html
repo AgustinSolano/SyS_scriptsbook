@@ -1,0 +1,784 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Computo de Transf. Fourier (FFT) sobre datos reales &#8212; Scripts - Señales y Sistemas</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Muestreo y Cuantización" href="muestreo_cuantizacion.html" />
+    <link rel="prev" title="Respuesta en frecuencia y temporal de un sistema mecanico" href="Sistema_Resorte_Masa_Amortiguador.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Scripts - Señales y Sistemas</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Bienvenidos al compendio de scripts de Señales y Sistemas
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="uso_colab.html">
+   Uso de Google Colab
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="instalaciones_iniciales.html">
+   Instalacion de python y librerias
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="instalacion_vscode.html">
+   Instalacion de VScode
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro_python.html">
+   Introducción a Python
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="convolucion_cont.html">
+   Convolucion continua
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="convolucion_continua.html">
+     Convolucion continua
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="resp_frecuencia.html">
+   Respuesta en frecuencia
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="Serie_de_Fourier.html">
+     Serie de Fourier
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Resp_frec_primer_orden.html">
+     Respuesta en frecuencia - Sistemas de primer orden
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Resp_frec_segundo_orden.html">
+     Respuesta en frecuencia - Sistemas de segundo orden
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Filtrado_de_Senoidales.html">
+     Filtrado de senoidales
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Sistema_familia_butterworth.html">
+     Sistema analogico de la familia Butterworth
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Filtro_butterworth_especif.html">
+     Filtro Butterworth a partir de especificaciones
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Sistema_Resorte_Masa_Amortiguador.html">
+     Respuesta en frecuencia y temporal de un sistema mecanico
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Computo de Transf. Fourier (FFT) sobre datos reales
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="muestreo_cuantizacion.html">
+   Muestreo y Cuantización
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="tipos_de_muestreo.html">
+     Tipos de Muestreo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="cuantizacion.html">
+     Cuantizacion
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="reconstruccion_seniales_interp_sinc.html">
+     Simulación del
+     <strong>
+      muestreo y reconstrucción
+     </strong>
+     ideal de una señal continua
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="senales_sistemas_discretos.html">
+   Señales y Sistemas Discretos
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sistema_discreto.html">
+     Señales y Sistemas Discretos
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ejemplos_DTFT.html">
+     Ejemplos DTFT
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Resp_frec_Sist_Digital.html">
+     Respuesta en Frecuencia de Funciones de Transferencia digitales
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="filtros_FIR.html">
+   Filtros Digitales FIR
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Resp_frec_Sist_FIR.html">
+     Respuesta en Frecuencia de Sistema FIR
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Filtros_PB_FIR_Ventanas.html">
+     Filtro Digital FIR - Pasa Bajos
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Filtros_FIR_LP_HP_BP.html">
+     Filtros FIR: LP, BP, HP
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Actividad9_Guia5_FiltrosFIR_Ventanas.html">
+     Actividad 9 - Guia 5: Filtros FIR
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="filtros_IIR.html">
+   Filtros Digitales IIR
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Filtros_IIR_TransBilineal.html">
+     Filtro Digital IIR - Transformada Bilineal
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Filtros_IIR_Notch.html">
+     Filtro Digital IIR - Notch
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/AgustinSolano/SyS_scriptsbook/master?urlpath=tree/docs/md_scripts/Computo_TFourier_FFT_senial_real.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/AgustinSolano/SyS_scriptsbook"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/AgustinSolano/SyS_scriptsbook/issues/new?title=Issue%20on%20page%20%2Fmd_scripts/Computo_TFourier_FFT_senial_real.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/md_scripts/Computo_TFourier_FFT_senial_real.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Computo de Transf. Fourier (FFT) sobre datos reales
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#importacion-de-datos-norwegian-endurance-athlete-ecg-database">
+     Importación de Datos (Norwegian Endurance Athlete ECG Database)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#transformada-de-fourier">
+   Transformada de Fourier
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Computo de Transf. Fourier (FFT) sobre datos reales</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Computo de Transf. Fourier (FFT) sobre datos reales
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#importacion-de-datos-norwegian-endurance-athlete-ecg-database">
+     Importación de Datos (Norwegian Endurance Athlete ECG Database)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#transformada-de-fourier">
+   Transformada de Fourier
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="computo-de-transf-fourier-fft-sobre-datos-reales">
+<h1>Computo de Transf. Fourier (FFT) sobre datos reales<a class="headerlink" href="#computo-de-transf-fourier-fft-sobre-datos-reales" title="Permalink to this headline">#</a></h1>
+<section id="importacion-de-datos-norwegian-endurance-athlete-ecg-database">
+<h2>Importación de Datos (Norwegian Endurance Athlete ECG Database)<a class="headerlink" href="#importacion-de-datos-norwegian-endurance-athlete-ecg-database" title="Permalink to this headline">#</a></h2>
+<p>Para trabajar en grupo y particularmente desde Colab, les recomiendo siempre usen Google Drive para guardar e importar las señales de interés. Para importar el drive personal de cada uno al .ipynb en el que quieran trabajar, se deben ejecutar las siguientes líneas de código.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">wfdb</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">directorio</span> <span class="o">=</span> <span class="s2">&quot;./external_files/&quot;</span> <span class="c1">#ruta de la carpeta en la cuál se encuentran los archivos del atleta 1 (.dat y .hea)</span>
+<span class="k">for</span> <span class="n">ecgfilename</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">directorio</span><span class="p">)):</span>
+    <span class="k">if</span> <span class="n">ecgfilename</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.dat&quot;</span><span class="p">):</span>
+        <span class="n">ecgprueba</span> <span class="o">=</span> <span class="n">wfdb</span><span class="o">.</span><span class="n">rdsamp</span><span class="p">(</span><span class="n">directorio</span> <span class="o">+</span> <span class="n">ecgfilename</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span> <span class="c1"># estamos generando la ruta del archivo para levantarlo /content/drive/MyDrive/SyS Ayudantía/ath_001.dat</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">ecgprueba</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([[ 0.20502, -0.02192, -0.20534, ...,  0.32206,  0.13324, -0.07612],
+       [ 0.17286, -0.05116, -0.21658, ...,  0.30832,  0.11794, -0.09096],
+       [ 0.10854, -0.07552, -0.1997 , ...,  0.2963 ,  0.1092 , -0.1021 ],
+       ...,
+       [ 0.62314,  0.00242, -0.46408, ...,  0.53164,  0.32328,  0.14292],
+       [ 0.59098,  0.00242, -0.44158, ...,  0.52476,  0.32328,  0.14664],
+       [ 0.56686,  0.00242, -0.4247 , ...,  0.51962,  0.32546,  0.15036]]), {&#39;fs&#39;: 500, &#39;sig_len&#39;: 5000, &#39;n_sig&#39;: 12, &#39;base_date&#39;: None, &#39;base_time&#39;: None, &#39;units&#39;: [&#39;mV&#39;, &#39;mV&#39;, &#39;mV&#39;, &#39;mV&#39;, &#39;mV&#39;, &#39;mV&#39;, &#39;mV&#39;, &#39;mV&#39;, &#39;mV&#39;, &#39;mV&#39;, &#39;mV&#39;, &#39;mV&#39;], &#39;sig_name&#39;: [&#39;I&#39;, &#39;II&#39;, &#39;III&#39;, &#39;AVR&#39;, &#39;AVL&#39;, &#39;AVF&#39;, &#39;V1&#39;, &#39;V2&#39;, &#39;V3&#39;, &#39;V4&#39;, &#39;V5&#39;, &#39;V6&#39;], &#39;comments&#39;: [&#39;SL12: Sinus bradycardia with marked sinus arrhythmia, Right axis deviation, Borderline ECG&#39;, &#39;C: Sinus arrhythmia,  Normal ECG&#39;]})
+</pre></div>
+</div>
+</div>
+</div>
+<p>Una vez que entendemos la forma en la que la información esta almacenada en el array extraemos alguna señal de ECG que nos interese, en este caso, la derivación I.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">signalI</span><span class="o">=</span><span class="p">[]</span>
+<span class="n">i</span><span class="o">=</span><span class="mi">0</span>
+<span class="k">while</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">5000</span><span class="p">:</span> <span class="c1">#para cada fila de las 5000</span>
+  <span class="n">signalI</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ecgprueba</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="c1"># el segundo 0 es porque quiero la derivacion I (hay información sobre las 12 derivaciones)</span>
+  <span class="n">i</span><span class="o">+=</span><span class="mi">1</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ECG Derivación I&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">signalI</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ECG Derivación I
+[0.20502, 0.17286, 0.10854, 0.10854, 0.12462, 0.10854, 0.09246, 0.08442, 0.06832, 0.08442, 0.08442, 0.07636, 0.06028, 0.08442, 0.08442, 0.06832, 0.06028, 0.03616, 0.02008, 0.02008, 0.0442, 0.02812, 0.01204, 0.02812, 0.03616, 0.01204, 0.03616, 0.05224, 0.0442, 0.05224, 0.05224, 0.02812, 0.02812, 0.02812, 0.03616, 0.05224, 0.02812, 0.03616, 0.03616, 0.03616, 0.02812, 0.05224, 0.07636, 0.05224, 0.0442, 0.0442, 0.06832, 0.06028, 0.0442, 0.03616, 0.06028, 0.05224, 0.05224, 0.05224, 0.06832, 0.07636, 0.06832, 0.06832, 0.06028, 0.02812, 0.02812, 0.07636, 0.1005, 0.08442, 0.06028, 0.06832, 0.06832, 0.06028, 0.0442, 0.05224, 0.0442, 0.03616, 0.03616, 0.0442, 0.0442, 0.0442, 0.03616, 0.03616, 0.0442, 0.06832, 0.06832, 0.06028, 0.03616, 0.02812, 0.03616, 0.06028, 0.03616, 0.02812, 0.0442, 0.05224, 0.02812, 0.02812, 0.02812, 0.06028, 0.01204, -0.0201, 0.02812, 0.03616, 0.03616, 0.0442, 0.02008, 0.02008, 0.02812, 0.02812, 0.03616, 0.004, 0.004, 0.02812, 0.03616, 0.05224, 0.05224, 0.06832, 0.06028, 0.03616, 0.02008, 0.02812, 0.02812, 0.01204, 0.03616, 0.0442, 0.03616, 0.0442, 0.03616, 0.02812, 0.03616, 0.02812, 0.02008, 0.01204, 0.02812, 0.01204, 0.01204, 0.02812, 0.01204, 0.004, 0.004, 0.004, 0.0442, 0.05224, 0.02812, 0.01204, 0.0442, 0.05224, 0.03616, 0.004, -0.01206, -0.00402, -0.00402, -0.00402, 0.01204, 0.02812, 0.02812, 0.03616, 0.02812, 0.004, 0.02812, 0.05224, 0.03616, 0.01204, -0.00402, -0.01206, -0.01206, 0.01204, 0.0442, 0.03616, 0.02812, 0.03616, 0.0442, 0.0442, 0.05224, 0.0442, 0.02812, 0.07636, 0.08442, 0.02812, 0.02812, 0.0442, 0.0442, 0.0442, 0.0442, 0.0442, 0.03616, 0.05224, 0.0442, 0.06832, 0.08442, 0.07636, 0.08442, 0.08442, 0.06028, 0.06832, 0.08442, 0.07636, 0.06832, 0.08442, 0.11658, 0.11658, 0.11658, 0.10854, 0.10854, 0.12462, 0.12462, 0.1005, 0.1005, 0.1005, 0.10854, 0.08442, 0.05224, 0.06832, 0.08442, 0.06832, 0.05224, 0.02812, 0.01204, 0.02812, 0.02008, 0.01204, 0.02812, 0.02812, -0.01206, 0.02812, 0.0442, 0.01204, 0.02812, 0.004, -0.00402, 0.004, 0.004, -0.01206, -0.0201, -0.00402, -0.00402, 0.004, 0.01204, 0.03616, 0.02812, -0.00402, -0.01206, 0.01204, 0.01204, -0.02814, -0.0603, -0.05226, -0.0201, 0.0442, 0.09246, 0.1407, 0.19698, 0.2613, 0.2774, 0.30152, 0.30956, 0.34976, 0.37388, 0.32564, 0.30956, 0.25326, 0.1005, -0.07638, -0.2935, -0.38998, -0.39802, -0.43018, -0.43822, -0.4704, -0.5106, -0.49452, -0.4543, -0.40606, -0.42214, -0.40606, -0.3337, -0.32566, -0.31762, -0.30154, -0.30154, -0.26936, -0.197, -0.17288, -0.14876, -0.1166, -0.0603, -0.04422, -0.04422, -0.0201, -0.01206, 0.03616, 0.0442, 0.0442, 0.06832, 0.08442, 0.08442, 0.08442, 0.06832, 0.03616, 0.02008, 0.02812, 0.02008, 0.06028, 0.08442, 0.08442, 0.08442, 0.08442, 0.08442, 0.08442, 0.08442, 0.08442, 0.07636, 0.08442, 0.08442, 0.1005, 0.09246, 0.03616, 0.0442, 0.08442, 0.1005, 0.12462, 0.1005, 0.09246, 0.12462, 0.13266, 0.09246, 0.08442, 0.09246, 0.1005, 0.11658, 0.13266, 0.12462, 0.10854, 0.1005, 0.1005, 0.11658, 0.1005, 0.14874, 0.14874, 0.11658, 0.12462, 0.11658, 0.12462, 0.11658, 0.13266, 0.14874, 0.15678, 0.16482, 0.16482, 0.18894, 0.19698, 0.1809, 0.18894, 0.14874, 0.12462, 0.15678, 0.14874, 0.1809, 0.21306, 0.21306, 0.19698, 0.21306, 0.25326, 0.25326, 0.24522, 0.24522, 0.22914, 0.23718, 0.2613, 0.25326, 0.24522, 0.24522, 0.29348, 0.32564, 0.33368, 0.29348, 0.28544, 0.34172, 0.3578, 0.34976, 0.3578, 0.3578, 0.37388, 0.398, 0.398, 0.38996, 0.40604, 0.4543, 0.4543, 0.43016, 0.42212, 0.4543, 0.4945, 0.51058, 0.52666, 0.51862, 0.51862, 0.51058, 0.48646, 0.47842, 0.47038, 0.47842, 0.50254, 0.48646, 0.46234, 0.44624, 0.42212, 0.40604, 0.398, 0.38192, 0.34172, 0.30956, 0.28544, 0.26936, 0.2613, 0.24522, 0.23718, 0.21306, 0.16482, 0.12462, 0.12462, 0.14874, 0.12462, 0.08442, 0.08442, 0.09246, 0.09246, 0.08442, 0.06832, 0.06028, 0.05224, 0.05224, 0.06832, 0.08442, 0.08442, 0.0442, 0.03616, 0.03616, 0.05224, 0.05224, 0.03616, 0.004, 0.02812, 0.0442, 0.02812, 0.01204, 0.03616, 0.0442, 0.03616, 0.03616, 0.0442, 0.05224, 0.02812, 0.004, 0.02008, 0.02008, 0.03616, 0.06028, 0.06832, 0.06028, 0.0442, 0.07636, 0.06832, 0.05224, 0.05224, 0.03616, 0.01204, -0.00402, 0.004, 0.01204, 0.0442, 0.08442, 0.08442, 0.05224, 0.0442, 0.0442, 0.05224, 0.03616, 0.0442, 0.02812, 0.004, 0.02812, 0.06832, 0.0442, 0.05224, 0.03616, 0.0442, 0.0442, 0.03616, 0.02008, -0.0201, -0.00402, 0.05224, 0.06832, 0.06028, 0.06028, 0.05224, 0.02812, -0.0201, -0.01206, -0.00402, -0.0201, 0.004, 0.06832, 0.08442, 0.05224, 0.0442, 0.03616, 0.02812, 0.02812, -0.00402, 0.004, 0.02008, 0.02008, 0.02008, 0.01204, 0.004, 0.01204, 0.0442, 0.05224, 0.06028, 0.06832, 0.03616, 0.02008, 0.004, 0.004, 0.02008, 0.03616, 0.03616, 0.02008, 0.01204, 0.02008, 0.02812, 0.02008, 0.02008, 0.03616, 0.03616, 0.01204, 0.02812, 0.03616, 0.01204, 0.01204, 0.01204, 0.02008, 0.02008, 0.01204, 0.02008, 0.02812, 0.03616, 0.03616, 0.01204, 0.02008, 0.03616, 0.02008, 0.004, 0.02812, 0.02812, 0.02008, 0.01204, 0.06028, 0.06832, 0.0442, 0.0442, 0.0442, 0.004, 0.01204, 0.05224, 0.06028, 0.0442, 0.03616, 0.01204, 0.02008, 0.02812, 0.03616, 0.03616, 0.02008, 0.02812, 0.05224, 0.06832, 0.06028, 0.0442, 0.05224, 0.06832, 0.07636, 0.05224, 0.0442, 0.06028, 0.06028, 0.03616, 0.03616, 0.05224, 0.06028, 0.06028, 0.07636, 0.07636, 0.06028, 0.06028, 0.08442, 0.1005, 0.06832, 0.06832, 0.08442, 0.08442, 0.08442, 0.08442, 0.07636, 0.08442, 0.11658, 0.1005, 0.08442, 0.09246, 0.12462, 0.13266, 0.11658, 0.1005, 0.10854, 0.12462, 0.14874, 0.12462, 0.09246, 0.1005, 0.08442, 0.07636, 0.07636, 0.06832, 0.07636, 0.0442, 0.004, -0.0201, 0.03616, 0.02812, 0.01204, 0.004, 0.05224, 0.06832, 0.07636, 0.05224, 0.02812, 0.03616, 0.0442, 0.02008, 0.01204, 0.01204, 0.01204, 0.02812, -0.00402, 0.004, 0.02812, 0.03616, 0.06028, 0.02812, 0.01204, 0.02008, 0.004, 0.03616, 0.02812, -0.01206, -0.03618, -0.03618, -0.00402, 0.03616, 0.09246, 0.13266, 0.12462, 0.19698, 0.21306, 0.21306, 0.22914, 0.30152, 0.3578, 0.30152, 0.2613, 0.20502, 0.08442, -0.13268, -0.31762, -0.36586, -0.3337, -0.36586, -0.38194, -0.38194, -0.39802, -0.4141, -0.38998, -0.34978, -0.36586, -0.31762, -0.26132, -0.25328, -0.26132, -0.22916, -0.18092, -0.16484, -0.14072, -0.10856, -0.08442, -0.03618, -0.01206, 0.004, 0.02812, 0.0442, 0.03616, 0.004, 0.03616, 0.06028, 0.07636, 0.08442, 0.06832, 0.06028, 0.06832, 0.07636, 0.07636, 0.08442, 0.09246, 0.1005, 0.09246, 0.10854, 0.13266, 0.10854, 0.08442, 0.08442, 0.09246, 0.1005, 0.10854, 0.10854, 0.1005, 0.09246, 0.08442, 0.08442, 0.08442, 0.08442, 0.08442, 0.08442, 0.08442, 0.09246, 0.09246, 0.08442, 0.11658, 0.12462, 0.1005, 0.10854, 0.1005, 0.08442, 0.08442, 0.10854, 0.13266, 0.1005, 0.1005, 0.10854, 0.11658, 0.13266, 0.18894, 0.17286, 0.12462, 0.11658, 0.10854, 0.13266, 0.17286, 0.1809, 0.16482, 0.15678, 0.15678, 0.15678, 0.1809, 0.1809, 0.14874, 0.16482, 0.19698, 0.20502, 0.19698, 0.19698, 0.2211, 0.20502, 0.20502, 0.22914, 0.23718, 0.22914, 0.21306, 0.23718, 0.2613, 0.2613, 0.25326, 0.26936, 0.2774, 0.2774, 0.28544, 0.28544, 0.30152, 0.33368, 0.3176, 0.28544, 0.33368, 0.33368, 0.32564, 0.38192, 0.38192, 0.398, 0.40604, 0.40604, 0.41408, 0.41408, 0.40604, 0.41408, 0.42212, 0.40604, 0.40604, 0.41408, 0.42212, 0.44624, 0.43016, 0.44624, 0.47038, 0.47038, 0.47842, 0.44624, 0.44624, 0.46234, 0.42212, 0.398, 0.36584, 0.34976, 0.33368, 0.32564, 0.30956, 0.30956, 0.28544, 0.25326, 0.22914, 0.2211, 0.20502, 0.14874, 0.10854, 0.08442, 0.08442, 0.1005, 0.10854, 0.12462, 0.10854, 0.11658, 0.09246, 0.06028, 0.0442, 0.05224, 0.06028, 0.06028, 0.05224, 0.05224, 0.06832, 0.05224, 0.03616, 0.0442, 0.03616, 0.02008, 0.02008, 0.02008, 0.06832, 0.07636, 0.0442, 0.0442, 0.06028, 0.05224, 0.0442, 0.06028, 0.07636, 0.06832, 0.01204, 0.02812, 0.03616, 0.03616, 0.03616, 0.02812, 0.02812, 0.02008, 0.0442, 0.05224, 0.06028, 0.06028, 0.0442, 0.03616, 0.05224, 0.0442, 0.03616, 0.02008, 0.05224, 0.06832, 0.0442, 0.02812, 0.02812, 0.05224, 0.06028, 0.06028, 0.03616, 0.0442, 0.06028, 0.06028, 0.0442, 0.05224, 0.03616, 0.03616, 0.05224, 0.06832, 0.06028, 0.0442, 0.05224, 0.06028, 0.06832, 0.06028, 0.0442, 0.06028, 0.06028, 0.06028, 0.03616, 0.02812, 0.03616, 0.03616, 0.03616, 0.02008, 0.02812, 0.0442, 0.0442, 0.0442, 0.05224, 0.05224, 0.0442, 0.0442, 0.0442, 0.06028, 0.06028, 0.03616, 0.02008, 0.03616, 0.0442, 0.02008, 0.02008, 0.03616, 0.02812, 0.05224, 0.06832, 0.004, -0.01206, 0.03616, 0.03616, 0.02008, 0.01204, 0.004, 0.004, 0.02812, 0.05224, 0.0442, 0.004, 0.02008, 0.03616, 0.03616, 0.05224, 0.06028, 0.06028, 0.0442, 0.05224, 0.03616, 0.02812, 0.0442, 0.03616, 0.03616, 0.0442, 0.02812, 0.02812, 0.0442, 0.02812, 0.02812, 0.0442, 0.05224, 0.02008, 0.01204, 0.01204, 0.02008, 0.02812, 0.02008, 0.03616, 0.03616, 0.03616, 0.03616, -0.00402, 0.004, 0.03616, 0.06028, 0.06832, 0.06028, 0.0442, 0.0442, 0.0442, 0.0442, 0.004, 0.01204, 0.02812, 0.02812, 0.01204, 0.01204, 0.01204, 0.0442, 0.07636, 0.05224, 0.03616, 0.05224, 0.05224, 0.02008, -0.00402, 0.01204, 0.03616, 0.02812, 0.02008, 0.02812, 0.02812, 0.0442, 0.05224, 0.03616, 0.02008, 0.02812, 0.05224, 0.06832, 0.03616, 0.02008, 0.004, 0.01204, 0.03616, 0.03616, 0.02812, 0.02008, 0.03616, 0.03616, 0.02812, 0.05224, 0.0442, 0.02008, 0.004, 0.02008, 0.02008, 0.02008, 0.02812, 0.03616, 0.06832, 0.06028, 0.02812, 0.02008, 0.0442, 0.05224, 0.02008, 0.01204, 0.02812, 0.0442, 0.05224, 0.02812, 0.05224, 0.06832, 0.06832, 0.08442, 0.06832, 0.07636, 0.0442, 0.02812, 0.05224, 0.06832, 0.06832, 0.06028, 0.06028, 0.08442, 0.07636, 0.06028, 0.05224, 0.08442, 0.09246, 0.08442, 0.06832, 0.06028, 0.07636, 0.06832, 0.08442, 0.07636, 0.08442, 0.08442, 0.08442, 0.08442, 0.09246, 0.1005, 0.09246, 0.10854, 0.12462, 0.11658, 0.11658, 0.11658, 0.13266, 0.14874, 0.13266, 0.13266, 0.13266, 0.13266, 0.11658, 0.1005, 0.10854, 0.12462, 0.10854, 0.08442, 0.08442, 0.06028, 0.06028, 0.07636, 0.07636, 0.05224, 0.02008, 0.02008, 0.02812, 0.03616, 0.0442, 0.01204, 0.004, 0.0442, 0.03616, -0.01206, 0.02008, 0.0442, 0.01204, 0.004, 0.02008, 0.03616, 0.02812, 0.01204, 0.01204, 0.02008, 0.02008, 0.03616, 0.05224, 0.03616, 0.004, 0.004, -0.00402, -0.0201, -0.0201, -0.03618, -0.03618, -0.01206, 0.02812, 0.08442, 0.12462, 0.15678, 0.16482, 0.18894, 0.24522, 0.28544, 0.33368, 0.34172, 0.30956, 0.33368, 0.30152, 0.18894, -0.00402, -0.2372, -0.31762, -0.3337, -0.3337, -0.36586, -0.4141, -0.4543, -0.42214, -0.3739, -0.36586, -0.35782, -0.34174, -0.3337, -0.32566, -0.32566, -0.30154, -0.24524, -0.197, -0.16484, -0.13268, -0.05226, -0.0201, 0.004, 0.03616, 0.02812, 0.01204, 0.004, 0.02008, 0.0442, 0.02812, 0.06028, 0.08442, 0.09246, 0.08442, 0.07636, 0.06832, 0.06028, 0.06028, 0.06028, 0.06028, 0.06028, 0.07636, 0.08442, 0.1005, 0.1005, 0.09246, 0.08442, 0.1005, 0.12462, 0.12462, 0.13266, 0.11658, 0.12462, 0.10854, 0.08442, 0.08442, 0.08442, 0.08442, 0.1005, 0.1005, 0.1005, 0.10854, 0.11658, 0.10854, 0.10854, 0.11658, 0.11658, 0.10854, 0.1005, 0.11658, 0.12462, 0.10854, 0.12462, 0.12462, 0.11658, 0.11658, 0.14874, 0.16482, 0.17286, 0.16482, 0.16482, 0.17286, 0.16482, 0.16482, 0.16482, 0.16482, 0.15678, 0.14874, 0.15678, 0.1809, 0.19698, 0.19698, 0.19698, 0.20502, 0.19698, 0.18894, 0.20502, 0.20502, 0.20502, 0.20502, 0.2211, 0.2613, 0.2613, 0.25326, 0.24522, 0.2613, 0.2774, 0.28544, 0.28544, 0.30152, 0.3176, 0.30956, 0.30956, 0.30152, 0.3176, 0.34976, 0.3578, 0.33368, 0.34172, 0.3578, 0.38192, 0.398, 0.40604, 0.398, 0.38996, 0.41408, 0.43016, 0.41408, 0.40604, 0.398, 0.46234, 0.51862, 0.51862, 0.51058, 0.47842, 0.47038, 0.50254, 0.54274, 0.51862, 0.51058, 0.4945, 0.48646, 0.4945, 0.48646, 0.47842, 0.4543, 0.4382, 0.42212, 0.40604, 0.38996, 0.3578, 0.33368, 0.3176, 0.29348, 0.2774, 0.25326, 0.24522, 0.22914, 0.19698, 0.18894, 0.17286, 0.15678, 0.14874, 0.11658, 0.1005, 0.1005, 0.12462, 0.1005, 0.08442, 0.08442, 0.07636, 0.07636, 0.07636, 0.06832, 0.06832, 0.06028, 0.06832, 0.06832, 0.08442, 0.08442, 0.06832, 0.06028, 0.06028, 0.06028, 0.06028, 0.06028, 0.08442, 0.08442, 0.05224, 0.0442, 0.07636, 0.07636, 0.06028, 0.06028, 0.02812, 0.004, 0.01204, 0.03616, 0.06028, 0.08442, 0.07636, 0.06028, 0.06832, 0.07636, 0.08442, 0.07636, 0.05224, 0.03616, 0.05224, 0.05224, 0.0442, 0.05224, 0.0442, 0.02008, -0.01206, -0.0201, 0.02812, 0.08442, 0.08442, 0.08442, 0.08442, 0.08442, 0.07636, 0.06028, 0.06028, 0.06028, 0.08442, 0.06028, 0.03616, 0.02812, 0.02812, 0.03616, 0.06832, 0.07636, 0.07636, 0.05224, 0.0442, 0.0442, 0.05224, 0.02812, 0.03616, 0.0442, 0.0442, 0.05224, 0.02008, 0.02008, 0.05224, 0.06028, 0.05224, 0.0442, 0.02812, 0.01204, 0.03616, 0.06028, 0.0442, 0.03616, 0.06832, 0.06028, 0.06028, 0.0442, 0.02812, 0.02812, 0.05224, 0.06832, 0.08442, 0.06832, 0.0442, 0.0442, 0.05224, 0.0442, 0.06028, 0.0442, 0.03616, 0.02008, 0.02812, 0.03616, 0.03616, 0.0442, 0.03616, 0.0442, 0.06028, 0.05224, 0.03616, 0.0442, 0.05224, 0.0442, 0.0442, 0.03616, 0.03616, 0.0442, 0.0442, 0.02008, 0.02812, 0.02812, 0.02812, 0.0442, 0.06832, 0.06028, 0.02812, 0.0442, 0.07636, 0.06832, 0.06028, 0.06028, 0.0442, 0.03616, 0.01204, 0.01204, 0.004, 0.0442, 0.05224, 0.03616, 0.02008, 0.0442, 0.06028, 0.06832, 0.05224, 0.05224, 0.06028, 0.0442, 0.0442, 0.03616, 0.03616, 0.06028, 0.06028, 0.0442, 0.0442, 0.06028, 0.06028, 0.0442, 0.05224, 0.03616, 0.02008, 0.0442, 0.06832, 0.03616, 0.02008, 0.06028, 0.06028, 0.0442, 0.02812, 0.03616, 0.03616, 0.05224, 0.06028, 0.03616, 0.02812, 0.05224, 0.0442, 0.03616, 0.03616, 0.05224, 0.0442, 0.02008, 0.03616, 0.0442, 0.03616, 0.03616, 0.02812, 0.01204, 0.03616, 0.02008, -0.03618, -0.00402, 0.06028, 0.05224, 0.06028, 0.0442, 0.05224, 0.0442, 0.0442, 0.06832, 0.03616, 0.004, 0.02008, 0.004, 0.01204, 0.03616, 0.05224, 0.05224, 0.03616, 0.05224, 0.05224, 0.03616, 0.03616, 0.02812, 0.02008, 0.02812, 0.03616, 0.0442, 0.06028, 0.0442, 0.02008, 0.02812, 0.03616, 0.03616, 0.0442, 0.02812, 0.0442, 0.0442, 0.0442, 0.03616, 0.05224, 0.06832, 0.02008, -0.02814, 0.004, 0.03616, 0.06028, 0.0442, 0.03616, 0.02812, -0.00402, 0.01204, -0.00402, 0.02812, 0.0442, 0.02008, 0.02812, 0.02008, 0.02812, 0.08442, 0.06832, 0.03616, 0.05224, 0.05224, 0.01204, -0.00402, 0.02008, 0.02812, 0.03616, 0.03616, 0.02008, 0.03616, 0.05224, 0.02812, 0.02812, 0.02812, 0.05224, 0.06832, 0.06028, 0.0442, 0.02812, 0.02812, 0.02812, 0.0442, 0.0442, 0.01204, 0.01204, 0.02812, 0.02008, 0.0442, 0.02812, 0.02812, 0.05224, 0.05224, 0.0442, 0.03616, 0.02008, 0.02812, 0.02812, 0.01204, 0.01204, 0.02008, 0.05224, 0.05224, 0.0442, 0.02812, 0.02008, 0.02812, 0.03616, 0.05224, 0.0442, 0.03616, 0.03616, 0.02008, 0.01204, 0.02008, 0.02812, 0.02008, 0.02812, 0.02008, 0.02008, 0.05224, 0.05224, 0.03616, 0.05224, 0.06832, 0.06028, 0.02812, 0.01204, 0.03616, 0.02008, 0.01204, -0.01206, -0.02814, 0.01204, 0.05224, 0.05224, 0.03616, 0.05224, 0.05224, 0.06832, 0.06832, 0.06028, 0.06832, 0.06832, 0.0442, 0.02008, 0.0442, 0.05224, 0.0442, 0.0442, 0.03616, 0.0442, 0.08442, 0.09246, 0.08442, 0.06832, 0.07636, 0.07636, 0.07636, 0.07636, 0.09246, 0.08442, 0.08442, 0.1005, 0.08442, 0.06028, 0.08442, 0.08442, 0.08442, 0.08442, 0.08442, 0.08442, 0.10854, 0.11658, 0.10854, 0.1005, 0.10854, 0.12462, 0.15678, 0.1407, 0.11658, 0.11658, 0.12462, 0.11658, 0.10854, 0.11658, 0.15678, 0.17286, 0.17286, 0.16482, 0.16482, 0.1809, 0.18894, 0.18894, 0.15678, 0.13266, 0.10854, 0.1005, 0.12462, 0.11658, 0.11658, 0.1005, 0.09246, 0.09246, 0.08442, 0.06832, 0.06028, 0.06028, 0.06028, 0.05224, 0.06028, 0.05224, 0.05224, 0.06028, 0.08442, 0.06832, 0.06028, 0.08442, 0.06832, 0.03616, 0.0442, 0.0442, 0.0442, 0.03616, 0.0442, 0.0442, 0.0442, 0.02812, 0.0442, 0.05224, 0.03616, 0.03616, 0.01204, -0.0201, -0.01206, -0.00402, 0.004, 0.02008, 0.06832, 0.10854, 0.14874, 0.21306, 0.2613, 0.28544, 0.30956, 0.37388, 0.43016, 0.44624, 0.44624, 0.43016, 0.40604, 0.3176, 0.08442, -0.16484, -0.28546, -0.30154, -0.32566, -0.34978, -0.39802, -0.4141, -0.3739, -0.34174, -0.34174, -0.34978, -0.30958, -0.26936, -0.26936, -0.2935, -0.28546, -0.26132, -0.22916, -0.18092, -0.13268, -0.07638, -0.0603, 0.004, 0.0442, 0.03616, 0.02812, 0.03616, 0.06028, 0.06028, 0.06832, 0.06832, 0.03616, 0.06028, 0.08442, 0.08442, 0.08442, 0.06832, 0.05224, 0.06832, 0.08442, 0.08442, 0.08442, 0.09246, 0.09246, 0.1005, 0.08442, 0.08442, 0.08442, 0.10854, 0.10854, 0.11658, 0.10854, 0.12462, 0.12462, 0.11658, 0.10854, 0.10854, 0.09246, 0.09246, 0.12462, 0.12462, 0.11658, 0.11658, 0.13266, 0.10854, 0.1005, 0.13266, 0.13266, 0.11658, 0.11658, 0.1005, 0.1005, 0.12462, 0.11658, 0.12462, 0.13266, 0.15678, 0.15678, 0.1407, 0.15678, 0.14874, 0.15678, 0.1407, 0.16482, 0.18894, 0.18894, 0.18894, 0.18894, 0.19698, 0.19698, 0.19698, 0.17286, 0.1809, 0.20502, 0.22914, 0.2211, 0.19698, 0.1809, 0.21306, 0.22914, 0.2613, 0.24522, 0.2211, 0.2211, 0.24522, 0.28544, 0.2774, 0.26936, 0.28544, 0.29348, 0.30152, 0.30956, 0.3176, 0.33368, 0.33368, 0.32564, 0.32564, 0.33368, 0.36584, 0.37388, 0.38996, 0.398, 0.40604, 0.398, 0.398, 0.41408, 0.4382, 0.4382, 0.40604, 0.41408, 0.4382, 0.4543, 0.4945, 0.51862, 0.5347, 0.52666, 0.54274, 0.51862, 0.47842, 0.46234, 0.4382, 0.47038, 0.5347, 0.55078, 0.55078, 0.5347, 0.52666, 0.50254, 0.48646, 0.4945, 0.4543, 0.43016, 0.40604, 0.38192, 0.37388, 0.33368, 0.32564, 0.30956, 0.2774, 0.26936, 0.2613, 0.22914, 0.18894, 0.18894, 0.17286, 0.15678, 0.14874, 0.1407, 0.13266, 0.1005, 0.10854, 0.11658, 0.09246, 0.09246, 0.08442, 0.08442, 0.06832, 0.0442, 0.08442, 0.09246, 0.07636, 0.06028, 0.02008, 0.03616, 0.06028, 0.06028, 0.08442, 0.07636, 0.08442, 0.08442, 0.08442, 0.06832, 0.06028, 0.07636, 0.06028, 0.0442, 0.05224, 0.03616, 0.03616, 0.03616, 0.0442, 0.05224, 0.05224, 0.06832, 0.0442, 0.01204, 0.07636, 0.07636, 0.0442, 0.06028, 0.08442, 0.08442, 0.07636, 0.06832, 0.06832, 0.06832, 0.0442, 0.0442, 0.05224, 0.06028, 0.05224, 0.05224, 0.06028, 0.06832, 0.0442, 0.0442, 0.06028, 0.06028, 0.02812, 0.02812, 0.06832, 0.06832, 0.03616, 0.01204, 0.02812, 0.0442, 0.03616, 0.02812, 0.0442, 0.0442, 0.03616, 0.03616, 0.02812, 0.02008, 0.03616, 0.02008, 0.02008, 0.02812, 0.02812, 0.02812, -0.00402, 0.01204, 0.03616, 0.02812, 0.02008, 0.01204, -0.00402, 0.004, 0.02008, 0.03616, 0.01204, 0.01204, 0.02008, 0.02812, 0.02008, 0.02812, 0.02008, 0.02812, 0.02812, 0.01204, 0.004, 0.03616, 0.01204, -0.01206, -0.0201, -0.01206, 0.01204, 0.004, -0.00402, 0.02008, 0.01204, 0.02008, 0.004, -0.00402, 0.004, 0.004, 0.01204, 0.02812, 0.02008, -0.0201, -0.02814, -0.01206, -0.00402, 0.02008, 0.01204, 0.004, -0.00402, 0.03616, 0.02812, 0.004, 0.004, 0.004, 0.02008, 0.004, 0.004, 0.02812, 0.01204, 0.004, 0.01204, 0.02008, 0.004, 0.004, 0.0442, 0.0442, 0.02008, 0.02008, 0.004, -0.00402, 0.004, 0.01204, 0.01204, 0.004, 0.004, -0.00402, 0.01204, 0.01204, -0.0201, -0.02814, -0.00402, 0.02812, 0.02008, -0.01206, -0.00402, 0.01204, 0.02008, 0.02812, 0.0442, 0.05224, 0.0442, 0.02812, 0.02008, 0.02008, 0.02812, 0.02812, 0.02812, 0.05224, 0.02812, 0.004, 0.02008, 0.01204, 0.02008, 0.02812, 0.03616, 0.05224, 0.0442, 0.03616, 0.03616, 0.01204, 0.0442, 0.0442, 0.01204, 0.004, 0.004, 0.01204, 0.02008, 0.02008, 0.01204, 0.01204, 0.02812, 0.004, -0.00402, 0.02008, 0.02812, 0.03616, 0.0442, 0.0442, 0.03616, 0.05224, 0.05224, 0.0442, 0.03616, 0.02008, -0.00402, -0.02814, -0.01206, 0.0442, 0.02008, -0.01206, 0.004, 0.02812, 0.06028, 0.06028, 0.05224, 0.02812, 0.02008, 0.004, 0.01204, 0.0442, 0.05224, 0.0442, 0.0442, 0.05224, 0.0442, 0.02812, 0.01204, 0.03616, 0.02812, 0.02008, 0.06832, 0.06832, 0.01204, 0.02008, 0.0442, 0.0442, 0.03616, 0.0442, 0.0442, 0.05224, 0.0442, 0.03616, 0.0442, 0.06028, 0.0442, 0.0442, 0.05224, 0.02812, 0.03616, 0.05224, 0.02812, 0.02008, 0.0442, 0.02812, 0.02812, 0.05224, 0.06832, 0.02812, -0.00402, 0.02812, 0.05224, 0.0442, 0.0442, 0.06028, 0.06028, 0.0442, 0.05224, 0.03616, 0.02812, 0.01204, -0.00402, 0.02812, 0.05224, 0.0442, 0.0442, 0.0442, 0.03616, 0.02812, 0.02812, 0.03616, 0.01204, 0.01204, 0.02812, 0.0442, 0.07636, 0.07636, 0.06832, 0.07636, 0.09246, 0.09246, 0.08442, 0.08442, 0.08442, 0.06832, 0.07636, 0.08442, 0.08442, 0.1005, 0.09246, 0.09246, 0.11658, 0.08442, 0.05224, 0.08442, 0.10854, 0.1005, 0.09246, 0.1005, 0.11658, 0.13266, 0.12462, 0.12462, 0.13266, 0.11658, 0.11658, 0.16482, 0.1809, 0.1809, 0.1809, 0.16482, 0.17286, 0.1809, 0.16482, 0.13266, 0.13266, 0.1407, 0.12462, 0.10854, 0.11658, 0.14874, 0.1407, 0.12462, 0.08442, 0.08442, 0.07636, 0.02812, 0.03616, 0.02812, 0.01204, 0.004, 0.02008, 0.0442, 0.05224, 0.06028, 0.03616, 0.02008, 0.02812, 0.01204, 0.004, 0.03616, 0.0442, 0.004, 0.02812, 0.02008, 0.01204, 0.02008, 0.02008, 0.004, -0.00402, -0.01206, -0.01206, -0.00402, -0.00402, -0.03618, -0.04422, -0.03618, -0.04422, -0.02814, -0.02814, 0.01204, 0.06832, 0.1005, 0.14874, 0.1809, 0.25326, 0.32564, 0.38192, 0.42212, 0.4543, 0.43016, 0.40604, 0.38996, 0.32564, 0.13266, -0.12464, -0.30154, -0.34978, -0.38194, -0.43018, -0.47844, -0.51864, -0.48648, -0.44626, -0.43018, -0.43822, -0.46234, -0.39802, -0.34174, -0.2935, -0.30958, -0.31762, -0.25328, -0.22112, -0.16484, -0.1166, -0.07638, -0.04422, -0.01206, -0.0201, 0.01204, 0.02008, 0.02812, 0.01204, 0.02008, 0.02812, 0.02008, 0.0442, 0.05224, 0.0442, 0.0442, 0.05224, 0.07636, 0.06028, 0.03616, 0.06028, 0.06832, 0.08442, 0.1005, 0.11658, 0.09246, 0.06832, 0.05224, 0.06832, 0.08442, 0.08442, 0.07636, 0.08442, 0.1005, 0.08442, 0.08442, 0.1005, 0.11658, 0.10854, 0.1005, 0.10854, 0.08442, 0.08442, 0.11658, 0.12462, 0.10854, 0.13266, 0.14874, 0.13266, 0.12462, 0.1407, 0.13266, 0.10854, 0.11658, 0.1005, 0.10854, 0.12462, 0.13266, 0.13266, 0.16482, 0.17286, 0.15678, 0.11658, 0.13266, 0.15678, 0.16482, 0.15678, 0.14874, 0.14874, 0.1407, 0.16482, 0.17286, 0.19698, 0.19698, 0.18894, 0.20502, 0.2211, 0.24522, 0.25326, 0.2613, 0.28544, 0.2613, 0.2613, 0.2774, 0.2774, 0.26936, 0.2613, 0.2774, 0.29348, 0.30152, 0.33368, 0.3176, 0.29348, 0.30956, 0.30956, 0.3176, 0.32564, 0.3578, 0.40604, 0.40604, 0.41408, 0.42212, 0.43016, 0.43016, 0.44624, 0.47842, 0.48646, 0.48646, 0.47038, 0.47842, 0.51058, 0.51058, 0.5347, 0.5347, 0.51862, 0.55078, 0.55078, 0.5347, 0.55882, 0.58294, 0.58294, 0.58294, 0.58294, 0.56686, 0.55882, 0.55078, 0.55078, 0.52666, 0.4945, 0.47038, 0.47038, 0.44624, 0.41408, 0.37388, 0.34172, 0.34172, 0.34172, 0.32564, 0.2774, 0.24522, 0.22914, 0.21306, 0.18894, 0.1809, 0.1407, 0.12462, 0.16482, 0.16482, 0.11658, 0.06028, 0.06028, 0.08442, 0.08442, 0.08442, 0.06832, 0.06028, 0.06832, 0.05224, 0.0442, 0.05224, 0.06028, 0.06028, 0.0442, 0.02812, 0.03616, 0.06832, 0.08442, 0.05224, 0.02812, 0.02008, 0.05224, 0.0442, 0.05224, 0.05224, 0.06028, 0.0442, 0.01204, 0.05224, 0.06832, 0.05224, 0.05224, 0.06832, 0.06028, 0.02812, 0.02812, 0.02812, 0.03616, 0.06028, 0.02812, -0.00402, 0.03616, 0.06028, 0.03616, 0.0442, 0.05224, 0.06028, 0.06028, 0.06028, 0.03616, 0.02008, 0.03616, 0.0442, 0.05224, 0.03616, -0.00402, 0.02008, 0.07636, 0.06028, 0.0442, 0.0442, 0.02812, 0.02008, 0.01204, 0.02812, 0.03616, 0.0442, 0.05224, 0.06832, 0.06028, 0.02812, 0.02812, 0.02812, 0.03616, 0.03616, 0.03616, 0.0442, 0.0442, 0.0442, 0.0442, 0.05224, 0.0442, 0.02008, 0.02008, 0.02812, 0.01204, 0.02812, 0.02812, 0.02008, 0.02812, 0.004, -0.00402, 0.01204, 0.0442, 0.06028, 0.02812, 0.02008, 0.02008, 0.004, -0.00402, 0.004, 0.01204, 0.004, 0.01204, 0.01204, -0.00402, 0.01204, 0.004, 0.004, -0.00402, -0.0201, -0.02814, -0.01206, 0.02008, 0.01204, -0.00402, -0.0201, -0.00402, 0.02008, 0.01204, 0.02008, 0.02812, 0.02812, -0.01206, -0.02814, -0.00402, -0.03618, -0.02814, -0.01206, 0.01204, 0.02008, 0.01204, 0.004, 0.004, 0.004, -0.00402, -0.00402, -0.01206, -0.02814, -0.02814, -0.00402, 0.02008, 0.02008, 0.02008, -0.01206, 0.004, -0.00402, -0.03618, -0.01206, 0.02008, 0.01204, 0.004, -0.00402, -0.01206, -0.00402, 0.004, -0.0201, -0.02814, -0.01206, -0.0201, -0.02814, -0.01206, -0.0201, 0.004, 0.01204, -0.02814, -0.02814, -0.01206, -0.02814, -0.03618, -0.04422, -0.03618, -0.02814, -0.02814, -0.02814, -0.02814, -0.0201, -0.02814, -0.01206, -0.00402, 0.004, -0.00402, 0.01204, 0.004, 0.01204, -0.00402, -0.02814, -0.01206, 0.01204, 0.004, -0.00402, -0.0201, -0.00402, 0.004, -0.00402, 0.03616, 0.02812, 0.01204, 0.004, 0.01204, 0.03616, 0.004, -0.01206, 0.004, 0.02812, 0.02812, 0.02008, 0.01204, 0.02008, 0.02812, 0.02812, 0.004, -0.01206, -0.01206, -0.00402, 0.004, 0.004, 0.004, 0.004, 0.004, -0.01206, -0.00402, 0.03616, 0.0442, 0.03616, 0.02812, -0.01206, -0.01206, 0.01204, 0.01204, 0.004, 0.004, 0.004, 0.02812, 0.02812, 0.01204, 0.01204, 0.02812, 0.01204, 0.02008, 0.02812, 0.02812, 0.03616, 0.02812, 0.0442, 0.03616, 0.01204, 0.01204, 0.03616, 0.05224, 0.03616, 0.02008, 0.0442, 0.05224, 0.02008, -0.00402, 0.01204, 0.02812, 0.03616, 0.05224, 0.0442, 0.03616, 0.0442, 0.05224, 0.05224, 0.06028, 0.06832, 0.08442, 0.08442, 0.08442, 0.08442, 0.09246, 0.09246, 0.07636, 0.06832, 0.08442, 0.08442, 0.08442, 0.1005, 0.1407, 0.1407, 0.10854, 0.1005, 0.11658, 0.10854, 0.10854, 0.14874, 0.15678, 0.1407, 0.12462, 0.14874, 0.16482, 0.14874, 0.1407, 0.13266, 0.12462, 0.11658, 0.14874, 0.16482, 0.16482, 0.15678, 0.17286, 0.16482, 0.13266, 0.11658, 0.11658, 0.1005, 0.08442, 0.07636, 0.06028, 0.06832, 0.05224, 0.05224, 0.06028, 0.02812, 0.01204, 0.02008, 0.01204, 0.02812, 0.02008, -0.01206, -0.01206, 0.01204, 0.004, 0.004, -0.00402, -0.00402, 0.01204, -0.01206, -0.0201, -0.02814, -0.02814, 0.01204, 0.01204, 0.004, -0.03618, -0.02814, -0.01206, -0.03618, -0.05226, -0.07638, -0.05226, -0.03618, -0.00402, 0.06028, 0.1005, 0.17286, 0.2211, 0.24522, 0.30152, 0.3578, 0.43016, 0.47842, 0.47038, 0.4382, 0.40604, 0.33368, 0.14874, -0.1568, -0.3739, -0.46234, -0.5106, -0.53472, -0.57492, -0.58296, -0.56688, -0.53472, -0.51864, -0.51864, -0.47844, -0.4543, -0.42214, -0.38194, -0.35782, -0.31762, -0.24524, -0.18896, -0.17288, -0.14072, -0.10856, -0.0603, -0.02814, -0.03618, -0.03618, -0.04422, -0.05226, -0.0201, 0.01204, 0.03616, 0.02812, 0.004, 0.02812, 0.03616, 0.0442, 0.06832, 0.07636, 0.06832, 0.07636, 0.06028, 0.03616, 0.06028, 0.08442, 0.06028, 0.0442, 0.06832, 0.08442, 0.10854, 0.1005, 0.08442, 0.08442, 0.1005, 0.11658, 0.1005, 0.09246, 0.08442, 0.07636, 0.08442, 0.1005, 0.11658, 0.13266, 0.1407, 0.13266, 0.1005, 0.1005, 0.11658, 0.10854, 0.10854, 0.12462, 0.12462, 0.1407, 0.14874, 0.14874, 0.14874, 0.14874, 0.1407, 0.1407, 0.14874, 0.13266, 0.1407, 0.14874, 0.15678, 0.21306, 0.1809, 0.17286, 0.1809, 0.16482, 0.14874, 0.1407, 0.1809, 0.19698, 0.21306, 0.22914, 0.2211, 0.22914, 0.2613, 0.26936, 0.24522, 0.25326, 0.25326, 0.24522, 0.25326, 0.2774, 0.30152, 0.33368, 0.38192, 0.34976, 0.3176, 0.32564, 0.3176, 0.30956, 0.3578, 0.38996, 0.36584, 0.36584, 0.40604, 0.40604, 0.40604, 0.42212, 0.43016, 0.44624, 0.4382, 0.47038, 0.4945, 0.51862, 0.5347, 0.52666, 0.55078, 0.55882, 0.56686, 0.5749, 0.58294, 0.60706, 0.5749, 0.59902, 0.63118, 0.6151, 0.59902, 0.60706, 0.64728, 0.63118, 0.6151, 0.6151, 0.59902, 0.56686, 0.5347, 0.52666, 0.52666, 0.50254, 0.47038, 0.4543, 0.43016, 0.42212, 0.398, 0.38996, 0.3578, 0.3176, 0.28544, 0.26936, 0.23718, 0.20502, 0.21306, 0.19698, 0.16482, 0.14874, 0.15678, 0.13266, 0.1005, 0.1005, 0.1407, 0.1407, 0.09246, 0.08442, 0.08442, 0.07636, 0.08442, 0.08442, 0.08442, 0.06028, 0.05224, 0.05224, 0.0442, 0.06832, 0.07636, 0.06028, 0.05224, 0.07636, 0.07636, 0.06028, 0.06832, 0.06832, 0.06832, 0.06028, 0.05224, 0.08442, 0.08442, 0.07636, 0.06028, 0.06832, 0.05224, 0.0442, 0.05224, 0.02812, 0.0442, 0.06832, 0.07636, 0.05224, 0.06028, 0.05224, 0.07636, 0.06832, 0.07636, 0.07636, 0.08442, 0.08442, 0.06832, 0.08442, 0.08442, 0.06028, 0.06832, 0.06832, 0.06028, 0.06832, 0.06832, 0.08442, 0.06028, 0.0442, 0.06028, 0.0442, 0.06832, 0.06028, 0.0442, 0.02812, 0.02008, 0.06028, 0.07636, 0.0442, 0.03616, 0.05224, 0.0442, 0.03616, 0.0442, 0.02812, 0.02812, 0.05224, 0.05224, 0.03616, 0.05224, 0.05224, 0.06832, 0.05224, 0.02008, 0.0442, 0.0442, 0.03616, 0.05224, 0.06028, 0.0442, 0.03616, 0.02008, 0.02008, 0.02812, 0.05224, 0.03616, 0.02812, 0.0442, 0.05224, 0.06028, 0.0442, 0.03616, 0.03616, 0.02008, 0.01204, 0.01204, 0.03616, 0.03616, 0.02008, 0.02008, 0.02812, 0.03616, 0.03616, 0.02812, 0.03616, 0.02812, 0.02008, 0.02812, 0.02812, 0.02812, 0.01204, 0.02812, 0.02812, 0.02008, 0.02008, 0.01204, 0.01204, 0.01204, 0.05224, 0.0442, 0.01204, 0.02008, 0.02812, 0.02008, 0.02008, 0.004, 0.0442, 0.07636, 0.03616, -0.00402, 0.02008, 0.0442, 0.03616, 0.02008, 0.02008, 0.0442, 0.05224, 0.03616, -0.00402, -0.01206, -0.02814, 0.004, 0.05224, 0.0442, 0.0442, 0.02812, 0.02812, 0.03616, 0.0442, 0.03616, 0.03616, 0.05224, 0.03616, 0.02008, 0.02812, 0.02008, 0.02008, 0.01204, 0.02008, 0.06028, 0.0442, 0.01204, -0.01206, 0.004, 0.03616, 0.02008, 0.01204, 0.01204, 0.01204, 0.02008, 0.02008, 0.03616, 0.01204, -0.00402, -0.00402, -0.01206, -0.00402, -0.00402, 0.01204, 0.02812, 0.01204, 0.01204, 0.01204, 0.03616, 0.03616, 0.01204, 0.004, -0.01206, 0.004, 0.02008, 0.01204, -0.00402, 0.01204, 0.03616, 0.02812, 0.004, 0.01204, 0.02008, 0.02812, 0.02812, 0.02812, 0.0442, 0.004, -0.0201, 0.004, -0.01206, 0.01204, 0.05224, 0.0442, 0.02008, 0.03616, 0.03616, 0.02812, 0.05224, 0.0442, 0.0442, 0.02812, 0.01204, 0.01204, 0.02812, 0.02008, 0.02008, 0.02812, 0.02812, 0.02812, 0.0442, 0.06028, 0.0442, 0.03616, 0.05224, 0.06832, 0.06832, 0.06028, 0.03616, 0.06028, 0.06832, 0.06832, 0.06832, 0.08442, 0.08442, 0.08442, 0.1005, 0.08442, 0.06028, 0.06832, 0.06832, 0.08442, 0.08442, 0.07636, 0.07636, 0.07636, 0.09246, 0.13266, 0.14874, 0.12462, 0.10854, 0.11658, 0.13266, 0.1407, 0.13266, 0.13266, 0.16482, 0.17286, 0.15678, 0.13266, 0.13266, 0.15678, 0.15678, 0.1407, 0.14874, 0.14874, 0.14874, 0.15678, 0.1407, 0.09246, 0.06028, 0.03616, 0.0442, 0.0442, 0.02812, 0.0442, 0.03616, 0.01204, 0.01204, 0.02812, 0.01204, 0.02812, 0.06028, 0.0442, 0.0442, 0.03616, 0.02812, 0.02812, -0.00402, 0.004, 0.02812, 0.03616, 0.03616, 0.02812, 0.02812, 0.02008, 0.02008, 0.02812, 0.004, 0.004, 0.01204, -0.00402, -0.0201, -0.02814, -0.00402, -0.00402, 0.05224, 0.09246, 0.15678, 0.2211, 0.2774, 0.32564, 0.37388, 0.42212, 0.47038, 0.51058, 0.51862, 0.50254, 0.4382, 0.32564, 0.08442, -0.2372, -0.40606, -0.46234, -0.50256, -0.54276, -0.57492, -0.60708, -0.61512, -0.58296, -0.55884, -0.5508, -0.49452, -0.43822, -0.40606, -0.38998, -0.3337, -0.30154, -0.24524, -0.197, -0.16484, -0.12464, -0.10052, -0.0603, 0.004, 0.004, 0.01204, 0.004, -0.00402, 0.01204, 0.03616, 0.03616, 0.0442, 0.05224, 0.03616, 0.03616, 0.02812, 0.06832, 0.08442, 0.07636, 0.07636, 0.08442, 0.08442, 0.06028, 0.08442, 0.08442, 0.06832, 0.05224, 0.07636, 0.08442, 0.08442, 0.08442, 0.1005, 0.10854, 0.12462, 0.11658, 0.1005, 0.09246, 0.12462, 0.1407, 0.1407, 0.10854, 0.08442, 0.08442, 0.12462, 0.15678, 0.15678, 0.12462, 0.12462, 0.1407, 0.13266, 0.12462, 0.12462, 0.11658, 0.10854, 0.12462, 0.1407, 0.1407, 0.17286, 0.18894, 0.17286, 0.16482, 0.16482, 0.1809, 0.15678, 0.17286, 0.19698, 0.18894, 0.1809, 0.1809, 0.18894, 0.2211, 0.23718, 0.24522, 0.22914, 0.24522, 0.2613, 0.25326, 0.23718, 0.23718, 0.24522, 0.2613, 0.2613, 0.2774, 0.30152, 0.30152, 0.3176, 0.3176, 0.3176, 0.29348, 0.3176, 0.36584, 0.37388, 0.36584, 0.38996, 0.40604, 0.41408, 0.41408, 0.41408, 0.43016, 0.43016, 0.4382, 0.4382, 0.4543, 0.47038, 0.48646, 0.50254, 0.55078, 0.56686, 0.55882, 0.5749, 0.58294, 0.58294, 0.5749, 0.58294, 0.59098, 0.58294, 0.59902, 0.62314, 0.63118, 0.63118, 0.65532, 0.63118, 0.6151, 0.60706, 0.5749, 0.55882, 0.5749, 0.55078, 0.50254, 0.4945, 0.47842, 0.44624, 0.43016, 0.40604, 0.37388, 0.34976, 0.3176, 0.26936, 0.2211, 0.21306, 0.18894, 0.17286, 0.14874, 0.14874, 0.13266, 0.12462, 0.12462, 0.11658, 0.09246, 0.09246, 0.09246, 0.08442, 0.08442, 0.08442, 0.07636, 0.06028, 0.0442, 0.0442, 0.02812, 0.03616, 0.06028, 0.07636, 0.08442, 0.03616, 0.02812, 0.03616, 0.06832, 0.06028, 0.0442, 0.06832, 0.06832, 0.0442, 0.02812, 0.02812, 0.03616, 0.0442, 0.0442, 0.0442, 0.0442, 0.0442, 0.03616, 0.06832, 0.08442, 0.05224, 0.0442, 0.0442, 0.0442, 0.0442, 0.05224, 0.0442, 0.03616, 0.02812, 0.03616, 0.05224, 0.05224, 0.0442, 0.0442, 0.06028, 0.06028, 0.0442, 0.0442, 0.06028, 0.06832, 0.0442, 0.05224, 0.06028, 0.06832, 0.06832, 0.01204, 0.02008, 0.06832, 0.07636, 0.05224, 0.03616, 0.0442, 0.0442, 0.0442, 0.02008, 0.0442, 0.06832, 0.06832, 0.05224, 0.02812, 0.02812, 0.05224, 0.05224, 0.0442, 0.05224, 0.05224, 0.02812, 0.02008, 0.03616, 0.03616, 0.02008, 0.02008, 0.02008, 0.01204, 0.01204, 0.02008, 0.05224, 0.06028, 0.05224, 0.02008, 0.02008, 0.0442, 0.0442, 0.02812, 0.02008, 0.02812, 0.02008, 0.02812, 0.03616, 0.02812, 0.02008, 0.02812, 0.0442, 0.03616, 0.02008, 0.03616, 0.01204, -0.00402, 0.02008, 0.02008, 0.004, 0.02008, 0.03616, 0.03616, 0.02008, 0.02008, 0.0442, 0.03616, 0.02812, 0.02812, 0.02008, 0.0442, 0.03616, 0.01204, 0.004, 0.02008, 0.0442, 0.03616, 0.02812, 0.02008, 0.02008, 0.05224, 0.06028, 0.02812, 0.004, 0.02812, 0.03616, 0.03616, 0.0442, 0.02812, 0.02008, 0.0442, 0.05224, 0.03616, 0.02812, 0.03616, 0.03616, 0.02008, 0.03616, 0.0442, 0.03616, 0.02008, 0.02812, 0.03616, 0.03616, 0.03616, 0.03616, 0.03616, 0.03616, 0.03616, 0.02008, 0.004, 0.02008, 0.02812, 0.0442, 0.0442, 0.02812, 0.02008, 0.01204, 0.004, 0.02008, 0.03616, 0.03616, 0.01204, 0.02812, 0.02812, 0.03616, 0.02008, 0.02812, 0.05224, 0.06832, 0.06832, 0.05224, 0.0442, 0.02812, 0.02812, 0.02008, 0.03616, 0.06832, 0.06028, 0.0442, 0.03616, 0.02812, 0.06028, 0.05224, 0.05224, 0.03616, 0.02812, 0.05224, 0.07636, 0.06832, 0.06028, 0.07636, 0.08442, 0.06832, 0.06028, 0.07636, 0.03616, 0.06028, 0.07636, 0.08442, 0.06832, 0.08442, 0.1005, 0.08442, 0.07636, 0.08442, 0.08442, 0.06832, 0.06832, 0.1005, 0.1005, 0.1005, 0.08442, 0.07636, 0.08442, 0.08442, 0.08442, 0.07636, 0.06832, 0.08442, 0.1005, 0.11658, 0.12462, 0.11658, 0.13266, 0.14874, 0.1407, 0.13266, 0.14874, 0.16482, 0.13266, 0.1407, 0.16482, 0.19698, 0.2211, 0.20502, 0.17286, 0.15678, 0.1407, 0.17286, 0.16482, 0.11658, 0.10854, 0.08442, 0.08442, 0.08442, 0.07636, 0.06028, 0.02812, 0.01204, 0.02008, 0.02812, 0.03616, 0.0442, 0.05224, 0.05224, 0.03616, 0.02812, 0.03616, 0.02812, 0.03616, -0.00402, -0.0201, -0.00402, -0.00402, 0.004, 0.02008, 0.004, -0.03618, -0.01206, 0.05224, 0.0442, 0.05224, 0.02812, 0.02008, 0.004, -0.0201, -0.02814, -0.03618, -0.02814, -0.02814, 0.01204, 0.09246, 0.15678, 0.22914, 0.29348, 0.3578, 0.40604, 0.44624, 0.51862, 0.54274, 0.4945, 0.47038, 0.40604, 0.2613, 0.004, -0.2774, -0.40606, -0.46234, -0.54276, -0.591, -0.63924, -0.64728, -0.61512, -0.58296, -0.57492, -0.56688, -0.48648, -0.43018, -0.38998, -0.35782, -0.38194, -0.35782, -0.2935, -0.2372, -0.17288, -0.13268, -0.07638, -0.0201, -0.01206, -0.00402, -0.01206, -0.02814, -0.00402, 0.02812, 0.06028, 0.06028, 0.05224, 0.06028, 0.03616, 0.02008, 0.02812, 0.02812, 0.0442, 0.0442, 0.08442, 0.09246, 0.1005, 0.09246, 0.09246, 0.08442, 0.09246, 0.09246, 0.08442, 0.08442, 0.09246, 0.09246, 0.10854, 0.10854, 0.08442, 0.08442, 0.08442, 0.07636, 0.08442, 0.1005, 0.10854, 0.09246, 0.10854, 0.13266, 0.11658, 0.10854, 0.12462, 0.11658, 0.10854, 0.1005, 0.10854, 0.12462, 0.1407, 0.14874, 0.1407, 0.1407, 0.14874, 0.14874, 0.1407, 0.1407, 0.16482, 0.14874, 0.11658, 0.11658, 0.12462, 0.11658, 0.14874, 0.19698, 0.18894, 0.1809, 0.18894, 0.18894, 0.19698, 0.20502, 0.20502, 0.21306, 0.23718, 0.22914, 0.23718, 0.21306, 0.22914, 0.2613, 0.26936, 0.26936, 0.2613, 0.2613, 0.29348, 0.30152, 0.29348, 0.3176, 0.34172, 0.3578, 0.36584, 0.3578, 0.36584, 0.38192, 0.38996, 0.398, 0.41408, 0.41408, 0.40604, 0.4382, 0.4543, 0.44624, 0.47038, 0.47038, 0.47038, 0.4945, 0.47842, 0.4945, 0.51058, 0.51862, 0.51058, 0.59098, 0.6151, 0.60706, 0.59902, 0.59098, 0.58294, 0.59902, 0.60706, 0.59902, 0.56686, 0.5749, 0.5749, 0.5749, 0.55882, 0.50254, 0.47842, 0.47038, 0.44624, 0.41408, 0.38996, 0.37388, 0.34172, 0.29348, 0.25326, 0.25326, 0.2774, 0.23718, 0.1809, 0.14874, 0.13266, 0.1407, 0.10854, 0.09246, 0.09246, 0.08442, 0.08442, 0.06832, 0.05224, 0.03616, 0.03616, 0.02812, 0.01204, 0.03616, 0.03616, 0.03616, 0.0442, 0.0442, 0.02812, 0.01204, 0.004, 0.01204, 0.03616, 0.03616, 0.02812, 0.02008, 0.01204, 0.01204, 0.02812, 0.02812, 0.004, 0.004, 0.004, 0.004, 0.03616, 0.0442, 0.01204, -0.01206, 0.004, 0.03616, 0.0442, 0.02008, 0.004, 0.02812, 0.02008, 0.02008, 0.004, 0.01204, 0.03616, 0.03616, 0.01204, -0.01206, -0.0201, -0.01206, 0.01204, 0.02812, 0.02008, -0.00402, 0.01204, 0.01204, 0.02812, 0.03616, 0.03616, 0.02812, 0.01204, 0.02812, 0.0442, 0.03616, 0.02812, 0.004, 0.004, 0.02812, 0.01204, 0.01204, 0.02008, 0.02008, 0.01204, 0.03616, 0.0442, 0.02812, 0.02812, 0.02008, 0.01204, -0.00402, -0.01206, 0.01204, 0.02008, 0.02008, 0.01204, 0.004, 0.03616, 0.02008, -0.00402, 0.004, 0.01204, 0.02008, 0.004, -0.00402, -0.00402, -0.0201, -0.01206, -0.00402, 0.004, 0.004, -0.01206, -0.01206, -0.0201, -0.01206, 0.01204, 0.01204, 0.01204, 0.01204, 0.01204, 0.02812, 0.004, -0.00402, -0.00402, -0.01206, -0.02814, 0.004, 0.01204, 0.004, -0.00402, 0.004, 0.004, 0.02008, 0.01204, -0.00402, 0.004, 0.004, 0.004, 0.004, 0.01204, 0.01204, 0.004, 0.01204, 0.01204, -0.0201, -0.02814, -0.01206, -0.02814, -0.04422, -0.0201, 0.01204, 0.004, 0.01204, 0.01204, 0.01204, 0.02812, -0.00402, -0.0201, 0.004, 0.01204, -0.01206, -0.0201, 0.02008, 0.02812, 0.01204, 0.01204, 0.01204, -0.0201, -0.02814, -0.01206, 0.004, -0.00402, -0.00402, 0.004, 0.01204, -0.00402, -0.01206, -0.00402, 0.01204, 0.02812, 0.01204, -0.01206, -0.00402, -0.00402, 0.02008, 0.02812, -0.0201, -0.0201, 0.004, 0.01204, 0.01204, 0.004, 0.004, 0.01204, 0.02812, 0.02812, 0.02812, 0.02812, 0.02812, 0.01204, -0.01206, 0.004, 0.01204, -0.00402, -0.00402, 0.004, 0.004, -0.01206, -0.00402, 0.02008, 0.03616, 0.02812, 0.02812, 0.02008, 0.02812, 0.03616, 0.02812, 0.01204, 0.01204, 0.02008, 0.03616, 0.01204, -0.00402, 0.01204, 0.02812, 0.01204, -0.00402, -0.00402, 0.004, 0.02812, 0.004, 0.004, -0.00402, 0.004, 0.02812, 0.02008, 0.01204, 0.01204, 0.02008, 0.02812, 0.03616, 0.03616, 0.05224, 0.07636, 0.06832, 0.0442, 0.05224, 0.02008, 0.01204, 0.03616, 0.05224, 0.05224, 0.03616, 0.0442, 0.06028, 0.06028, 0.06028, 0.05224, 0.07636, 0.08442, 0.06028, 0.0442, 0.0442, 0.05224, 0.07636, 0.08442, 0.08442, 0.09246, 0.1005, 0.11658, 0.09246, 0.09246, 0.10854, 0.11658, 0.13266, 0.11658, 0.10854, 0.12462, 0.17286, 0.19698, 0.16482, 0.15678, 0.15678, 0.12462, 0.11658, 0.11658, 0.10854, 0.10854, 0.08442, 0.08442, 0.08442, 0.06832, 0.03616, 0.03616, 0.03616, 0.03616, 0.004, -0.00402, 0.02008, 0.02008, 0.02008, 0.03616, 0.004, -0.0201, -0.00402, 0.004, -0.00402, -0.00402, 0.02008, 0.02008, 0.01204, 0.02008, 0.01204, -0.01206, -0.02814, -0.02814, -0.03618, -0.05226, -0.05226, -0.02814, -0.02814, -0.03618, -0.02814, -0.0201, -0.02814, -0.02814, 0.004, 0.07636, 0.1407, 0.20502, 0.21306, 0.28544, 0.38192, 0.44624, 0.51058, 0.51058, 0.46234, 0.4382, 0.40604, 0.29348, 0.06028, -0.2372, -0.4141, -0.46234, -0.49452, -0.5508, -0.59904, -0.64728, -0.62316, -0.59904, -0.58296, -0.591, -0.57492, -0.50256, -0.44626, -0.42214, -0.36586, -0.31762, -0.26132, -0.22916, -0.17288, -0.12464, -0.10856, -0.05226, 0.004, -0.00402, -0.00402, -0.01206, -0.0201, -0.0201, -0.0201, 0.02812, 0.05224, 0.06028, 0.06028, 0.02812, 0.05224, 0.03616, 0.03616, 0.0442, 0.06028, 0.06028, 0.03616, 0.08442, 0.1005, 0.06832, 0.06028, 0.05224, 0.06832, 0.08442, 0.08442, 0.08442, 0.08442, 0.08442, 0.08442, 0.08442, 0.10854, 0.10854, 0.09246, 0.06832, 0.06832, 0.08442, 0.08442, 0.1005, 0.12462, 0.12462, 0.12462, 0.11658, 0.11658, 0.11658, 0.12462, 0.11658, 0.13266, 0.14874, 0.13266, 0.11658, 0.11658, 0.12462, 0.1407, 0.16482, 0.16482, 0.16482, 0.16482, 0.15678, 0.14874, 0.14874, 0.16482, 0.16482, 0.15678, 0.16482, 0.16482, 0.20502, 0.2211, 0.2211, 0.23718, 0.23718, 0.24522, 0.25326, 0.25326, 0.23718, 0.24522, 0.24522, 0.25326, 0.25326, 0.24522, 0.2774, 0.28544, 0.3176, 0.34172, 0.32564, 0.3176, 0.34172, 0.3578, 0.36584, 0.38192, 0.398, 0.38192, 0.38996, 0.42212, 0.40604, 0.41408, 0.44624, 0.4382, 0.4543, 0.50254, 0.50254, 0.51862, 0.51862, 0.51058, 0.51862, 0.52666, 0.54274, 0.54274, 0.55078, 0.58294, 0.60706, 0.6151, 0.6151, 0.60706, 0.62314, 0.63924, 0.62314, 0.60706, 0.60706, 0.60706, 0.62314, 0.58294, 0.55882, 0.55882, 0.51058, 0.47038, 0.4382, 0.42212, 0.40604, 0.3578, 0.34976, 0.34976, 0.30152, 0.2613, 0.23718, 0.20502, 0.1809, 0.20502, 0.18894, 0.1407, 0.13266, 0.10854, 0.08442, 0.08442, 0.08442, 0.08442, 0.08442, 0.06832, 0.0442, 0.03616, 0.07636, 0.08442, 0.06028, 0.05224, 0.05224, 0.06028, 0.05224, 0.06028, 0.05224, 0.02812, 0.02812, 0.03616, 0.05224, 0.02812, 0.01204, 0.03616, 0.02812, 0.03616, 0.05224, 0.07636, 0.06028, 0.05224, 0.0442, 0.02812, 0.02008, 0.03616, 0.03616, 0.02008, 0.01204, 0.03616, 0.06832, 0.07636, 0.06028, 0.06028, 0.06028, 0.0442, 0.02812, 0.01204, -0.01206, 0.004, 0.0442, 0.0442, 0.03616, 0.06832, 0.07636, 0.03616, 0.03616, 0.06028, 0.06028, 0.03616, 0.03616, 0.05224, 0.03616, 0.02812, 0.02812, 0.02008, 0.01204, 0.02008, 0.05224, 0.05224, 0.03616, 0.02812, 0.0442, 0.0442, 0.03616, 0.03616, 0.05224, 0.06832, 0.03616, 0.05224, 0.02812, -0.00402, 0.004, 0.02008, 0.05224, 0.02812, 0.004, 0.02008, 0.03616, 0.0442, 0.0442, 0.06028, 0.0442, 0.02008, 0.01204, 0.02812, 0.02812, 0.004, 0.004, 0.01204, 0.03616, 0.0442, 0.03616, 0.03616, 0.03616, 0.02812, 0.02008, 0.004, -0.00402, 0.01204, 0.03616, 0.05224, 0.03616, -0.00402, 0.02008, 0.05224, 0.03616, 0.01204, 0.02008, 0.03616, 0.02812, 0.004, 0.01204, 0.02812, 0.03616, 0.02812, 0.02008, 0.01204, -0.00402, 0.004, 0.004, -0.01206, -0.0201, 0.02812, 0.05224, 0.0442, 0.0442, 0.02812, 0.0442, 0.05224, 0.03616, 0.01204, 0.02008, 0.03616, 0.03616, 0.02008, 0.03616, 0.0442, 0.02812, 0.02008, 0.02812, 0.02812, 0.02008, 0.004, -0.01206, 0.004, 0.02008, 0.03616, 0.06028, 0.05224, 0.004, -0.00402, 0.01204, 0.02008, 0.02008, 0.01204, 0.01204, 0.01204, 0.02812, 0.02812, 0.004, 0.004, 0.02008, 0.0442, 0.0442, 0.03616, 0.01204, 0.004, 0.01204, 0.03616, 0.02812, 0.02812, 0.01204, 0.004, 0.03616, 0.0442, 0.01204, 0.01204, 0.02008, -0.00402, 0.02812, 0.03616, -0.01206, -0.0201, 0.01204, 0.02812, 0.02008, 0.01204, 0.01204, 0.02812, 0.02008, 0.01204, 0.03616, 0.02812, 0.01204, 0.004, 0.01204, 0.0442, 0.02812, -0.00402, -0.00402, -0.00402, 0.01204, 0.01204, 0.0442, 0.05224, 0.03616, 0.02008, -0.0201, -0.0201, 0.004, 0.03616, 0.02812, 0.02812, 0.02812, 0.02008, 0.01204, 0.01204, 0.01204, 0.004, 0.01204, 0.004, -0.00402, -0.00402, -0.01206, 0.01204, 0.0442, 0.02812, 0.004, 0.01204, 0.004, -0.01206, -0.00402, 0.02812, 0.03616, -0.00402, 0.004, 0.02008, 0.02008, 0.02812, 0.03616, 0.02812, 0.01204, -0.00402, -0.0201, 0.01204, 0.05224, 0.03616, 0.02812, 0.03616, 0.05224, 0.06832, 0.05224, 0.05224, 0.05224, 0.06028, 0.08442, 0.06832, 0.08442, 0.06028, 0.03616, 0.0442, 0.05224, 0.08442, 0.08442, 0.08442, 0.06832, 0.06028, 0.06832, 0.06832, 0.08442, 0.1005, 0.08442, 0.08442, 0.09246, 0.11658, 0.10854, 0.10854, 0.11658, 0.11658, 0.09246, 0.09246, 0.1005, 0.1005, 0.1005, 0.15678, 0.18894, 0.16482, 0.14874, 0.13266, 0.1407, 0.1407, 0.16482, 0.15678, 0.12462, 0.1005, 0.08442, 0.07636, 0.07636, 0.06028, 0.06028, 0.06028, 0.03616, 0.03616, 0.03616, 0.01204, 0.004, -0.00402, 0.02008, 0.03616, 0.05224, 0.0442, 0.02812, 0.03616, 0.03616, 0.03616, 0.01204, -0.00402, -0.02814, -0.01206, 0.004, -0.00402, -0.02814, -0.00402, 0.01204, 0.01204, 0.02008, 0.02008, 0.01204, -0.01206, -0.02814, -0.04422, -0.0201, -0.01206, 0.02812, 0.08442, 0.11658, 0.18894, 0.24522, 0.30956, 0.37388, 0.40604, 0.48646, 0.55078, 0.5347, 0.48646, 0.43016, 0.34976, 0.17286, -0.14876, -0.36586, -0.44626, -0.50256, -0.57492, -0.58296, -0.62316, -0.65534, -0.59904, -0.56688, -0.57492, -0.54276, -0.4704, -0.42214, -0.40606, -0.4141, -0.38194, -0.30154, -0.24524, -0.197, -0.14876, -0.06834, -0.02814, -0.03618, -0.04422, -0.02814, 0.01204, 0.02812, 0.02008, 0.02008, 0.02812, 0.02812, 0.0442, 0.05224, 0.05224, 0.06028, 0.05224, 0.03616, 0.05224, 0.06028, 0.06832, 0.07636, 0.06028, 0.06028, 0.08442, 0.09246, 0.10854, 0.08442, 0.07636, 0.08442, 0.1005, 0.08442, 0.06832, 0.08442, 0.1005, 0.09246, 0.08442, 0.06832, 0.08442, 0.10854, 0.12462, 0.13266, 0.10854, 0.11658, 0.1407, 0.13266, 0.12462, 0.12462, 0.13266, 0.15678, 0.14874, 0.1407, 0.14874, 0.1407, 0.1407, 0.14874, 0.15678, 0.1407, 0.14874, 0.16482, 0.1809, 0.17286, 0.16482, 0.1809, 0.1809, 0.19698, 0.19698, 0.17286, 0.1809, 0.19698, 0.19698, 0.1809, 0.18894, 0.19698, 0.20502, 0.2211, 0.2211, 0.19698, 0.23718, 0.2613, 0.25326, 0.28544, 0.2774, 0.28544, 0.28544, 0.2774, 0.28544, 0.3176, 0.34976, 0.32564, 0.29348, 0.3176, 0.36584, 0.37388, 0.36584, 0.38996, 0.38996, 0.37388, 0.40604, 0.42212, 0.42212, 0.4382, 0.47038, 0.50254, 0.47842, 0.47842, 0.4945, 0.50254, 0.51862, 0.51058, 0.5347, 0.54274, 0.5347, 0.5749, 0.59098, 0.59098, 0.59902, 0.59902, 0.6151, 0.63924, 0.62314, 0.59098, 0.56686]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="transformada-de-fourier">
+<h1>Transformada de Fourier<a class="headerlink" href="#transformada-de-fourier" title="Permalink to this headline">#</a></h1>
+<p>Ya con la signal I importada podemos trabajar con ella. Una herramienta muy útil y necesaria es la Transformada de Fourier. A continuación creamos una función para obtener la Transformada de Fourier con la funcion fft.fft de Numpy.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">transform_fourier</span><span class="p">(</span><span class="n">signalI</span><span class="p">,</span><span class="n">fs</span><span class="p">):</span>
+  <span class="c1"># realizamos la transformada rápida de Fourier</span>
+  <span class="n">fourier_transform</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">signalI</span><span class="p">)</span>
+  <span class="n">frequencies</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftfreq</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">signalI</span><span class="p">),</span> <span class="mi">1</span><span class="o">/</span><span class="n">fs</span><span class="p">)</span> <span class="c1"># creamos un vector de frecuencias para graficar en base a este parámetro</span>
+
+  <span class="c1"># si graficamos la transformada de Fourier vamos a notar una línea marcada sobre y = 0</span>
+
+  <span class="c1"># para sacarla, tenemos que ordenar el vector de frequencias y también la transformada (la acomodamos acorde al nuevo vector)</span>
+
+  <span class="n">fourier_transform_ordenado</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">fourier_transform</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">frequencies</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">:],</span><span class="n">fourier_transform</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">frequencies</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">]))</span>
+  <span class="n">frequencies_ordenado</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">frequencies</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">frequencies</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">:],</span><span class="n">frequencies</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">frequencies</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">]))</span>
+
+  <span class="c1"># graficamos la señal en el dominio del tiempo</span>
+
+  <span class="k">return</span> <span class="n">frequencies_ordenado</span> <span class="p">,</span> <span class="n">fourier_transform_ordenado</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Corremos nuestra función y obtenemos las gráficas correspondientes a la señal y su Transformada de Fourier.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fs</span><span class="o">=</span><span class="mi">500</span> <span class="c1"># encontramos la frecuencia de muestreo en el archivo de Physionet</span>
+<span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">signalI</span><span class="p">))</span> <span class="o">/</span> <span class="n">fs</span> <span class="c1"># creamos un vector de tiempo para graficar en base a este parámetro y no en base a cantidad de muestras</span>
+
+<span class="c1"># corremos la función para obtener la transformada</span>
+<span class="n">frequencies_ordenado</span> <span class="p">,</span> <span class="n">fourier_transform_ordenado</span> <span class="o">=</span> <span class="n">transform_fourier</span><span class="p">(</span><span class="n">signalI</span><span class="p">,</span><span class="n">fs</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">signalI</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Señal en el dominio del tiempo&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Tiempo [s]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Amplitud [mV]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="s2">&quot;on&quot;</span><span class="p">)</span>
+
+<span class="c1"># graficamos la magnitud de la transformada de Fourier</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">frequencies_ordenado</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">fourier_transform_ordenado</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Modulo - Transformada de Fourier&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Frecuencia [Hz]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Magnitud [ua]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="s2">&quot;on&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">fs</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># el gráfico de la transformada (por Nyquist) va a ir de  −𝐹𝑠/2  hasta  𝐹𝑠/2 pero elegimos graficar únicamente las positivas.</span>
+
+<span class="c1"># graficamos la fase de la transformada de Fourier</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">frequencies_ordenado</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">fourier_transform_ordenado</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Fase - Transformada de Fourier&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Frecuencia [Hz]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Fase [rad]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="s2">&quot;on&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">fs</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># el gráfico de la transformada (por Nyquist) va a ir de  −𝐹𝑠/2  hasta  𝐹𝑠/2 pero elegimos graficar únicamente las positivas.</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Computo_TFourier_FFT_senial_real_11_0.png" src="../_images/Computo_TFourier_FFT_senial_real_11_0.png" />
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./md_scripts"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="Sistema_Resorte_Masa_Amortiguador.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Respuesta en frecuencia y temporal de un sistema mecanico</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="muestreo_cuantizacion.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Muestreo y Cuantización</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Agustín Solano & Sebastian Tomas<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
