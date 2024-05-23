@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Computo de Transf. Fourier (FFT) sobre datos reales &#8212; Scripts - Señales y Sistemas</title>
+    <title>Filtrado de una senal digital con un Sistema digital (filtro digital) &#8212; Scripts - Señales y Sistemas</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -52,8 +52,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Muestreo y Cuantización" href="muestreo_cuantizacion.html" />
-    <link rel="prev" title="Respuesta en frecuencia y temporal de un sistema mecanico" href="Sistema_Resorte_Masa_Amortiguador.html" />
+    <link rel="next" title="Filtros Digitales IIR" href="filtros_IIR.html" />
+    <link rel="prev" title="Actividad 9 - Guia 5: Filtros FIR" href="Actividad9_Guia5_FiltrosFIR_Ventanas.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -151,16 +151,16 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
   </ul>
  </li>
- <li class="toctree-l1 current active has-children">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="resp_frecuencia.html">
    Respuesta en frecuencia
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
   <label for="toctree-checkbox-2">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul class="current">
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="Serie_de_Fourier.html">
      Serie de Fourier
@@ -196,8 +196,8 @@ const thebe_selector_output = ".output, .cell_output"
      Respuesta en frecuencia y temporal de un sistema mecanico
     </a>
    </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
+   <li class="toctree-l2">
+    <a class="reference internal" href="Computo_TFourier_FFT_senial_real.html">
      Computo de Transf. Fourier (FFT) sobre datos reales
     </a>
    </li>
@@ -261,16 +261,16 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
   </ul>
  </li>
- <li class="toctree-l1 has-children">
+ <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="filtros_FIR.html">
    Filtros Digitales FIR
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
   <label for="toctree-checkbox-5">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul>
+  <ul class="current">
    <li class="toctree-l2">
     <a class="reference internal" href="Resp_frec_Sist_FIR.html">
      Respuesta en Frecuencia de Sistema FIR
@@ -291,8 +291,8 @@ const thebe_selector_output = ".output, .cell_output"
      Actividad 9 - Guia 5: Filtros FIR
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="Filtrado_con_Sist_Digitales.html">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
      Filtrado de una senal digital con un Sistema digital (filtro digital)
     </a>
    </li>
@@ -379,7 +379,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/AgustinSolano/SyS_scriptsbook/master?urlpath=tree/docs/md_scripts/Computo_TFourier_FFT_senial_real.ipynb"
+        <a href="https://mybinder.org/v2/gh/AgustinSolano/SyS_scriptsbook/master?urlpath=tree/docs/md_scripts/Filtrado_con_Sist_Digitales.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -439,7 +439,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/AgustinSolano/SyS_scriptsbook/issues/new?title=Issue%20on%20page%20%2Fmd_scripts/Computo_TFourier_FFT_senial_real.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/AgustinSolano/SyS_scriptsbook/issues/new?title=Issue%20on%20page%20%2Fmd_scripts/Filtrado_con_Sist_Digitales.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -467,7 +467,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/md_scripts/Computo_TFourier_FFT_senial_real.ipynb"
+        <a href="../_sources/md_scripts/Filtrado_con_Sist_Digitales.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -526,21 +526,26 @@ title="Print to PDF"
     </div>
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Computo de Transf. Fourier (FFT) sobre datos reales
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#importacion-de-datos-norwegian-endurance-athlete-ecg-database">
+   Importación de Datos (Norwegian Endurance Athlete ECG Database)
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#importacion-de-datos-norwegian-endurance-athlete-ecg-database">
-     Importación de Datos (Norwegian Endurance Athlete ECG Database)
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#obtencion-de-un-filtro-digital">
+     Obtencion de un filtro digital
     </a>
    </li>
   </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#transformada-de-fourier">
-   Transformada de Fourier
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#operacion-de-filtrado-de-la-senal-de-interes-con-un-filtro-digital">
+   OPERACION DE FILTRADO DE LA SEÑAL DE INTERES CON UN FILTRO DIGITAL
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#graficos">
+   Graficos
   </a>
  </li>
 </ul>
@@ -552,7 +557,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Computo de Transf. Fourier (FFT) sobre datos reales</h1>
+                <h1>Filtrado de una senal digital con un Sistema digital (filtro digital)</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -562,21 +567,26 @@ title="Print to PDF"
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Computo de Transf. Fourier (FFT) sobre datos reales
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#importacion-de-datos-norwegian-endurance-athlete-ecg-database">
+   Importación de Datos (Norwegian Endurance Athlete ECG Database)
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#importacion-de-datos-norwegian-endurance-athlete-ecg-database">
-     Importación de Datos (Norwegian Endurance Athlete ECG Database)
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#obtencion-de-un-filtro-digital">
+     Obtencion de un filtro digital
     </a>
    </li>
   </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#transformada-de-fourier">
-   Transformada de Fourier
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#operacion-de-filtrado-de-la-senal-de-interes-con-un-filtro-digital">
+   OPERACION DE FILTRADO DE LA SEÑAL DE INTERES CON UN FILTRO DIGITAL
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#graficos">
+   Graficos
   </a>
  </li>
 </ul>
@@ -589,8 +599,8 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="computo-de-transf-fourier-fft-sobre-datos-reales">
-<h1>Computo de Transf. Fourier (FFT) sobre datos reales<a class="headerlink" href="#computo-de-transf-fourier-fft-sobre-datos-reales" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="filtrado-de-una-senal-digital-con-un-sistema-digital-filtro-digital">
+<h1>Filtrado de una senal digital con un Sistema digital (filtro digital)<a class="headerlink" href="#filtrado-de-una-senal-digital-con-un-sistema-digital-filtro-digital" title="Permalink to this headline">#</a></h1>
 <section id="importacion-de-datos-norwegian-endurance-athlete-ecg-database">
 <h2>Importación de Datos (Norwegian Endurance Athlete ECG Database)<a class="headerlink" href="#importacion-de-datos-norwegian-endurance-athlete-ecg-database" title="Permalink to this headline">#</a></h2>
 <p>Para trabajar en grupo y particularmente desde Colab, les recomiendo siempre usen Google Drive para guardar e importar las señales de interés. Para importar el drive personal de cada uno al .ipynb en el que quieran trabajar, se deben ejecutar las siguientes líneas de código.</p>
@@ -600,6 +610,28 @@ title="Print to PDF"
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">signal</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">transform_fourier</span><span class="p">(</span><span class="n">signalI</span><span class="p">,</span><span class="n">fs</span><span class="p">):</span>
+  <span class="c1"># realizamos la transformada rápida de Fourier</span>
+  <span class="n">fourier_transform</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">signalI</span><span class="p">)</span>
+  <span class="n">frequencies</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftfreq</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">signalI</span><span class="p">),</span> <span class="mi">1</span><span class="o">/</span><span class="n">fs</span><span class="p">)</span> <span class="c1"># creamos un vector de frecuencias para graficar en base a este parámetro</span>
+
+  <span class="c1"># si graficamos la transformada de Fourier vamos a notar una línea marcada sobre y = 0</span>
+
+  <span class="c1"># para sacarla, tenemos que ordenar el vector de frequencias y también la transformada (la acomodamos acorde al nuevo vector)</span>
+
+  <span class="n">fourier_transform_ordenado</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">fourier_transform</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">frequencies</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">:],</span><span class="n">fourier_transform</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">frequencies</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">]))</span>
+  <span class="n">frequencies_ordenado</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">frequencies</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">frequencies</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">:],</span><span class="n">frequencies</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">frequencies</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">]))</span>
+
+  <span class="c1"># graficamos la señal en el dominio del tiempo</span>
+
+  <span class="k">return</span> <span class="n">frequencies_ordenado</span> <span class="p">,</span> <span class="n">fourier_transform_ordenado</span>
 </pre></div>
 </div>
 </div>
@@ -647,54 +679,114 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-</section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="transformada-de-fourier">
-<h1>Transformada de Fourier<a class="headerlink" href="#transformada-de-fourier" title="Permalink to this headline">#</a></h1>
-<p>Ya con la signal I importada podemos trabajar con ella. Una herramienta muy útil y necesaria es la Transformada de Fourier. A continuación creamos una función para obtener la Transformada de Fourier con la funcion fft.fft de Numpy.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">transform_fourier</span><span class="p">(</span><span class="n">signalI</span><span class="p">,</span><span class="n">fs</span><span class="p">):</span>
-  <span class="c1"># realizamos la transformada rápida de Fourier</span>
-  <span class="n">fourier_transform</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">signalI</span><span class="p">)</span>
-  <span class="n">frequencies</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftfreq</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">signalI</span><span class="p">),</span> <span class="mi">1</span><span class="o">/</span><span class="n">fs</span><span class="p">)</span> <span class="c1"># creamos un vector de frecuencias para graficar en base a este parámetro</span>
-
-  <span class="c1"># si graficamos la transformada de Fourier vamos a notar una línea marcada sobre y = 0</span>
-
-  <span class="c1"># para sacarla, tenemos que ordenar el vector de frequencias y también la transformada (la acomodamos acorde al nuevo vector)</span>
-
-  <span class="n">fourier_transform_ordenado</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">fourier_transform</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">frequencies</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">:],</span><span class="n">fourier_transform</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">frequencies</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">]))</span>
-  <span class="n">frequencies_ordenado</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">frequencies</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">frequencies</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">:],</span><span class="n">frequencies</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">frequencies</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">]))</span>
-
-  <span class="c1"># graficamos la señal en el dominio del tiempo</span>
-
-  <span class="k">return</span> <span class="n">frequencies_ordenado</span> <span class="p">,</span> <span class="n">fourier_transform_ordenado</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Corremos nuestra función y obtenemos las gráficas correspondientes a la señal y su Transformada de Fourier.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fs</span><span class="o">=</span><span class="mi">500</span> <span class="c1"># encontramos la frecuencia de muestreo en el archivo de Physionet</span>
 <span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">signalI</span><span class="p">))</span> <span class="o">/</span> <span class="n">fs</span> <span class="c1"># creamos un vector de tiempo para graficar en base a este parámetro y no en base a cantidad de muestras</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="obtencion-de-un-filtro-digital">
+<h3>Obtencion de un filtro digital<a class="headerlink" href="#obtencion-de-un-filtro-digital" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Diseñamos el filtro</span>
+<span class="n">Wn</span> <span class="o">=</span> <span class="mi">10</span> <span class="c1">#cut-freq [Hz]</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">2</span> <span class="c1"># filter order</span>
 
-<span class="c1"># corremos la función para obtener la transformada</span>
-<span class="n">frequencies_ordenado</span> <span class="p">,</span> <span class="n">fourier_transform_ordenado</span> <span class="o">=</span> <span class="n">transform_fourier</span><span class="p">(</span><span class="n">signalI</span><span class="p">,</span><span class="n">fs</span><span class="p">)</span>
+<span class="c1"># Coeficientes del numerado (b) y del denominados (a) de la H(z) del sistema digital</span>
+<span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">iirfilter</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">Wn</span><span class="p">,</span> <span class="n">btype</span><span class="o">=</span><span class="s1">&#39;lowpass&#39;</span><span class="p">,</span> <span class="n">analog</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ftype</span><span class="o">=</span><span class="s1">&#39;butter&#39;</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="s1">&#39;ba&#39;</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="n">fs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="operacion-de-filtrado-de-la-senal-de-interes-con-un-filtro-digital">
+<h2>OPERACION DE FILTRADO DE LA SEÑAL DE INTERES CON UN FILTRO DIGITAL<a class="headerlink" href="#operacion-de-filtrado-de-la-senal-de-interes-con-un-filtro-digital" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Filtramos la señal utilizando los vectores a y b, y la senal de interes</span>
+<span class="n">signalI_filt</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">lfilter</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">signalI</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">signalI_filt</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.00074252 0.00346446 0.00808073 ... 0.52054173 0.5307286  0.54015883]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Computo de la transformada de los espectros de ambas senales</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Computamos la transformada de Fourier de la senal original</span>
+<span class="n">frecs_espectro_orig</span> <span class="p">,</span> <span class="n">espectro_orig</span> <span class="o">=</span> <span class="n">transform_fourier</span><span class="p">(</span><span class="n">signalI</span><span class="p">,</span><span class="n">fs</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="c1"># Computamos tambien el espectro de la señal filtrada</span>
+<span class="n">frecs_espectro_filt</span> <span class="p">,</span> <span class="n">espectro_filt</span> <span class="o">=</span> <span class="n">transform_fourier</span><span class="p">(</span><span class="n">signalI_filt</span><span class="p">,</span><span class="n">fs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="graficos">
+<h2>Graficos<a class="headerlink" href="#graficos" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">signalI</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Señal en el dominio del tiempo&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Señal Original&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Tiempo [s]&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Amplitud [mV]&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="s2">&quot;on&quot;</span><span class="p">)</span>
 
-<span class="c1"># graficamos la magnitud de la transformada de Fourier</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">frequencies_ordenado</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">fourier_transform_ordenado</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Modulo - Transformada de Fourier&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">signalI_filt</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Señal Filtrada&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Tiempo [s]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Amplitud [mV]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="s2">&quot;on&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">signalI</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">signalI_filt</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Original&#39;</span><span class="p">,</span><span class="s1">&#39;Filtrada&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Ambas señales&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Tiempo [s]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Amplitud [mV]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="s2">&quot;on&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Filtrado_con_Sist_Digitales_16_0.png" src="../_images/Filtrado_con_Sist_Digitales_16_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+
+<span class="c1"># graficamos la magnitud de la transformada de Fourier</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">frecs_espectro_orig</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">espectro_orig</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Modulo Senal Original - Transformada de Fourier&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Frecuencia [Hz]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Magnitud [ua]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="s2">&quot;on&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">fs</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># el gráfico de la transformada (por Nyquist) va a ir de  −𝐹𝑠/2  hasta  𝐹𝑠/2 pero elegimos graficar únicamente las positivas.</span>
+
+<span class="c1"># graficamos la fase de la transformada de Fourier</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">frecs_espectro_filt</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">espectro_filt</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Modulo Senal Filtrada - Transformada de Fourier&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Frecuencia [Hz]&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Magnitud [ua]&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="s2">&quot;on&quot;</span><span class="p">)</span>
@@ -702,10 +794,12 @@ title="Print to PDF"
 
 <span class="c1"># graficamos la fase de la transformada de Fourier</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">frequencies_ordenado</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">fourier_transform_ordenado</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Fase - Transformada de Fourier&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">frecs_espectro_orig</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">espectro_orig</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">frecs_espectro_filt</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">espectro_filt</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Original&#39;</span><span class="p">,</span> <span class="s1">&#39;Filtrada&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Modulo ambas Senales - Transformada de Fourier&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Frecuencia [Hz]&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Fase [rad]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Magnitud [ua]&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="s2">&quot;on&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">fs</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># el gráfico de la transformada (por Nyquist) va a ir de  −𝐹𝑠/2  hasta  𝐹𝑠/2 pero elegimos graficar únicamente las positivas.</span>
 
@@ -715,9 +809,10 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Computo_TFourier_FFT_senial_real_11_0.png" src="../_images/Computo_TFourier_FFT_senial_real_11_0.png" />
+<img alt="../_images/Filtrado_con_Sist_Digitales_17_0.png" src="../_images/Filtrado_con_Sist_Digitales_17_0.png" />
 </div>
 </div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -747,17 +842,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="Sistema_Resorte_Masa_Amortiguador.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="Actividad9_Guia5_FiltrosFIR_Ventanas.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Respuesta en frecuencia y temporal de un sistema mecanico</p>
+            <p class="prev-next-title">Actividad 9 - Guia 5: Filtros FIR</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="muestreo_cuantizacion.html" title="next page">
+    <a class='right-next' id="next-link" href="filtros_IIR.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Muestreo y Cuantización</p>
+        <p class="prev-next-title">Filtros Digitales IIR</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
