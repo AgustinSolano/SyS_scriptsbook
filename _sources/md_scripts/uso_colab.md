@@ -11,6 +11,8 @@ En resumen, Google Colab es una herramienta versátil y accesible que proporcion
 
 Para comenzar recomendamos explorar el siguiente sitio: https://colab.research.google.com/?hl=es
 
+Muy buena esta notebook donde explica el uso de **Markdown** para realizar informes en colab, integrando codigo con texto, figuras, tablas, etc: https://colab.research.google.com/github/Tanu-N-Prabhu/Python/blob/master/Cheat_sheet_for_Google_Colab.ipynb#scrollTo=MDR6gDj70pu8
+
 Ver tambien este video: 
 
 
