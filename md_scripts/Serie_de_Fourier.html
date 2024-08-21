@@ -117,6 +117,11 @@ const thebe_selector_output = ".output, .cell_output"
         </ul>
         <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
+  <a class="reference internal" href="uso_colab.html">
+   Uso de Google Colab
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="instalaciones_iniciales.html">
    Instalacion de python y librerias
   </a>
@@ -191,6 +196,11 @@ const thebe_selector_output = ".output, .cell_output"
    <li class="toctree-l2">
     <a class="reference internal" href="Sistema_Resorte_Masa_Amortiguador.html">
      Respuesta en frecuencia y temporal de un sistema mecanico
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Computo_TFourier_FFT_senial_real.html">
+     Computo de Transf. Fourier (FFT) sobre datos reales
     </a>
    </li>
   </ul>
@@ -281,6 +291,11 @@ const thebe_selector_output = ".output, .cell_output"
    <li class="toctree-l2">
     <a class="reference internal" href="Actividad9_Guia5_FiltrosFIR_Ventanas.html">
      Actividad 9 - Guia 5: Filtros FIR
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Filtrado_con_Sist_Digitales.html">
+     Filtrado de una senal digital con un Sistema digital (filtro digital)
     </a>
    </li>
   </ul>
@@ -580,73 +595,90 @@ title="Print to PDF"
 <section id="forma-compleja">
 <h2>Forma compleja<a class="headerlink" href="#forma-compleja" title="Permalink to this headline">#</a></h2>
 <p><span class="math notranslate nohighlight">\(f(x) = \sum_{k=-\infty}^{\infty} F_k \mathrm{e}^{jk\omega_0t}\)</span></p>
-<p><span class="math notranslate nohighlight">\( F_k = \frac{1}{\pi} \int_{-\pi}^\pi f(x)\mathrm{e}^{-jk\omega_0t}\mathrm{d}t \)</span></p>
+<p><span class="math notranslate nohighlight">\( F_k = \frac{1}{T_{0}} \int_{T_{0}} f(x)\mathrm{e}^{-jk\omega_0t}\mathrm{d}t \)</span></p>
 </section>
 <section id="forma-trigonometrica">
 <h2>Forma trigonometrica<a class="headerlink" href="#forma-trigonometrica" title="Permalink to this headline">#</a></h2>
-<p><span class="math notranslate nohighlight">\( f(x) = \frac{A_0}{2} + \sum_{k=1}^{\infty} (A_k cos(\frac{2\pi k\omega_0t}{L} + B_k sin(\frac{2\pi k\omega_0t}{L})) \)</span></p>
-<p><span class="math notranslate nohighlight">\( A_0 = \frac{1}{\pi} \int_{-\pi}^\pi f(x)\mathrm{d}x \)</span></p>
-<p><span class="math notranslate nohighlight">\( A_k= \frac{1}{\pi} \int_{-\pi}^\pi f(x)*cos(k\omega_0t)\mathrm{d}x \)</span></p>
-<p><span class="math notranslate nohighlight">\( B_k= \frac{1}{\pi} \int_{-\pi}^\pi f(x)*sin(k\omega_0t)\mathrm{d}x \)</span></p>
+<p><span class="math notranslate nohighlight">\( f(t) = A_{0} + \sum_{k=1}^{\infty} (A_k cos({k\omega_0t}) + B_k sin({k\omega_0t})) \)</span></p>
+<p><span class="math notranslate nohighlight">\( A_0 = \frac{1}{T_0} \int_{T_0} f(x)\mathrm{d}x \)</span></p>
+<p><span class="math notranslate nohighlight">\( A_k= \frac{2}{T_0} \int_{T_0} f(x)*cos(k\omega_0t)\mathrm{d}t \)</span></p>
+<p><span class="math notranslate nohighlight">\( B_k= \frac{2}{T_0} \int_{T_0} f(x)*sin(k\omega_0t)\mathrm{d}t \)</span></p>
+<p>Definiciond de una senal</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Defino un vector x entre –π to +π</span>
-<span class="n">t</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="mi">3</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="mf">0.001</span><span class="p">)</span> 
+<span class="n">t</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="mi">3</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="mf">0.001</span><span class="p">)</span>
 
 <span class="c1"># Genera una senal cuadrada utilizando scipy</span>
-<span class="c1">#y=square(t) </span>
-<span class="c1">#Funciones utilizadas para el calculo de An y Bn</span>
-<span class="c1">#fc=lambda t:square(t)*cos(i*t)  #i :dummy index</span>
-<span class="c1">#fs=lambda t:square(t)*sin(i*t)</span>
+<span class="c1">#y=square(t)</span>
 
-<span class="n">y</span> <span class="o">=</span> <span class="n">sawtooth</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> 
-<span class="c1">#Funciones utilziadas para el calculo de An y Bn</span>
-<span class="n">fc</span><span class="o">=</span><span class="k">lambda</span> <span class="n">t</span><span class="p">:</span><span class="n">sawtooth</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>  <span class="c1">#i :dummy index</span>
-<span class="n">fs</span><span class="o">=</span><span class="k">lambda</span> <span class="n">t</span><span class="p">:</span><span class="n">sawtooth</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
-
-<span class="c1">#Cantidad de terminos incluidos en la sumatoria</span>
-<span class="n">n</span><span class="o">=</span><span class="mi">100</span>
+<span class="c1"># Senal diente de sierra</span>
+<span class="n">offset</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">sawtooth</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">offset</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig1</span><span class="p">,</span> <span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">fig1</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="o">/</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">),</span><span class="n">y</span><span class="p">,</span><span class="s1">&#39;g&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Senal original&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Tiempo (x pi)&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Amplitud&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Serie_de_Fourier_7_0.png" src="../_images/Serie_de_Fourier_7_0.png" />
+</div>
+</div>
+<p>Se computa la serie de Fourier</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Cantidad de terminos incluidos en la sumatoria</span>
+<span class="n">n</span><span class="o">=</span><span class="mi">30</span>
 
 <span class="n">An</span><span class="o">=</span><span class="p">[]</span> <span class="c1">#defining array</span>
 <span class="n">Bn</span><span class="o">=</span><span class="p">[]</span>
 
 <span class="nb">sum</span><span class="o">=</span><span class="mi">0</span>
 
+<span class="c1">#Funciones utilziadas para el calculo de A0, An y Bn</span>
+<span class="c1">#forig = lambda t:(square(t))</span>
+<span class="c1">#fc=lambda t:square(t)*cos(i*t)  #i :dummy index</span>
+<span class="c1">#fs=lambda t:square(t)*sin(i*t)</span>
+
+<span class="c1">#Funciones utilziadas para el calculo de A0, An y Bn</span>
+<span class="n">forig</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">:(</span><span class="n">sawtooth</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">offset</span><span class="p">)</span>
+<span class="n">fc</span><span class="o">=</span><span class="k">lambda</span> <span class="n">t</span><span class="p">:(</span><span class="n">sawtooth</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">offset</span><span class="p">)</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>  <span class="c1">#i :dummy index</span>
+<span class="n">fs</span><span class="o">=</span><span class="k">lambda</span> <span class="n">t</span><span class="p">:(</span><span class="n">sawtooth</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">offset</span><span class="p">)</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
+
+<span class="c1">#Se obtiene el termino A0</span>
+<span class="n">a0</span><span class="o">=</span><span class="n">quad</span><span class="p">(</span><span class="n">forig</span><span class="p">,</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">))</span>
+
+<span class="c1">#An.append(0)</span>
+<span class="c1">#Bn.append(0)</span>
+
 <span class="c1">#Se obtiene el termino An</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
  <span class="n">an</span><span class="o">=</span><span class="n">quad</span><span class="p">(</span><span class="n">fc</span><span class="p">,</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
  <span class="n">An</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">an</span><span class="p">)</span>
 
 <span class="c1">#Se obtiene el termino Bn</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
  <span class="n">bn</span><span class="o">=</span><span class="n">quad</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
- <span class="n">Bn</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bn</span><span class="p">)</span> 
+ <span class="n">Bn</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bn</span><span class="p">)</span>
 
+<span class="c1">#for i in range(n):</span>
+<span class="c1">#  sum=sum+a0+(An[i]*np.cos(i*t)+Bn[i]*np.sin(i*t))</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
  <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mf">0.0</span><span class="p">:</span>
-    <span class="nb">sum</span><span class="o">=</span><span class="nb">sum</span><span class="o">+</span><span class="n">An</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="mi">2</span>
+    <span class="nb">sum</span><span class="o">=</span><span class="p">[</span><span class="n">a0</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
  <span class="k">else</span><span class="p">:</span>
-    <span class="nb">sum</span><span class="o">=</span><span class="nb">sum</span><span class="o">+</span><span class="p">(</span><span class="n">An</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">+</span><span class="n">Bn</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="n">t</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/kc/w9qf361n0lv2428kf159qtqm0000gn/T/ipykernel_65537/3920190134.py:25: IntegrationWarning: The maximum number of subdivisions (50) has been achieved.
-  If increasing the limit yields no improvement it is advised to analyze 
-  the integrand in order to determine the difficulties.  If the position of a 
-  local difficulty can be determined (singularity, discontinuity) one will 
-  probably gain from splitting up the interval and calling the integrator 
-  on the subranges.  Perhaps a special-purpose integrator should be used.
-  an=quad(fc,-np.pi,np.pi)[0]*(1.0/np.pi)
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/kc/w9qf361n0lv2428kf159qtqm0000gn/T/ipykernel_65537/3920190134.py:30: IntegrationWarning: The maximum number of subdivisions (50) has been achieved.
-  If increasing the limit yields no improvement it is advised to analyze 
-  the integrand in order to determine the difficulties.  If the position of a 
-  local difficulty can be determined (singularity, discontinuity) one will 
-  probably gain from splitting up the interval and calling the integrator 
-  on the subranges.  Perhaps a special-purpose integrator should be used.
-  bn=quad(fs,-np.pi,np.pi)[0]*(1.0/np.pi)
+    <span class="nb">sum</span><span class="o">=</span><span class="nb">sum</span><span class="o">+</span><span class="p">(</span><span class="n">An</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">+</span><span class="n">Bn</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="n">t</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -668,36 +700,31 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Serie_de_Fourier_7_0.png" src="../_images/Serie_de_Fourier_7_0.png" />
+<img alt="../_images/Serie_de_Fourier_10_0.png" src="../_images/Serie_de_Fourier_10_0.png" />
 </div>
 </div>
+<p>Espectro de la Serie de Fourier</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Xn_modulo</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">An</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Bn</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
-<span class="n">Xn_fase</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Bn</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">An</span><span class="p">))</span> 
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Xn_modulo</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">An</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Bn</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">))]</span>
+<span class="n">Xn_modulo</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">Xn_modulo</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">a0</span><span class="p">))</span> 
+<span class="n">Xn_fase</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Bn</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">An</span><span class="p">))</span>
+<span class="n">Xn_fase</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">Xn_fase</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">a0</span><span class="p">))</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Serie de Fourier&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">22</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Espectro - Serie de Fourier&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">22</span><span class="p">)</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">Xn_modulo</span><span class="p">)</span>
-<span class="c1">#ax[0].set_title(&quot;Senal original&quot;)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Modulo&quot;</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">Xn_fase</span><span class="p">)</span>
-<span class="c1">#ax[1].set_title(&quot;Suma de Fourier (Serie)&quot;)</span>
-<span class="c1">#ax[2].plot(t,y,&#39;g&#39;)</span>
-<span class="c1">#ax[2].plot(t,sum,&#39;r--&#39;)</span>
-<span class="c1">#ax[2].set_title(&quot;Senial y reconstruccion&quot;)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Fase&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;k*w0&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/kc/w9qf361n0lv2428kf159qtqm0000gn/T/ipykernel_65537/2356088145.py:2: RuntimeWarning: divide by zero encountered in divide
-  Xn_fase = np.arctan(np.array(Bn)/np.array(An))
-/var/folders/kc/w9qf361n0lv2428kf159qtqm0000gn/T/ipykernel_65537/2356088145.py:2: RuntimeWarning: invalid value encountered in divide
-  Xn_fase = np.arctan(np.array(Bn)/np.array(An))
-</pre></div>
-</div>
-<img alt="../_images/Serie_de_Fourier_8_1.png" src="../_images/Serie_de_Fourier_8_1.png" />
+<img alt="../_images/Serie_de_Fourier_12_0.png" src="../_images/Serie_de_Fourier_12_0.png" />
 </div>
 </div>
 </section>
